@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/infinite/Project/TVplayer/src/audio.c
+audio.h
+/home/infinite/Project/TVplayer/src/audio.h
+
+/home/infinite/Project/TVplayer/src/audio.h
+structures.h
+/home/infinite/Project/TVplayer/src/structures.h
+file.h
+/home/infinite/Project/TVplayer/src/file.h
+
+/home/infinite/Project/TVplayer/src/file.h
+structures.h
+/home/infinite/Project/TVplayer/src/structures.h
+
+/home/infinite/Project/TVplayer/src/libffmpeg.h
+libavcodec/avcodec.h
+-
+libavformat/avformat.h
+-
+libswscale/swscale.h
+-
+
+/home/infinite/Project/TVplayer/src/libsdl.h
+SDL/SDL.h
+-
+SDL/SDL_thread.h
+-
+
+/home/infinite/Project/TVplayer/src/structures.h
+libffmpeg.h
+/home/infinite/Project/TVplayer/src/libffmpeg.h
+libsdl.h
+/home/infinite/Project/TVplayer/src/libsdl.h
+utility.h
+/home/infinite/Project/TVplayer/src/utility.h
+
+/home/infinite/Project/TVplayer/src/utility.h
+

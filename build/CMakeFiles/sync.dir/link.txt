@@ -1,0 +1,1 @@
+/usr/bin/gcc  -fPIC   -shared -Wl,-soname,libsync.so -o libsync.so CMakeFiles/sync.dir/src/sync.c.o 

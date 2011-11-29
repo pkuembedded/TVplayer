@@ -1,0 +1,1 @@
+/usr/bin/gcc  -fPIC   -shared -Wl,-soname,libaudio.so -o libaudio.so CMakeFiles/audio.dir/src/audio.c.o 

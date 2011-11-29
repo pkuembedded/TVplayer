@@ -1,0 +1,1 @@
+/usr/bin/gcc  -fPIC   -shared -Wl,-soname,libfile.so -o libfile.so CMakeFiles/file.dir/src/file.c.o 

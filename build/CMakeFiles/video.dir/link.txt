@@ -1,0 +1,1 @@
+/usr/bin/gcc  -fPIC   -shared -Wl,-soname,libvideo.so -o libvideo.so CMakeFiles/video.dir/src/video.c.o 
