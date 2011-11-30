@@ -99,7 +99,7 @@ int queue_av_pkt(void *arg) {
     while(true) {
 	//if queue is full, wait for eat
 	if(state->video->rawDataBuf.size > MAX_VIDEO_QUEUE_SIZE || state->audio->rawDataBuf.size > MAX_AUDIO_QUEUE_SIZE) {
-	    SDL_Delay(5);
+	    SDL_Delay(10);
 //	    fprintf(stderr, "queue is full, waiting for decoding : queue_av_pkt\n");
 	    continue;
 	}

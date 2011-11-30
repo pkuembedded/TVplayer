@@ -1,4 +1,5 @@
 #include "video.h"
+#include "display.h"
 #include "sync.h"
 
 int decode_video(void *arg)
@@ -31,8 +32,7 @@ int decode_video(void *arg)
 	if(frameFinished) {
 	    pts = sync_video(video, pFrame, pts);
 	    if(video_frame_convert(video, pFrame, pts) < 0)
-		break;;
-//	    SDL_CondSignal(video->playCond);
+		break;
 	}
     }
     av_free_packet(pkt);
@@ -47,6 +47,13 @@ int video_frame_convert(Media *video, AVFrame *pFrame, double pts)
     int dstPixFmt;
     static struct SwsContext *imgConvertCtx;
     VideoFrame *vf;
+
+    SDL_LockMutex(video->frameBufMutex);
+    while(video->frameBufSize >= VIDEO_FRAME_QUEUE_SIZE) {
+	SDL_CondWait(video->frameBufCond, video->frameBufMutex);
+    }
+    SDL_UnlockMutex(video->frameBufMutex);
+
     vf = &video->frameBuf;
     if(vf->bmp) {
 	SDL_LockYUVOverlay(vf->bmp);
@@ -71,51 +78,9 @@ int video_frame_convert(Media *video, AVFrame *pFrame, double pts)
 	sws_scale(imgConvertCtx, pFrame->data, pFrame->linesize, 0, video->stream->codec->height, pict.data, pict.linesize);
 	SDL_UnlockYUVOverlay(vf->bmp);
 	vf->pts = pts;
-//	SDL_LockMutex(video->frameBuf->mutex);
+	SDL_LockMutex(video->frameBufMutex);
 	video->frameBufSize++;
-//	SDL_UnlockMutex(video->frameBuf->mutex);
-    }
-    return 0;
-}
-
-
-int video_refresh_timer(void *arg)
-{
-    State *state = (State *)arg;
-    VideoFrame *vf;
-    double actual_delay, delay, sync_threshold, ref_clk, diff;
-    if(state->video->stream) {
-	if(state->video->frameBufSize == 0) {
-	    schedule_refresh(state, 1);
-	} else {
-	    vf = &state->video->frameBuf;
-	    delay = vf->pts - state->video->frame_last_pts;
-	    if(delay <= 0 || delay >= 1.0) {
-		delay = state->video->frame_last_delay;
-	    }
-	    state->video->frame_last_delay = delay;
-	    state->video->frame_last_pts = vf->pts;
-
-	    ref_clk = get_audio_clock(state->audio);
-	    diff = vf->pts - ref_clk;
-	    sync_threshold = (delay > AV_SYNC_THRESHOLD) ? delay : AV_SYNC_THRESHOLD;
-	    if(fabs(diff) < AV_NOSYNC_THRESHOLD) {
-		if(diff <= -sync_threshold) {
-		    delay = 0;
-		} else if(diff >= sync_threshold) {
-		    delay = 2 * delay;
-		}
-	    }
-	    state->video->frame_timer += delay;
-	    actual_delay = state->video->frame_timer - (av_gettime() / 1000000.0);
-	    if(actual_delay < 0.010) {
-		actual_delay = 0.010;
-	    }
-	    schedule_refresh(state, (int)(actual_delay * 1000 + 0.5));
-	    play_video(state->video);
-	}
-    } else {
-	schedule_refresh(state, 100);
+	SDL_UnlockMutex(video->frameBufMutex);
     }
     return 0;
 }
@@ -131,28 +96,13 @@ void init_video(Media *video)
     video->find_stream = find_av_streams;
     video->find_codec = find_decoder;
     video->play = play_video;
+    video->frameBufMutex = SDL_CreateMutex();
+    video->frameBufCond = SDL_CreateCond();
     video->playCond = SDL_CreateCond();    
     video->playMutex = SDL_CreateMutex();    
-}
+    video->frame_last_delay = 40e-3;
+    video->video_current_pts_time = av_gettime();
+    video->frame_timer = (double)av_gettime() / 1000000.0;
 
-
-int play_video(void *arg)
-{
-    SDL_Rect rect;
-    VideoFrame *vf;
-    int w, h, x, y;
-    Media *video = (Media *)arg;
-    vf = &video->frameBuf;
-    //put our pict on the queue
-//    while(true) {
-//	SDL_CondWait(video->playCond, video->playMutex);
-	rect.x = 0;
-	rect.y = 0;
-	rect.w = video->pCodecCtx->width;
-	rect.h = video->pCodecCtx->height;
-//	video_refresh_timer(video);
-	SDL_DisplayYUVOverlay(vf->bmp, &rect);
-//    }
-    return 0;
 }
 

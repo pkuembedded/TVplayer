@@ -48,6 +48,7 @@ CMakeFiles/TVplayer.dir/src/sync.c.o
  /home/infinite/Project/TVplayer/src/sync.h
  /home/infinite/Project/TVplayer/src/utility.h
 CMakeFiles/TVplayer.dir/src/video.c.o
+ /home/infinite/Project/TVplayer/src/display.h
  /home/infinite/Project/TVplayer/src/file.h
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h

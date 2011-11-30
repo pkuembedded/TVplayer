@@ -1,4 +1,4 @@
-cscope 15 $HOMEProject/TVplayer/src               0000584963
+cscope 15 $HOMEProject/TVplayer/src               0000586148
 	@TVplayer.c
 
 1 
@@ -78,12 +78,18 @@ globÆ_video_pkt_±s
 ;
 
 16 
+SDL_SurÁ˚
+ *
+s¸ìn
+;
+
+17 
 SDL_Evít
  
 evít
 ;
 
-17 
+18 
 Fûe
  *
 fûe
@@ -91,7 +97,7 @@ fûe
 	`av_mÆlocz
 ((File));
 
-18 
+19 
 Medü
  *
 video
@@ -99,7 +105,7 @@ video
 	`av_mÆlocz
 ((Media));
 
-19 
+20 
 Medü
  *
 audio
@@ -107,7 +113,7 @@ audio
 	`av_mÆlocz
 ((Media));
 
-20 
+21 
 Sèã
  *
 °©e
@@ -115,67 +121,67 @@ Sèã
 	`av_mÆlocz
 ((State));
 
-21 
+22 
 SDL_Thªad
  *
 video_decode_tid
 ;
 
-22 
+23 
 SDL_Thªad
  *
 ªad_pkt_tid
 ;
 
-23 
+24 
 SDL_Thªad
  *
 ∂ay_tid
 ;
 
-24 
+25 
 °©e
 ->
 fûe
  = file;
 
-25 
+26 
 °©e
 ->
 video
  = video;
 
-26 
+27 
 °©e
 ->
 audio
  =áudio;
 
-27 
+28 
 	`öô_video
 (
 video
 );
 
-28 if(
+29 if(
 ¨gc
  < 2) {
 
-29 
+30 
 	`Ârötf
 (
 °dîr
 , "Usage :Ölay <file>\n");
 
-30 
+31 
 	`exô
 (1);
 
-32 
+33 
 	`av_ªgi°î_Æl
 ();
 
-33 if(
+34 if(
 	`SDL_Inô
 (
 SDL_INIT_VIDEO
@@ -185,7 +191,7 @@ SDL_INIT_AUDIO
 SDL_INIT_TIMER
 )) {
 
-34 
+35 
 	`Ârötf
 (
 °dîr
@@ -193,11 +199,11 @@ SDL_INIT_TIMER
 	`SDL_GëEº‹
 ());
 
-35 
+36 
 	`exô
 (1);
 
-37 
+38 
 	`av_°æ˝y
 (
 fûe
@@ -207,13 +213,13 @@ fûe
 ¨gv
 [1], (file->name));
 
-38 
+39 
 	`gë_fûe_öfo
 (
 fûe
 );
 
-39 
+40 
 	`föd_av_°ªams
 (
 fûe
@@ -223,19 +229,19 @@ video
 audio
 );
 
-40 
+41 
 	`föd_decodî
 (
 video
 );
 
-42 
+43 
 	`öô_s¸ìn
 (
 video
 );
 
-43 
+44 
 ªad_pkt_tid
  = 
 	`SDL_Cª©eThªad
@@ -245,13 +251,13 @@ queue_av_pkt
 °©e
 );
 
-44 
+45 
 	`öô_‰ame
 (
 video
 );
 
-45 
+46 
 video_decode_tid
  = 
 	`SDL_Cª©eThªad
@@ -261,33 +267,33 @@ decode_video
 video
 );
 
-47 
+48 
 	`scheduÀ_ª‰esh
 (
 °©e
 , 40);
 
-50 
+51 
 åue
 ) {
 
-51 
+52 
 	`SDL_WaôEvít
 (&
 evít
 );
 
-52 
+53 
 evít
 .
 ty≥
 ) {
 
-53 
+54 
 FF_REFRESH_EVENT
 :
 
-54 
+55 
 	`video_ª‰esh_timî
 (
 evít
@@ -297,7 +303,7 @@ u£r
 d©a1
 );
 
-61 
+62 
 	}
 }
 
@@ -1103,6 +1109,216 @@ codec
 	}
 }
 
+27 
+	$∂ay_video
+(*
+¨g
+)
+
+29 
+SDL_Re˘
+ 
+ª˘
+;
+
+30 
+VideoFøme
+ *
+vf
+;
+
+31 
+w
+, 
+h
+, 
+x
+, 
+y
+;
+
+32 
+a•e˘_øtio
+;
+
+33 
+Medü
+ *
+video
+ = (Medü *)
+¨g
+;
+
+34 
+vf
+ = &
+video
+->
+‰ameBuf
+;
+
+36 if(
+vf
+->
+bmp
+)
+
+38 if(
+video
+->
+°ªam
+->
+codec
+->
+ßm∂e_a•e˘_øtio
+.
+num
+ == 0) {
+
+39 
+a•e˘_øtio
+ = 0;
+
+41 
+a•e˘_øtio
+ = 
+	`av_q2d
+(
+video
+->
+°ªam
+->
+codec
+->
+ßm∂e_a•e˘_øtio
+Ë* video->°ªam->codec->
+width
+ / video->°ªam->codec->
+height
+;
+
+43 if(
+a•e˘_øtio
+ <= 0.0) {
+
+44 
+a•e˘_øtio
+ = ()
+video
+->
+°ªam
+->
+codec
+->
+width
+ / ()video->°ªam->codec->
+height
+;
+
+46 
+h
+ = 
+s¸ìn
+->h;
+
+47 
+w
+ = (()
+	`röt
+(
+h
+ * 
+a•e˘_øtio
+)) & -3;
+
+48 if(
+w
+ > 
+s¸ìn
+->w) {
+
+49 
+w
+ = 
+s¸ìn
+->w;
+
+50 
+h
+ = (()
+	`röt
+(
+w
+ / 
+a•e˘_øtio
+)) & -3;
+
+52 
+x
+ = (
+s¸ìn
+->
+w
+ - w) / 2;
+
+53 
+y
+ = (
+s¸ìn
+->
+h
+ - h) / 2;
+
+55 
+ª˘
+.
+x
+ = 0;
+
+56 
+ª˘
+.
+y
+ = 0;
+
+57 
+ª˘
+.
+w
+ = 
+video
+->
+pCodecCtx
+->
+width
+;
+
+58 
+ª˘
+.
+h
+ = 
+video
+->
+pCodecCtx
+->
+height
+;
+
+59 
+	`SDL_Di•œyYUVOvîœy
+(
+vf
+->
+bmp
+, &
+ª˘
+);
+
+63 
+	}
+}
+
 	@display.h
 
 1 
@@ -1139,6 +1355,12 @@ video
 Medü
  *
 video
+);
+
+9 
+∂ay_video
+(*
+¨g
 );
 
 	@file.c
@@ -1629,7 +1851,7 @@ MAX_AUDIO_QUEUE_SIZE
 
 102 
 	`SDL_Dñay
-(5);
+(10);
 
 107 if(
 	`av_ªad_‰ame
@@ -2335,101 +2557,89 @@ queue
 	~"utûôy.h
 "
 
-5 
-uöt64_t
- 
-	gglobÆ_video_pkt_±s
-;
-
-6 
-SDL_SurÁ˚
- *
-	gs¸ìn
-;
-
-8 #i‚de‡
+6 #i‚de‡
 STRUCTURES_H
 
 
-9 
+7 
 	#STRUCTURES_H
 
 
 	)
 
-11 
+9 
 	#MAX_NAME_LEN
  1024
 
 	)
 
-12 
+10 
 	#VIDEO_FRAME_QUEUE_SIZE
  1
 
 	)
 
-16 
+14 
 	mAUDIO
 ,
 
-17 
+15 
 	mVIDEO
 ,
 
-20 
+18 
 	mAV_SYNC_AUDIO_MASTER
 ,
 
-21 
+19 
 	mAV_SYNC_VIDEO_MASTER
 ,
 
-22 
+20 
 	mAV_SYNC_EXTERNAL_MASTER
 ,
 
-25 
+23 
 	tuöt
 ;
 
-26 
+24 
 	tuch¨
 ;
 
-28 
+26 
 	sVideoFøme
  {
 
-29 
+27 
 	mwidth
 , 
 	mheight
 ;
 
-30 
+28 
 	mÆloˇãd
 ;
 
-31 
+29 
 	m±s
 ;
 
-32 
+30 
 SDL_Ovîœy
  *
 	mbmp
 ;
 
-33 } 
+31 } 
 	tVideoFøme
 ;
 
-36 
+34 
 	sPackëQueue
  {
 
-37 
+35 
 AVPackëLi°
  *
 	mhódî
@@ -2437,110 +2647,118 @@ AVPackëLi°
 	míd
 ;
 
-38 
+36 
 	mpktNum
 ;
 
-39 
+37 
 	msize
 ;
 
-40 
+38 
 SDL_muãx
  *
 	mmuãx
 ;
 
-41 
+39 
 SDL_c⁄d
  *
 	mc⁄d
 ;
 
-42 } 
+40 } 
 	tPackëQueue
 ;
 
-44 
+42 
 	sFûe
  {
 
-45 
+43 
 AVF‹m©C⁄ãxt
  *
 	mpF‹m©Ctx
 ;
 
-46 
+44 
 	m«me
 [
 MAX_NAME_LEN
 ];
 
-47 } 
+45 } 
 	tFûe
 ;
 
-50 
+48 
 	sMedü
  {
 
-51 
+49 
 	mmedüTy≥
 ;
 
-52 
+50 
 	måack
 ;
 
-53 
+51 
 PackëQueue
  
 	møwD©aBuf
 ;
 
-54 
+52 
 AVSåóm
  *
 	m°ªam
 ;
 
-55 
+53 
 AVCodecC⁄ãxt
  *
 	mpCodecCtx
 ;
 
-56 
+54 
 AVCodec
  *
 	mpCodec
 ;
 
-57 
+55 
 VideoFøme
  
 	m‰ameBuf
 ;
 
-58 
+56 
 	m‰ameBufSize
 ;
 
-59 
+57 
 	m˛k
 ;
 
-60 
+58 
 	m‰ame_timî
 ;
 
-61 
+59 
 	m‰ame_œ°_±s
 ;
 
-62 
+60 
 	m‰ame_œ°_dñay
+;
+
+61 
+	mvideo_cuºít_±s
+;
+
+62 
+	mvideo_cuºít_±s_time
 ;
 
 63 
@@ -2584,62 +2802,74 @@ uöt8_t
 ;
 
 70 
-SDL_c⁄d
+SDL_muãx
  *
-	m∂ayC⁄d
+	m‰ameBufMuãx
 ;
 
 71 
 SDL_muãx
  *
+	m‰ameBufC⁄d
+;
+
+72 
+SDL_c⁄d
+ *
+	m∂ayC⁄d
+;
+
+73 
+SDL_muãx
+ *
 	m∂ayMuãx
 ;
 
-72 (*
+74 (*
 	möô
 )(*
 	m¨g
 );
 
-73 (*
+75 (*
 	mföd_°ªam
 )(*
 	m¨g
 );
 
-74 (*
+76 (*
 	mföd_codec
 )(*
 	m¨g
 );
 
-75 (*
+77 (*
 	m∂ay
 )(*
 	m¨g
 );
 
-76 (*
+78 (*
 	m∑u£
 )(*
 	m¨g
 );
 
-77 } 
+79 } 
 	tMedü
 ;
 
-80 
+82 
 	sSèã
  {
 
-81 
+83 
 Fûe
  *
 	mfûe
 ;
 
-82 
+84 
 Medü
  *
 	maudio
@@ -2647,7 +2877,7 @@ Medü
 	mvideo
 ;
 
-83 } 
+85 } 
 	tSèã
 ;
 
@@ -2779,7 +3009,7 @@ evít
 	}
 }
 
-27 
+27 
 	$scheduÀ_ª‰esh
 (
 Sèã
@@ -2905,23 +3135,45 @@ Medü
 video
 ) {
 
+47 
+dñè
+;
+
 48 
-	}
-}
-
-49 
-	$gë_exã∫Æ_˛ock
-() {
-
-50  
+dñè
+ = (
 	`av_gëtime
-() / 1000000.0;
+(Ë- 
+video
+->
+video_cuºít_±s_time
+) / 1000000.0;
+
+49  
+video
+->
+video_cuºít_±s
+ + 
+dñè
+;
 
 51 
 	}
 }
 
-53 
+52 
+	$gë_exã∫Æ_˛ock
+() {
+
+53  
+	`av_gëtime
+() / 1000000.0;
+
+54 
+	}
+}
+
+56 
 	$gë_ma°î_˛ock
 (
 Sèã
@@ -2929,13 +3181,265 @@ Sèã
 °©e
 )
 
-55  
-	`gë_exã∫Æ_˛ock
+59  
+	`gë_video_˛ock
 (
 °©e
+->
+video
 );
 
-56 
+60 
+	}
+}
+
+64 
+	$video_ª‰esh_timî
+(*
+¨g
+)
+
+66 
+Sèã
+ *
+°©e
+ = (Sèã *)
+¨g
+;
+
+67 
+VideoFøme
+ *
+vf
+;
+
+68 
+a˘uÆ_dñay
+, 
+dñay
+, 
+sync_thªshﬁd
+, 
+ªf_˛k
+, 
+diff
+;
+
+69 if(
+°©e
+->
+video
+->
+°ªam
+) {
+
+70 if(
+°©e
+->
+video
+->
+‰ameBufSize
+ == 0) {
+
+71 
+	`scheduÀ_ª‰esh
+(
+°©e
+, 1);
+
+72 
+	`Ârötf
+(
+°dîr
+, "enter A : delay 1 ms\n");
+
+74 
+vf
+ = &
+°©e
+->
+video
+->
+‰ameBuf
+;
+
+75 
+°©e
+->
+video
+->
+video_cuºít_±s
+ = 
+vf
+->
+±s
+;
+
+76 
+°©e
+->
+video
+->
+video_cuºít_±s_time
+ = 
+	`av_gëtime
+();
+
+77 
+dñay
+ = 
+vf
+->
+±s
+ - 
+°©e
+->
+video
+->
+‰ame_œ°_±s
+;
+
+78 if(
+dñay
+ <= 0 || delay >= 1.0) {
+
+79 
+dñay
+ = 
+°©e
+->
+video
+->
+‰ame_œ°_dñay
+;
+
+81 
+°©e
+->
+video
+->
+‰ame_œ°_dñay
+ = 
+dñay
+;
+
+82 
+°©e
+->
+video
+->
+‰ame_œ°_±s
+ = 
+vf
+->
+±s
+;
+
+83 
+°©e
+->
+video
+->
+‰ame_timî
+ +
+dñay
+;
+
+84 
+a˘uÆ_dñay
+ = 
+°©e
+->
+video
+->
+‰ame_timî
+ - (
+	`av_gëtime
+() / 1000000.0);
+
+85 if(
+a˘uÆ_dñay
+ < 0.010) {
+
+86 
+a˘uÆ_dñay
+ = 0.010;
+
+88 
+	`scheduÀ_ª‰esh
+(
+°©e
+, ()(
+a˘uÆ_dñay
+ * 1000 + 0.5));
+
+89 
+	`Ârötf
+(
+°dîr
+, "íã∏B : dñay %d ms\n", ()(
+a˘uÆ_dñay
+ * 1000 + 0.5));
+
+90 
+	`∂ay_video
+(
+°©e
+->
+video
+);
+
+92 
+	`SDL_LockMuãx
+(
+°©e
+->
+video
+->
+‰ameBufMuãx
+);
+
+93 
+°©e
+->
+video
+->
+‰ameBufSize
+--;
+
+94 
+	`SDL_C⁄dSig«l
+(
+°©e
+->
+video
+->
+‰ameBufC⁄d
+);
+
+95 
+	`SDL_U∆ockMuãx
+(
+°©e
+->
+video
+->
+‰ameBufMuãx
+);
+
+98 
+	`scheduÀ_ª‰esh
+(
+°©e
+, 100);
+
+99 
+	`Ârötf
+(
+°dîr
+, "enter C : delay 100 ms\n");
+
+102 
 	}
 }
 
@@ -2979,7 +3483,19 @@ SDL_USEREVENT
 
 	)
 
-9 
+8 
+	#AV_SYNC_THRESHOLD
+ 0.01
+
+	)
+
+9 
+	#AV_NOSYNC_THRESHOLD
+ 10.0
+
+	)
+
+12 
 sync_video
 (
 Medü
@@ -2993,7 +3509,7 @@ AVFøme
 ±s
 );
 
-10 
+13 
 Uöt32
  
 sdl_ª‰esh_timî_cb
@@ -3003,7 +3519,7 @@ sdl_ª‰esh_timî_cb
 ›aque
 );
 
-11 
+14 
 scheduÀ_ª‰esh
 (
 Sèã
@@ -3013,7 +3529,7 @@ Sèã
 dñay
 );
 
-12 
+15 
 gë_audio_˛ock
 (
 Medü
@@ -3021,7 +3537,7 @@ Medü
 audio
 );
 
-13 
+16 
 gë_video_˛ock
 (
 Medü
@@ -3029,17 +3545,15 @@ Medü
 video
 );
 
-14 
-gë_video_˛ock
-(
-Medü
- *
-video
-);
-
-15 
+17 
 gë_exã∫Æ_˛ock
 ();
+
+18 
+video_ª‰esh_timî
+(*
+¨g
+);
 
 	@utility.h
 
@@ -3071,13 +3585,21 @@ UTILITY_H
 	~"video.h
 "
 
-4 
+2 
+	~"di•œy.h
+"
+
+3 
+	~"sync.h
+"
+
+5 
 	$decode_video
 (*
 ¨g
 )
 
-6 
+7 
 Medü
  *
 video
@@ -3085,27 +3607,27 @@ video
 ¨g
 ;
 
-7 
+8 
 AVFøme
  *
 pFøme
 ;
 
-8 
+9 
 ‰ameFöished
 ;
 
-9 
+10 
 ±s
 ;
 
-10 
+11 
 AVPackë
  
 ∑ckë
 ;
 
-11 
+12 
 AVPackë
  *
 pkt
@@ -3113,17 +3635,17 @@ pkt
 ∑ckë
 ;
 
-12 
+13 
 pFøme
  = 
 	`avcodec_Æloc_‰ame
 ();
 
-13 
+14 
 åue
 ) {
 
-14 if(
+15 if(
 	`gë_‰om_queue
 (&
 video
@@ -3133,13 +3655,13 @@ video
 pkt
 ) < 0) {
 
-15 
+16 
 	`Ârötf
 (
 °dîr
 , "failÅo get videoÖkt from queue : decode_video\n");
 
-18 
+19 
 	`avcodec_decode_video2
 (
 video
@@ -3153,11 +3675,11 @@ pFøme
 ∑ckë
 );
 
-19 
+20 
 ±s
  = 0;
 
-20 
+21 
 globÆ_video_pkt_±s
  = 
 pkt
@@ -3165,7 +3687,7 @@ pkt
 ±s
 ;
 
-21 if(
+22 if(
 pkt
 ->
 dts
@@ -3179,7 +3701,7 @@ pFøme
 uöt64_t
  *)pFrame->opaque != AV_NOPTS_VALUE) {
 
-22 
+23 
 ±s
  = *(
 uöt64_t
@@ -3189,7 +3711,7 @@ pFøme
 ›aque
 ;
 
-23 } if(
+24 } if(
 pkt
 ->
 dts
@@ -3197,7 +3719,7 @@ dts
 AV_NOPTS_VALUE
 ) {
 
-24 
+25 
 ±s
  = 
 pkt
@@ -3205,11 +3727,11 @@ pkt
 dts
 ;
 
-27 
+28 
 ±s
  = 0;
 
-29 
+30 
 ±s
  *
 	`av_q2d
@@ -3221,11 +3743,11 @@ video
 time_ba£
 );
 
-31 if(
+32 if(
 ‰ameFöished
 ) {
 
-32 
+33 
 ±s
  = 
 	`sync_video
@@ -3235,7 +3757,7 @@ video
 pFøme
 ,Öts);
 
-33 if(
+34 if(
 	`video_‰ame_c⁄vît
 (
 video
@@ -3503,243 +4025,17 @@ vf
 ±s
  =Öts;
 
-75 
+74 
 video
 ->
 ‰ameBufSize
 ++;
 
-79 
+77 
 	}
 }
 
-82 
-	$video_ª‰esh_timî
-(*
-¨g
-)
-
-84 
-Sèã
- *
-°©e
- = (Sèã *)
-¨g
-;
-
-85 
-VideoFøme
- *
-vf
-;
-
-86 
-a˘uÆ_dñay
-, 
-dñay
-, 
-sync_thªshﬁd
-, 
-ªf_˛k
-, 
-diff
-;
-
-87 if(
-°©e
-->
-video
-->
-°ªam
-) {
-
-88 if(
-°©e
-->
-video
-->
-‰ameBufSize
- == 0) {
-
-89 
-	`scheduÀ_ª‰esh
-(
-°©e
-, 1);
-
-91 
-vf
- = &
-°©e
-->
-video
-->
-‰ameBuf
-;
-
-92 
-dñay
- = 
-vf
-->
-±s
- - 
-°©e
-->
-video
-->
-‰ame_œ°_±s
-;
-
-93 if(
-dñay
- <= 0 || delay >= 1.0) {
-
-94 
-dñay
- = 
-°©e
-->
-video
-->
-‰ame_œ°_dñay
-;
-
-96 
-°©e
-->
-video
-->
-‰ame_œ°_dñay
- = 
-dñay
-;
-
-97 
-°©e
-->
-video
-->
-‰ame_œ°_±s
- = 
-vf
-->
-±s
-;
-
-99 
-ªf_˛k
- = 
-	`gë_audio_˛ock
-(
-°©e
-->
-audio
-);
-
-100 
-diff
- = 
-vf
-->
-±s
- - 
-ªf_˛k
-;
-
-101 
-sync_thªshﬁd
- = (
-dñay
- > 
-AV_SYNC_THRESHOLD
-) ? delay : AV_SYNC_THRESHOLD;
-
-102 if(
-	`Ábs
-(
-diff
-Ë< 
-AV_NOSYNC_THRESHOLD
-) {
-
-103 if(
-diff
- <-
-sync_thªshﬁd
-) {
-
-104 
-dñay
- = 0;
-
-105 } if(
-diff
- >
-sync_thªshﬁd
-) {
-
-106 
-dñay
- = 2 * delay;
-
-109 
-°©e
-->
-video
-->
-‰ame_timî
- +
-dñay
-;
-
-110 
-a˘uÆ_dñay
- = 
-°©e
-->
-video
-->
-‰ame_timî
- - (
-	`av_gëtime
-() / 1000000.0);
-
-111 if(
-a˘uÆ_dñay
- < 0.010) {
-
-112 
-a˘uÆ_dñay
- = 0.010;
-
-114 
-	`scheduÀ_ª‰esh
-(
-°©e
-, ()(
-a˘uÆ_dñay
- * 1000 + 0.5));
-
-115 
-	`∂ay_video
-(
-°©e
-->
-video
-);
-
-118 
-	`scheduÀ_ª‰esh
-(
-°©e
-, 100);
-
-121 
-	}
-}
-
-124 
+80 
 	$öô_video
 (
 Medü
@@ -3747,7 +4043,7 @@ Medü
 video
 )
 
-126 
+82 
 	`mem£t
 (
 video
@@ -3755,13 +4051,13 @@ video
 Medü
 ));
 
-127 
+83 
 globÆ_video_pkt_±s
  = 
 AV_NOPTS_VALUE
 ;
 
-128 
+84 
 video
 ->
 medüTy≥
@@ -3769,7 +4065,7 @@ medüTy≥
 VIDEO
 ;
 
-129 
+85 
 video
 ->
 ‰ame_timî
@@ -3777,13 +4073,13 @@ video
 	`av_gëtime
 () / 1000000.0;
 
-130 
+86 
 video
 ->
 ‰ame_œ°_dñay
  = 40e-3;
 
-131 
+87 
 video
 ->
 föd_°ªam
@@ -3791,7 +4087,7 @@ föd_°ªam
 föd_av_°ªams
 ;
 
-132 
+88 
 video
 ->
 föd_codec
@@ -3799,7 +4095,7 @@ föd_codec
 föd_decodî
 ;
 
-133 
+89 
 video
 ->
 ∂ay
@@ -3807,7 +4103,23 @@ video
 ∂ay_video
 ;
 
-134 
+90 
+video
+->
+‰ameBufMuãx
+ = 
+	`SDL_Cª©eMuãx
+();
+
+91 
+video
+->
+‰ameBufC⁄d
+ = 
+	`SDL_Cª©eC⁄d
+();
+
+92 
 video
 ->
 ∂ayC⁄d
@@ -3815,7 +4127,7 @@ video
 	`SDL_Cª©eC⁄d
 ();
 
-135 
+93 
 video
 ->
 ∂ayMuãx
@@ -3823,101 +4135,29 @@ video
 	`SDL_Cª©eMuãx
 ();
 
-136 
-	}
-}
-
-139 
-	$∂ay_video
-(*
-¨g
-)
-
-141 
-SDL_Re˘
- 
-ª˘
-;
-
-142 
-VideoFøme
- *
-vf
-;
-
-143 
-w
-, 
-h
-, 
-x
-, 
-y
-;
-
-144 
-Medü
- *
-video
- = (Medü *)
-¨g
-;
-
-145 
-vf
- = &
+94 
 video
 ->
-‰ameBuf
-;
+‰ame_œ°_dñay
+ = 40e-3;
 
-149 
-ª˘
-.
-x
- = 0;
-
-150 
-ª˘
-.
-y
- = 0;
-
-151 
-ª˘
-.
-w
+95 
+video
+->
+video_cuºít_±s_time
  = 
+	`av_gëtime
+();
+
+96 
 video
 ->
-pCodecCtx
-->
-width
-;
+‰ame_timî
+ = ()
+	`av_gëtime
+() / 1000000.0;
 
-152 
-ª˘
-.
-h
- = 
-video
-->
-pCodecCtx
-->
-height
-;
-
-154 
-	`SDL_Di•œyYUVOvîœy
-(
-vf
-->
-bmp
-, &
-ª˘
-);
-
-157 
+98 
 	}
 }
 
@@ -3941,19 +4181,7 @@ VIDEO_H
 
 	)
 
-6 
-	#AV_SYNC_THRESHOLD
- 0.01
-
-	)
-
-7 
-	#AV_NOSYNC_THRESHOLD
- 10.0
-
-	)
-
-9 
+7 
 video_‰ame_c⁄vît
 (
 Medü
@@ -3967,25 +4195,13 @@ pFøme
 ±s
 );
 
-10 
+8 
 decode_video
 (*
 ¨g
 );
 
-11 
-video_ª‰esh_timî
-(*
-¨g
-);
-
-12 
-∂ay_video
-(*
-¨g
-);
-
-13 
+9 
 öô_video
 (
 Medü

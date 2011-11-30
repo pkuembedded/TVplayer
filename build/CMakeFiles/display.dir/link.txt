@@ -1,1 +1,1 @@
-/usr/bin/gcc  -fPIC   -shared -Wl,-soname,libdisplay.so -o libdisplay.so CMakeFiles/display.dir/src/display.c.o 
+/usr/bin/gcc  -fPIC  -O0 -Wall -g -ggdb  -shared -Wl,-soname,libdisplay.so -o libdisplay.so CMakeFiles/display.dir/src/display.c.o 

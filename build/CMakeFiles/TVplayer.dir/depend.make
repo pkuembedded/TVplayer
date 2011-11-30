@@ -47,6 +47,7 @@ CMakeFiles/TVplayer.dir/src/sync.c.o: ../src/sync.c
 CMakeFiles/TVplayer.dir/src/sync.c.o: ../src/sync.h
 CMakeFiles/TVplayer.dir/src/sync.c.o: ../src/utility.h
 
+CMakeFiles/TVplayer.dir/src/video.c.o: ../src/display.h
 CMakeFiles/TVplayer.dir/src/video.c.o: ../src/file.h
 CMakeFiles/TVplayer.dir/src/video.c.o: ../src/libffmpeg.h
 CMakeFiles/TVplayer.dir/src/video.c.o: ../src/libsdl.h

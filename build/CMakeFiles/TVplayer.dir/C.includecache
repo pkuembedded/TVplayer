@@ -20,9 +20,25 @@ audio.h
 sync.h
 /home/infinite/Project/TVplayer/src/sync.h
 
+/home/infinite/Project/TVplayer/src/audio.c
+audio.h
+/home/infinite/Project/TVplayer/src/audio.h
+
 /home/infinite/Project/TVplayer/src/audio.h
 structures.h
 /home/infinite/Project/TVplayer/src/structures.h
+file.h
+/home/infinite/Project/TVplayer/src/file.h
+
+/home/infinite/Project/TVplayer/src/display.c
+display.h
+/home/infinite/Project/TVplayer/src/display.h
+
+/home/infinite/Project/TVplayer/src/display.h
+structures.h
+/home/infinite/Project/TVplayer/src/structures.h
+
+/home/infinite/Project/TVplayer/src/file.c
 file.h
 /home/infinite/Project/TVplayer/src/file.h
 
@@ -43,6 +59,14 @@ SDL/SDL.h
 -
 SDL/SDL_thread.h
 -
+
+/home/infinite/Project/TVplayer/src/queue.c
+queue.h
+/home/infinite/Project/TVplayer/src/queue.h
+
+/home/infinite/Project/TVplayer/src/queue.h
+structures.h
+/home/infinite/Project/TVplayer/src/structures.h
 
 /home/infinite/Project/TVplayer/src/structures.h
 libffmpeg.h
@@ -65,6 +89,8 @@ structures.h
 /home/infinite/Project/TVplayer/src/video.c
 video.h
 /home/infinite/Project/TVplayer/src/video.h
+display.h
+/home/infinite/Project/TVplayer/src/display.h
 sync.h
 /home/infinite/Project/TVplayer/src/sync.h
 

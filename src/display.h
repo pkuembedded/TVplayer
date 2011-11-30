@@ -6,4 +6,5 @@ SDL_Surface *screen;
 
 int init_screen(Media *video);
 void init_frame(Media *video);
+int play_video(void *arg);
 #endif //DISPLAY_H

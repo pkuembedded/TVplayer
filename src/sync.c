@@ -44,6 +44,9 @@ double get_audio_clock(Media *audio) {
     return pts;
 }
 double get_video_clock(Media *video) {
+  double delta;
+  delta = (av_gettime() - video->video_current_pts_time) / 1000000.0;
+  return video->video_current_pts + delta;
 
 }
 double get_external_clock() {
@@ -52,7 +55,48 @@ double get_external_clock() {
 
 double get_master_clock(State *state) 
 {
-    return get_external_clock(state);
+//    return get_external_clock(state);
+    return get_video_clock(state->video);
 }
 
 
+
+int video_refresh_timer(void *arg)
+{
+    State *state = (State *)arg;
+    VideoFrame *vf;
+    double actual_delay, delay, sync_threshold, ref_clk, diff;
+    if(state->video->stream) {
+	if(state->video->frameBufSize == 0) {
+	    schedule_refresh(state, 1);
+//	    fprintf(stderr, "enter A : delay 1 ms\n");
+	} else {
+	    vf = &state->video->frameBuf;
+	    state->video->video_current_pts = vf->pts;
+	    state->video->video_current_pts_time = av_gettime();
+	    delay = vf->pts - state->video->frame_last_pts;
+	    if(delay <= 0 || delay >= 1.0) {
+		delay = state->video->frame_last_delay;
+	    }
+	    state->video->frame_last_delay = delay;
+	    state->video->frame_last_pts = vf->pts;
+	    state->video->frame_timer += delay;
+	    actual_delay = state->video->frame_timer - (av_gettime() / 1000000.0);
+	    if(actual_delay < 0.010) {
+		actual_delay = 0.010;
+	    }
+	    schedule_refresh(state, (int)(actual_delay * 1000 + 0.5));
+//	    fprintf(stderr, "enter B : delay %d ms\n", (int)(actual_delay * 1000 + 0.5));
+	    play_video(state->video);
+
+	    SDL_LockMutex(state->video->frameBufMutex);
+	    state->video->frameBufSize--;
+	    SDL_CondSignal(state->video->frameBufCond);
+	    SDL_UnlockMutex(state->video->frameBufMutex);
+	}
+    } else {
+	schedule_refresh(state, 100);
+//	fprintf(stderr, "enter C : delay 100 ms\n");
+    }
+    return 0;
+}

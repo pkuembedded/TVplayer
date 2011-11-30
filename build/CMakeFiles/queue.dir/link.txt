@@ -1,1 +1,1 @@
-/usr/bin/gcc  -fPIC   -shared -Wl,-soname,libqueue.so -o libqueue.so CMakeFiles/queue.dir/src/queue.c.o 
+/usr/bin/gcc  -fPIC  -O0 -Wall -g -ggdb  -shared -Wl,-soname,libqueue.so -o libqueue.so CMakeFiles/queue.dir/src/queue.c.o 

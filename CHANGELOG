@@ -1,0 +1,6 @@
+2011-11-30
+add A/V sync, base on video 
+Test result:
+.avi:A/V normal
+.avs:V slow 
+.rmvb:V slow, A normal

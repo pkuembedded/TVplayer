@@ -24,3 +24,41 @@ void init_frame(Media *video) {
     vf->height = video->stream->codec->height;
 }
 
+int play_video(void *arg)
+{
+    SDL_Rect rect;
+    VideoFrame *vf;
+    int w, h, x, y;
+    float aspect_ratio;
+    Media *video = (Media *)arg;
+    vf = &video->frameBuf;
+    //put our pict on the queue
+    if(vf->bmp)
+    {
+	if(video->stream->codec->sample_aspect_ratio.num == 0) {
+	    aspect_ratio = 0;
+	} else {
+	    aspect_ratio = av_q2d(video->stream->codec->sample_aspect_ratio) * video->stream->codec->width / video->stream->codec->height;
+	}
+	if(aspect_ratio <= 0.0) {
+	    aspect_ratio = (float)video->stream->codec->width / (float)video->stream->codec->height;
+	}
+	h = screen->h;
+	w = ((int)rint(h * aspect_ratio)) & -3;
+	if(w > screen->w) {
+	    w = screen->w;
+	    h = ((int)rint(w / aspect_ratio)) & -3;
+	}
+	x = (screen->w - w) / 2;
+	y = (screen->h - h) / 2;
+
+	rect.x = 0;
+	rect.y = 0;
+	rect.w = video->pCodecCtx->width;
+	rect.h = video->pCodecCtx->height;
+	SDL_DisplayYUVOverlay(vf->bmp, &rect);
+    }
+
+    return 0;
+}
+

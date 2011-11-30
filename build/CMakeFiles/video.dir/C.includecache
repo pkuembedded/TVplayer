@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/infinite/Project/TVplayer/src/display.h
+structures.h
+/home/infinite/Project/TVplayer/src/structures.h
+
 /home/infinite/Project/TVplayer/src/file.h
 structures.h
 /home/infinite/Project/TVplayer/src/structures.h
@@ -41,6 +45,8 @@ structures.h
 /home/infinite/Project/TVplayer/src/video.c
 video.h
 /home/infinite/Project/TVplayer/src/video.h
+display.h
+/home/infinite/Project/TVplayer/src/display.h
 sync.h
 /home/infinite/Project/TVplayer/src/sync.h
 
