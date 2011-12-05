@@ -31,7 +31,7 @@ int add_to_queue(PacketQueue *queue, AVPacket *pkt)
     else
 	queue->end->next = pkt1;
     queue->end = pkt1;
-    queue->pktNum++;
+    queue->pkt_num++;
     queue->size += pkt1->pkt.size;
     SDL_CondSignal(queue->cond);
     SDL_UnlockMutex(queue->mutex);
@@ -47,18 +47,18 @@ int get_from_queue(PacketQueue *queue, AVPacket *pkt)
     while(true) {
 	pkt1 = queue->header;
 	if(pkt1) {
-//	    fprintf(stderr, "video queue size :%d, video queue pktNum: %d\n", queue->size, queue->pktNum);
+//	    fprintf(stderr, "video queue size :%d, video queue pkt_num: %d\n", queue->size, queue->pkt_num);
 	    queue->header = queue->header->next;
 	    if(!queue->header)
 		queue->end = NULL;
-	    queue->pktNum--;
+	    queue->pkt_num--;
 	    queue->size -= pkt1->pkt.size;
 	    *pkt = pkt1->pkt;
 	    av_free(pkt1);
 	    ret = 1;
 	    break;
 	}else {
-//	    fprintf(stderr, "video queue size :%d, video queue pktNum: %d\n", queue->size, queue->pktNum);
+//	    fprintf(stderr, "video queue size :%d, video queue pkt_num: %d\n", queue->size, queue->pkt_num);
 	    SDL_CondWait(queue->cond, queue->mutex);
 	}
     }
@@ -78,7 +78,7 @@ void queue_flush(PacketQueue *queue)
     }
     queue->header = NULL;
     queue->end = NULL;
-    queue->pktNum = 0;
+    queue->pkt_num = 0;
     queue->size = 0;
     SDL_UnlockMutex(queue->mutex);
 }

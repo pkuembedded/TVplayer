@@ -414,8 +414,8 @@ audio_size
 (
 audio
 ,‡udio->
-audioBuf
-, ×udio->audioBuf), &
+audio_buf
+, ×udio->audio_buf), &
 ±s
 );
 
@@ -434,7 +434,7 @@ audio_buf_size
 (
 audio
 ->
-audioBuf
+audio_buf
 , 0,‡udio->
 audio_buf_size
 );
@@ -484,7 +484,7 @@ ušt8_t
  *)
 audio
 ->
-audioBuf
+audio_buf
  +‡udio->
 audio_buf_šdex
 , 
@@ -544,7 +544,7 @@ wª‹d_¥ec
  = 
 audio
 ->
-pCodecCtx
+codec_ctx
 ->
 §m¶e_¿‹
 ;
@@ -564,7 +564,7 @@ chªÃls
  = 
 audio
 ->
-pCodecCtx
+codec_ctx
 ->channels;
 
 47 
@@ -630,7 +630,7 @@ aCodec
 (
 audio
 ->
-pCodecCtx
+codec_ctx
 ->
 codec_id
 );
@@ -652,7 +652,7 @@ NULL
 (
 audio
 ->
-pCodecCtx
+codec_ctx
 , 
 aCodec
 ) < 0)
@@ -726,7 +726,7 @@ audio_pkt
 82 
 audio
 ->
-audioPktSize
+audio_pkt_size
  > 0) {
 
 83 
@@ -742,7 +742,7 @@ buf_size
 (
 audio
 ->
-pCodecCtx
+codec_ctx
 ,
 
 85 (
@@ -762,7 +762,7 @@ pkt
 88 
 audio
 ->
-audioPktSize
+audio_pkt_size
  = 0;
 
 91 
@@ -776,7 +776,7 @@ audioPktD©a
 92 
 audio
 ->
-audioPktSize
+audio_pkt_size
  -ð
 Ën1
 ;
@@ -816,7 +816,7 @@ n
  * 
 audio
 ->
-pCodecCtx
+codec_ctx
 ->
 §m¶e_¿‹
 );
@@ -860,7 +860,7 @@ d©a
 113 
 audio
 ->
-audioPktSize
+audio_pkt_size
  = 
 pkt
 ->
@@ -882,7 +882,7 @@ audio
  = 
 	`av_q2d
 ×udio->
-pCodecCtx
+codec_ctx
 ->
 time_ba£
 )*
@@ -986,10 +986,10 @@ sü“n
 (
 video
 ->
-pCodecCtx
+codec_ctx
 ->
 width
-, video->pCodecCtx->
+, video->codec_ctx->
 height
 , 0, 0);
 
@@ -1288,7 +1288,7 @@ w
  = 
 video
 ->
-pCodecCtx
+codec_ctx
 ->
 width
 ;
@@ -1300,7 +1300,7 @@ h
  = 
 video
 ->
-pCodecCtx
+codec_ctx
 ->
 height
 ;
@@ -1374,7 +1374,7 @@ video
 (
 AVCodecCÚ‹xt
  *
-pCodecCtx
+codec_ctx
 , 
 AVF¿me
  *
@@ -1386,7 +1386,7 @@ AVF¿me
  = 
 	`avcodec_deçuÉ_g‘_bufãr
 (
-pCodecCtx
+codec_ctx
 , 
 äame
 );
@@ -1426,7 +1426,7 @@ glob®_video_pkt_±s
 (
 AVCodecCÚ‹xt
  *
-pCodecCtx
+codec_ctx
 , 
 AVF¿me
  *
@@ -1448,7 +1448,7 @@ AVF¿me
 17 
 	`avcodec_deçuÉ_»Ëa£_bufãr
 (
-pCodecCtx
+codec_ctx
 , 
 äame
 );
@@ -1592,7 +1592,7 @@ i
 48 
 video
 ->
-pCodecCtx
+codec_ctx
  = 
 fže
 ->
@@ -1646,7 +1646,7 @@ i
 53 
 audio
 ->
-pCodecCtx
+codec_ctx
  = 
 fže
 ->
@@ -1680,11 +1680,11 @@ medŸ
 62 
 medŸ
 ->
-pCodec
+codec
  = 
 	`avcodec_fšd_decod”
 (medŸ->
-pCodecCtx
+codec_ctx
 ->
 codec_id
 );
@@ -1692,7 +1692,7 @@ codec_id
 63 if(
 medŸ
 ->
-pCodec
+codec
  =ð
 NULL
 )
@@ -1708,9 +1708,9 @@ NULL
 (
 medŸ
 ->
-pCodecCtx
+codec_ctx
 , medŸ->
-pCodec
+codec
 ) < 0)
 
 70 
@@ -1732,7 +1732,7 @@ VIDEO
 76 
 medŸ
 ->
-pCodecCtx
+codec_ctx
 ->
 g‘_bufãr
  = 
@@ -1742,7 +1742,7 @@ our_g‘_bufãr
 77 
 medŸ
 ->
-pCodecCtx
+codec_ctx
 ->
 »Ëa£_bufãr
  = 
@@ -1990,7 +1990,7 @@ our_g‘_bufãr
 (
 AVCodecCÚ‹xt
  *
-pCodecCtx
+codec_ctx
 , 
 AVF¿me
  *
@@ -2002,7 +2002,7 @@ our_»Ëa£_bufãr
 (
 AVCodecCÚ‹xt
  *
-pCodecCtx
+codec_ctx
 , 
 AVF¿me
  *
@@ -2232,7 +2232,7 @@ pkt1
 34 
 queue
 ->
-pktNum
+pkt_num
 ++;
 
 35 
@@ -2336,7 +2336,7 @@ NULL
 54 
 queue
 ->
-pktNum
+pkt_num
 --;
 
 55 
@@ -2466,7 +2466,7 @@ NULL
 81 
 queue
 ->
-pktNum
+pkt_num
  = 0;
 
 82 
@@ -2648,7 +2648,7 @@ AVPack‘Li¡
 ;
 
 36 
-	mpktNum
+	mpkt_num
 ;
 
 37 
@@ -2718,13 +2718,13 @@ AVSŒ—m
 53 
 AVCodecCÚ‹xt
  *
-	mpCodecCtx
+	mcodec_ctx
 ;
 
 54 
 AVCodec
  *
-	mpCodec
+	mcodec
 ;
 
 55 
@@ -2786,7 +2786,7 @@ AVPack‘
 67 
 ušt8_t
  
-	maudioBuf
+	maudio_buf
 [(
 AVCODEC_MAX_AUDIO_FRAME_SIZE
  * 3) / 2];
@@ -2798,7 +2798,7 @@ ušt8_t
 ;
 
 69 
-	maudioPktSize
+	maudio_pkt_size
 ;
 
 70 
@@ -3666,7 +3666,7 @@ pkt
 (
 video
 ->
-pCodecCtx
+codec_ctx
 , 
 pF¿me
 , &

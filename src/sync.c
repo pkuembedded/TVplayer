@@ -67,11 +67,11 @@ int video_refresh_timer(void *arg)
     VideoFrame *vf;
     double actual_delay, delay, sync_threshold, ref_clk, diff;
     if(state->video->stream) {
-	if(state->video->frameBufSize == 0) {
+	if(state->video->frame_buf_size == 0) {
 	    schedule_refresh(state, 1);
-//	    fprintf(stderr, "enter A : delay 1 ms\n");
+	    fprintf(stderr, "enter A : delay 1 ms\n");
 	} else {
-	    vf = &state->video->frameBuf;
+	    vf = &state->video->frame_buf;
 	    state->video->video_current_pts = vf->pts;
 	    state->video->video_current_pts_time = av_gettime();
 	    delay = vf->pts - state->video->frame_last_pts;
@@ -86,17 +86,17 @@ int video_refresh_timer(void *arg)
 		actual_delay = 0.010;
 	    }
 	    schedule_refresh(state, (int)(actual_delay * 1000 + 0.5));
-//	    fprintf(stderr, "enter B : delay %d ms\n", (int)(actual_delay * 1000 + 0.5));
+	    fprintf(stderr, "enter B : delay %d ms\n", (int)(actual_delay * 1000 + 0.5));
 	    play_video(state->video);
 
-	    SDL_LockMutex(state->video->frameBufMutex);
-	    state->video->frameBufSize--;
-	    SDL_CondSignal(state->video->frameBufCond);
-	    SDL_UnlockMutex(state->video->frameBufMutex);
+	    SDL_LockMutex(state->video->frame_buf_mutex);
+	    state->video->frame_buf_size--;
+	    SDL_CondSignal(state->video->frame_buf_cond);
+	    SDL_UnlockMutex(state->video->frame_buf_mutex);
 	}
     } else {
 	schedule_refresh(state, 100);
-//	fprintf(stderr, "enter C : delay 100 ms\n");
+	fprintf(stderr, "enter C : delay 100 ms\n");
     }
     return 0;
 }
