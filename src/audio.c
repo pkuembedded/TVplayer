@@ -7,6 +7,7 @@ void init_audio(Media *audio)
     audio->play_cond = SDL_CreateCond();    
     audio->play_mutex = SDL_CreateMutex();    
     audio->find_codec = find_decoder;
+    audio->get_info = get_av_info;
 }
 
 void audio_callback(void *userdata, Uint8 *stream, int len) 

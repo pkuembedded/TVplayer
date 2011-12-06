@@ -14,4 +14,5 @@ int get_file_info(File *file);
 void find_av_streams(File *file, Media *video, Media *audio);
 int find_decoder(Media *media);
 int queue_av_pkt(void *arg);
+void get_av_info(void *arg);
 #endif //FILE_H

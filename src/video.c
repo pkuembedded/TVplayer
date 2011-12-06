@@ -16,9 +16,13 @@ int decode_video(void *arg)
 	    fprintf(stderr, "fail to get video pkt from queue : decode_video\n");
 	    break;
 	}
-	avcodec_decode_video2(video->codec_ctx, pFrame, &frameFinished, &packet);
+	if(pkt->data == flush_pkt.data) {
+	    avcodec_flush_buffers(video->stream->codec);
+	    continue;
+	}
 	pts = 0;
 	global_video_pkt_pts = pkt->pts;
+	avcodec_decode_video2(video->codec_ctx, pFrame, &frameFinished, &packet);
 	if(pkt->dts != AV_NOPTS_VALUE && pFrame->opaque && *(uint64_t *)pFrame->opaque != AV_NOPTS_VALUE) {
 	    pts = *(uint64_t *)pFrame->opaque;
 	} else if(pkt->dts != AV_NOPTS_VALUE) {
@@ -54,7 +58,7 @@ int video_frame_convert(Media *video, AVFrame *pFrame, double pts)
     }
     SDL_UnlockMutex(video->frame_buf_mutex);
 
-    vf = &video->frame_buf;
+    vf = &video->frame_buf[video->frame_index];
     if(vf->bmp) {
 	SDL_LockYUVOverlay(vf->bmp);
 	dstPixFmt = PIX_FMT_YUV420P;
@@ -96,7 +100,6 @@ void init_video(Media *video)
     video->frame_last_delay = 40e-3;
     video->find_stream = find_av_streams;
     video->find_codec = find_decoder;
-    video->play = play_video;
     video->frame_buf_mutex = SDL_CreateMutex();
     video->frame_buf_cond = SDL_CreateCond();
     video->play_cond = SDL_CreateCond();    
@@ -104,6 +107,7 @@ void init_video(Media *video)
     video->frame_last_delay = 40e-3;
     video->video_current_pts_time = av_gettime();
     video->frame_timer = (double)av_gettime() / 1000000.0;
-
+    video->play = play_video;
+    video->get_info = get_av_info;
 }
 

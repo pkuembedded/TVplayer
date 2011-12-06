@@ -39,15 +39,14 @@ int main(int argc, char **argv)
     get_file_info(file);
     find_av_streams(file, video, audio);
     find_decoder(video);
-//    find_decoder(audio);
+    video->get_info(video);
     init_screen(video);
-    read_pkt_tid = SDL_CreateThread(queue_av_pkt, state);
+    read_pkt_tid = SDL_CreateThread(queue_av_pkt, "read", state);
     init_frame(video);
-    video_decode_tid = SDL_CreateThread(decode_video, video);
-//    video_refresh_timer(video);
-    schedule_refresh(state, 40);
-//    play_tid = SDL_CreateThread(play_video, video);
-//    sleep(100);
+    video_decode_tid = SDL_CreateThread(decode_video, "decode", video);
+    schedule_refresh(state, 30);
+    av_init_packet(&flush_pkt);
+    flush_pkt.data = "FLUSH";
     while(true) {
 	SDL_WaitEvent(&event);
 	switch(event.type) {

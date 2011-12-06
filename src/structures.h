@@ -8,8 +8,6 @@
 
 #define MAX_NAME_LEN 1024
 #define VIDEO_FRAME_QUEUE_SIZE 1
-
-
 enum {
     AUDIO,
     VIDEO,
@@ -41,19 +39,23 @@ typedef struct PacketQueue {
 
 typedef struct File {
     AVFormatContext *format_ctx;
+//    int hours, mins, secs, us;
+    int duration;
     char name[MAX_NAME_LEN];
 } File;
 
 
 typedef struct Media {
     int media_type;
+    char info[MAX_NAME_LEN];
     int track;
     PacketQueue raw_data_buf;
     AVStream *stream;
     AVCodecContext *codec_ctx;
     AVCodec *codec;
-    VideoFrame frame_buf;
+    VideoFrame frame_buf[VIDEO_FRAME_QUEUE_SIZE];
     int frame_buf_size;
+    int frame_index;
     double clk;
     double frame_timer;
     double frame_last_pts;
@@ -73,6 +75,7 @@ typedef struct Media {
     SDL_mutex *play_mutex;
     void (*init)(void *arg);
     void (*find_stream)(void *arg);
+    void (*get_info)(void *arg);
     int (*find_codec)(void *arg);
     int (*play)(void *arg);
     int (*pause)(void *arg);

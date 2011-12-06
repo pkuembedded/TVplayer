@@ -10,6 +10,7 @@ SET(CMAKE_FORCE_UNIX_PATHS 1)
 
 # The C and CXX include file search paths:
 SET(CMAKE_C_INCLUDE_PATH
+  "/usr/local/include/SDL"
   "/usr/include/SDL"
   )
 SET(CMAKE_CXX_INCLUDE_PATH ${CMAKE_C_INCLUDE_PATH})

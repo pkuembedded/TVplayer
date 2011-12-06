@@ -6,8 +6,48 @@ CMakeFiles/video.dir/src/video.c.o
  /home/infinite/Project/TVplayer/src/file.h
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h
+ /home/infinite/Project/TVplayer/src/queue.h
  /home/infinite/Project/TVplayer/src/structures.h
  /home/infinite/Project/TVplayer/src/sync.h
  /home/infinite/Project/TVplayer/src/utility.h
  /home/infinite/Project/TVplayer/src/video.c
  /home/infinite/Project/TVplayer/src/video.h
+ /usr/local/include/SDL/SDL.h
+ /usr/local/include/SDL/SDL_assert.h
+ /usr/local/include/SDL/SDL_atomic.h
+ /usr/local/include/SDL/SDL_audio.h
+ /usr/local/include/SDL/SDL_blendmode.h
+ /usr/local/include/SDL/SDL_clipboard.h
+ /usr/local/include/SDL/SDL_compat.h
+ /usr/local/include/SDL/SDL_config.h
+ /usr/local/include/SDL/SDL_cpuinfo.h
+ /usr/local/include/SDL/SDL_endian.h
+ /usr/local/include/SDL/SDL_error.h
+ /usr/local/include/SDL/SDL_events.h
+ /usr/local/include/SDL/SDL_gesture.h
+ /usr/local/include/SDL/SDL_hints.h
+ /usr/local/include/SDL/SDL_joystick.h
+ /usr/local/include/SDL/SDL_keyboard.h
+ /usr/local/include/SDL/SDL_keycode.h
+ /usr/local/include/SDL/SDL_loadso.h
+ /usr/local/include/SDL/SDL_log.h
+ /usr/local/include/SDL/SDL_main.h
+ /usr/local/include/SDL/SDL_mouse.h
+ /usr/local/include/SDL/SDL_mutex.h
+ /usr/local/include/SDL/SDL_pixels.h
+ /usr/local/include/SDL/SDL_platform.h
+ /usr/local/include/SDL/SDL_power.h
+ /usr/local/include/SDL/SDL_quit.h
+ /usr/local/include/SDL/SDL_rect.h
+ /usr/local/include/SDL/SDL_render.h
+ /usr/local/include/SDL/SDL_rwops.h
+ /usr/local/include/SDL/SDL_scancode.h
+ /usr/local/include/SDL/SDL_stdinc.h
+ /usr/local/include/SDL/SDL_surface.h
+ /usr/local/include/SDL/SDL_thread.h
+ /usr/local/include/SDL/SDL_timer.h
+ /usr/local/include/SDL/SDL_touch.h
+ /usr/local/include/SDL/SDL_version.h
+ /usr/local/include/SDL/SDL_video.h
+ /usr/local/include/SDL/begin_code.h
+ /usr/local/include/SDL/close_code.h

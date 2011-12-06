@@ -31,7 +31,7 @@ int play_video(void *arg)
     int w, h, x, y;
     float aspect_ratio;
     Media *video = (Media *)arg;
-    vf = &video->frame_buf;
+    vf = &video->frame_buf[video->frame_index];
     //put our pict on the queue
     if(vf->bmp)
     {

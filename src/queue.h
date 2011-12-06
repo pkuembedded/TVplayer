@@ -2,6 +2,7 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
+AVPacket flush_pkt;
 void init_queue(PacketQueue *queue);
 int add_to_queue(PacketQueue *queue, AVPacket *pkt);
 int get_from_queue(PacketQueue *queue, AVPacket *pkt);

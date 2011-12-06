@@ -1,4 +1,5 @@
 #include "structures.h"
+#include "queue.h"
 #include "file.h"
 
 #ifndef VIDEO_H

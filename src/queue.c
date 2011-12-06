@@ -17,7 +17,7 @@ int add_to_queue(PacketQueue *queue, AVPacket *pkt)
 	fprintf(stderr, "fail to malloc : add_to_queue\n");
 	return -1;	    
     }
-    if(av_dup_packet(pkt) < 0)
+    if(pkt != &flush_pkt && av_dup_packet(pkt) < 0)
     {
 	fprintf(stderr, "av_dup_packet : add_to_queue\n");
 	return -1;	    

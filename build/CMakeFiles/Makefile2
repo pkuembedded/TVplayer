@@ -56,11 +56,11 @@ CMAKE_BINARY_DIR = /home/infinite/Project/TVplayer/build
 # Target rules for target CMakeFiles/TVplayer.dir
 
 # All Build rule for target.
-CMakeFiles/TVplayer.dir/all: CMakeFiles/audio.dir/all
-CMakeFiles/TVplayer.dir/all: CMakeFiles/file.dir/all
 CMakeFiles/TVplayer.dir/all: CMakeFiles/video.dir/all
-CMakeFiles/TVplayer.dir/all: CMakeFiles/sync.dir/all
 CMakeFiles/TVplayer.dir/all: CMakeFiles/queue.dir/all
+CMakeFiles/TVplayer.dir/all: CMakeFiles/audio.dir/all
+CMakeFiles/TVplayer.dir/all: CMakeFiles/sync.dir/all
+CMakeFiles/TVplayer.dir/all: CMakeFiles/file.dir/all
 CMakeFiles/TVplayer.dir/all: CMakeFiles/display.dir/all
 	$(MAKE) -f CMakeFiles/TVplayer.dir/build.make CMakeFiles/TVplayer.dir/depend
 	$(MAKE) -f CMakeFiles/TVplayer.dir/build.make CMakeFiles/TVplayer.dir/build

@@ -43,23 +43,21 @@ double get_audio_clock(Media *audio) {
     }
     return pts;
 }
-double get_video_clock(Media *video) {
-  double delta;
-  delta = (av_gettime() - video->video_current_pts_time) / 1000000.0;
-  return video->video_current_pts + delta;
 
+double get_video_clock(Media *video) {
+    double delta;
+    delta = (av_gettime() - video->video_current_pts_time) / 1000000.0;
+    return video->video_current_pts + delta;
 }
+
 double get_external_clock() {
     return av_gettime() / 1000000.0;
 }
 
 double get_master_clock(State *state) 
 {
-//    return get_external_clock(state);
     return get_video_clock(state->video);
 }
-
-
 
 int video_refresh_timer(void *arg)
 {
@@ -71,7 +69,7 @@ int video_refresh_timer(void *arg)
 	    schedule_refresh(state, 1);
 	    fprintf(stderr, "enter A : delay 1 ms\n");
 	} else {
-	    vf = &state->video->frame_buf;
+	    vf = &state->video->frame_buf[state->video->frame_index];
 	    state->video->video_current_pts = vf->pts;
 	    state->video->video_current_pts_time = av_gettime();
 	    delay = vf->pts - state->video->frame_last_pts;
@@ -80,15 +78,29 @@ int video_refresh_timer(void *arg)
 	    }
 	    state->video->frame_last_delay = delay;
 	    state->video->frame_last_pts = vf->pts;
+	    if(state->audio->stream) {
+		ref_clk = get_audio_clock(state->audio);
+		diff = vf->pts - ref_clk;
+		sync_threshold = (delay > AV_SYNC_THRESHOLD) ? delay : AV_SYNC_THRESHOLD;
+		if(fabs(diff) < AV_NOSYNC_THRESHOLD) {
+		    if(diff <= -sync_threshold) {
+			delay = 0;
+		    } else if(diff > sync_threshold) {
+			delay = 2 * delay;
+		    }
+		}
+	    }
 	    state->video->frame_timer += delay;
 	    actual_delay = state->video->frame_timer - (av_gettime() / 1000000.0);
 	    if(actual_delay < 0.010) {
 		actual_delay = 0.010;
 	    }
-	    schedule_refresh(state, (int)(actual_delay * 1000 + 0.5));
-	    fprintf(stderr, "enter B : delay %d ms\n", (int)(actual_delay * 1000 + 0.5));
+	    schedule_refresh(state, (int)(actual_delay * 50 + 0.5));
+	    fprintf(stderr, "enter B : delay %d ms\n", (int)(actual_delay * 50 + 0.5));
 	    play_video(state->video);
-
+	    if(++state->video->frame_index == VIDEO_FRAME_QUEUE_SIZE) {
+		state->video->frame_index = 0;
+	    }
 	    SDL_LockMutex(state->video->frame_buf_mutex);
 	    state->video->frame_buf_size--;
 	    SDL_CondSignal(state->video->frame_buf_cond);

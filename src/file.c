@@ -31,7 +31,7 @@ int get_file_info(File *file)
 	return -1;
     }
 
-    dump_format(file->format_ctx, 0, file->name, 0);
+    av_dump_format(file->format_ctx, 0, file->name, 0);
     return 0;
 }
 
@@ -72,6 +72,7 @@ int find_decoder(Media *media)
     }
 
     switch(media->media_type) {
+
     case VIDEO:
 	media->codec_ctx->get_buffer = our_get_buffer;
 	media->codec_ctx->release_buffer = our_release_buffer;
@@ -83,6 +84,7 @@ int find_decoder(Media *media)
 	memset(&media->audio_pkt, 0, sizeof(media->audio_pkt));
 	SDL_PauseAudio(0);
 	break;
+
     default:
 	fprintf(stderr, "unknown media type : find_decoder\n");
 	return -1;
@@ -126,3 +128,8 @@ int queue_av_pkt(void *arg) {
     return 0;
 }
 
+void get_av_info(void *arg) {
+    Media *media = (Media *)arg;
+    int is_output = false;//make msg short
+    avcodec_string(media->info, sizeof(media->info), media->codec_ctx, is_output);
+}
