@@ -14,12 +14,12 @@ int add_to_queue(PacketQueue *queue, AVPacket *pkt)
     AVPacketList *pkt1;
     if(!(pkt1 = av_malloc(sizeof(AVPacketList))))
     {
-	fprintf(stderr, "fail to malloc : add_to_queue\n");
+	LOGV("fail to malloc : add_to_queue");
 	return -1;	    
     }
     if(pkt != &flush_pkt && av_dup_packet(pkt) < 0)
     {
-	fprintf(stderr, "av_dup_packet : add_to_queue\n");
+	LOGV("av_dup_packet : add_to_queue");
 	return -1;	    
     }
 

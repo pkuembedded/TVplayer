@@ -4,6 +4,7 @@
 CMakeFiles/parse.dir/src/parse.c.o
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h
+ /home/infinite/Project/TVplayer/src/log.h
  /home/infinite/Project/TVplayer/src/parse.c
  /home/infinite/Project/TVplayer/src/parse.h
  /home/infinite/Project/TVplayer/src/queue.h

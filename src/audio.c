@@ -41,7 +41,7 @@ int find_audio_decoder(Media *audio)
     wanted_spec.userdata = audio;
     
     if(SDL_OpenAudio(&wanted_spec, &spec) < 0) {
-      fprintf(stderr, "SDL_OpenAudio: %s\n", SDL_GetError());
+      LOGV("SDL_OpenAudio : find_audio_decoder");
       return -1;
     }
     audio->audio_hw_buf_size = spec.size;
@@ -49,7 +49,7 @@ int find_audio_decoder(Media *audio)
     aCodec = avcodec_find_decoder(audio->codec_ctx->codec_id);
     if(aCodec == NULL)
     {
-	fprintf(stderr, "Codec not found!\n");
+	LOGV("Codec not found : find_audio_decoder");
 	return 4;
     }
     if(avcodec_open(audio->codec_ctx, aCodec) < 0)

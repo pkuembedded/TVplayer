@@ -3,6 +3,7 @@
 
 CMakeFiles/sync.dir/src/sync.c.o: ../src/libffmpeg.h
 CMakeFiles/sync.dir/src/sync.c.o: ../src/libsdl.h
+CMakeFiles/sync.dir/src/sync.c.o: ../src/log.h
 CMakeFiles/sync.dir/src/sync.c.o: ../src/structures.h
 CMakeFiles/sync.dir/src/sync.c.o: ../src/sync.c
 CMakeFiles/sync.dir/src/sync.c.o: ../src/sync.h

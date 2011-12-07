@@ -6,6 +6,7 @@ CMakeFiles/TVplayer.dir/src/TVplayer.c.o
  /home/infinite/Project/TVplayer/src/audio.h
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h
+ /home/infinite/Project/TVplayer/src/log.h
  /home/infinite/Project/TVplayer/src/parse.h
  /home/infinite/Project/TVplayer/src/queue.h
  /home/infinite/Project/TVplayer/src/structures.h
@@ -56,11 +57,10 @@ CMakeFiles/TVplayer.dir/src/audio.c.o
  /home/infinite/Project/TVplayer/src/audio.h
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h
+ /home/infinite/Project/TVplayer/src/log.h
  /home/infinite/Project/TVplayer/src/parse.h
- /home/infinite/Project/TVplayer/src/queue.h
  /home/infinite/Project/TVplayer/src/structures.h
  /home/infinite/Project/TVplayer/src/utility.h
- /home/infinite/Project/TVplayer/src/video.h
  /usr/local/include/SDL/SDL.h
  /usr/local/include/SDL/SDL_assert.h
  /usr/local/include/SDL/SDL_atomic.h
@@ -105,6 +105,7 @@ CMakeFiles/TVplayer.dir/src/display.c.o
  /home/infinite/Project/TVplayer/src/display.h
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h
+ /home/infinite/Project/TVplayer/src/log.h
  /home/infinite/Project/TVplayer/src/structures.h
  /home/infinite/Project/TVplayer/src/utility.h
  /usr/local/include/SDL/SDL.h
@@ -149,6 +150,7 @@ CMakeFiles/TVplayer.dir/src/display.c.o
 CMakeFiles/TVplayer.dir/src/parse.c.o
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h
+ /home/infinite/Project/TVplayer/src/log.h
  /home/infinite/Project/TVplayer/src/parse.c
  /home/infinite/Project/TVplayer/src/parse.h
  /home/infinite/Project/TVplayer/src/queue.h
@@ -197,6 +199,7 @@ CMakeFiles/TVplayer.dir/src/parse.c.o
 CMakeFiles/TVplayer.dir/src/queue.c.o
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h
+ /home/infinite/Project/TVplayer/src/log.h
  /home/infinite/Project/TVplayer/src/queue.c
  /home/infinite/Project/TVplayer/src/queue.h
  /home/infinite/Project/TVplayer/src/structures.h
@@ -243,6 +246,7 @@ CMakeFiles/TVplayer.dir/src/queue.c.o
 CMakeFiles/TVplayer.dir/src/sync.c.o
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h
+ /home/infinite/Project/TVplayer/src/log.h
  /home/infinite/Project/TVplayer/src/structures.h
  /home/infinite/Project/TVplayer/src/sync.c
  /home/infinite/Project/TVplayer/src/sync.h
@@ -290,6 +294,7 @@ CMakeFiles/TVplayer.dir/src/video.c.o
  /home/infinite/Project/TVplayer/src/display.h
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h
+ /home/infinite/Project/TVplayer/src/log.h
  /home/infinite/Project/TVplayer/src/parse.h
  /home/infinite/Project/TVplayer/src/queue.h
  /home/infinite/Project/TVplayer/src/structures.h

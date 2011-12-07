@@ -1,13 +1,17 @@
 #include "libffmpeg.h"
 #include "libsdl.h"
 #include "utility.h"
-
+#include "log.h"
+#include <fcntl.h>
 
 #ifndef STRUCTURES_H
 #define STRUCTURES_H
 
 #define MAX_NAME_LEN 1024
 #define VIDEO_FRAME_QUEUE_SIZE 1
+
+FILE *fp;
+
 enum {
     AUDIO,
     VIDEO,

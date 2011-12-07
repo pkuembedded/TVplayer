@@ -5,6 +5,7 @@ CMakeFiles/TVplayer.dir/src/TVplayer.c.o: ../src/TVplayer.c
 CMakeFiles/TVplayer.dir/src/TVplayer.c.o: ../src/audio.h
 CMakeFiles/TVplayer.dir/src/TVplayer.c.o: ../src/libffmpeg.h
 CMakeFiles/TVplayer.dir/src/TVplayer.c.o: ../src/libsdl.h
+CMakeFiles/TVplayer.dir/src/TVplayer.c.o: ../src/log.h
 CMakeFiles/TVplayer.dir/src/TVplayer.c.o: ../src/parse.h
 CMakeFiles/TVplayer.dir/src/TVplayer.c.o: ../src/queue.h
 CMakeFiles/TVplayer.dir/src/TVplayer.c.o: ../src/structures.h
@@ -55,11 +56,10 @@ CMakeFiles/TVplayer.dir/src/audio.c.o: ../src/audio.c
 CMakeFiles/TVplayer.dir/src/audio.c.o: ../src/audio.h
 CMakeFiles/TVplayer.dir/src/audio.c.o: ../src/libffmpeg.h
 CMakeFiles/TVplayer.dir/src/audio.c.o: ../src/libsdl.h
+CMakeFiles/TVplayer.dir/src/audio.c.o: ../src/log.h
 CMakeFiles/TVplayer.dir/src/audio.c.o: ../src/parse.h
-CMakeFiles/TVplayer.dir/src/audio.c.o: ../src/queue.h
 CMakeFiles/TVplayer.dir/src/audio.c.o: ../src/structures.h
 CMakeFiles/TVplayer.dir/src/audio.c.o: ../src/utility.h
-CMakeFiles/TVplayer.dir/src/audio.c.o: ../src/video.h
 CMakeFiles/TVplayer.dir/src/audio.c.o: /usr/local/include/SDL/SDL.h
 CMakeFiles/TVplayer.dir/src/audio.c.o: /usr/local/include/SDL/SDL_assert.h
 CMakeFiles/TVplayer.dir/src/audio.c.o: /usr/local/include/SDL/SDL_atomic.h
@@ -104,6 +104,7 @@ CMakeFiles/TVplayer.dir/src/display.c.o: ../src/display.c
 CMakeFiles/TVplayer.dir/src/display.c.o: ../src/display.h
 CMakeFiles/TVplayer.dir/src/display.c.o: ../src/libffmpeg.h
 CMakeFiles/TVplayer.dir/src/display.c.o: ../src/libsdl.h
+CMakeFiles/TVplayer.dir/src/display.c.o: ../src/log.h
 CMakeFiles/TVplayer.dir/src/display.c.o: ../src/structures.h
 CMakeFiles/TVplayer.dir/src/display.c.o: ../src/utility.h
 CMakeFiles/TVplayer.dir/src/display.c.o: /usr/local/include/SDL/SDL.h
@@ -148,6 +149,7 @@ CMakeFiles/TVplayer.dir/src/display.c.o: /usr/local/include/SDL/close_code.h
 
 CMakeFiles/TVplayer.dir/src/parse.c.o: ../src/libffmpeg.h
 CMakeFiles/TVplayer.dir/src/parse.c.o: ../src/libsdl.h
+CMakeFiles/TVplayer.dir/src/parse.c.o: ../src/log.h
 CMakeFiles/TVplayer.dir/src/parse.c.o: ../src/parse.c
 CMakeFiles/TVplayer.dir/src/parse.c.o: ../src/parse.h
 CMakeFiles/TVplayer.dir/src/parse.c.o: ../src/queue.h
@@ -196,6 +198,7 @@ CMakeFiles/TVplayer.dir/src/parse.c.o: /usr/local/include/SDL/close_code.h
 
 CMakeFiles/TVplayer.dir/src/queue.c.o: ../src/libffmpeg.h
 CMakeFiles/TVplayer.dir/src/queue.c.o: ../src/libsdl.h
+CMakeFiles/TVplayer.dir/src/queue.c.o: ../src/log.h
 CMakeFiles/TVplayer.dir/src/queue.c.o: ../src/queue.c
 CMakeFiles/TVplayer.dir/src/queue.c.o: ../src/queue.h
 CMakeFiles/TVplayer.dir/src/queue.c.o: ../src/structures.h
@@ -242,6 +245,7 @@ CMakeFiles/TVplayer.dir/src/queue.c.o: /usr/local/include/SDL/close_code.h
 
 CMakeFiles/TVplayer.dir/src/sync.c.o: ../src/libffmpeg.h
 CMakeFiles/TVplayer.dir/src/sync.c.o: ../src/libsdl.h
+CMakeFiles/TVplayer.dir/src/sync.c.o: ../src/log.h
 CMakeFiles/TVplayer.dir/src/sync.c.o: ../src/structures.h
 CMakeFiles/TVplayer.dir/src/sync.c.o: ../src/sync.c
 CMakeFiles/TVplayer.dir/src/sync.c.o: ../src/sync.h
@@ -289,6 +293,7 @@ CMakeFiles/TVplayer.dir/src/sync.c.o: /usr/local/include/SDL/close_code.h
 CMakeFiles/TVplayer.dir/src/video.c.o: ../src/display.h
 CMakeFiles/TVplayer.dir/src/video.c.o: ../src/libffmpeg.h
 CMakeFiles/TVplayer.dir/src/video.c.o: ../src/libsdl.h
+CMakeFiles/TVplayer.dir/src/video.c.o: ../src/log.h
 CMakeFiles/TVplayer.dir/src/video.c.o: ../src/parse.h
 CMakeFiles/TVplayer.dir/src/video.c.o: ../src/queue.h
 CMakeFiles/TVplayer.dir/src/video.c.o: ../src/structures.h

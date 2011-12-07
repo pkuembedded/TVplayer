@@ -1,6 +1,7 @@
 2011-12-7
 rename some data struct
 add method of getting media info
+add log feature
 
 2011-12-6
 update SDL lib to 1.3

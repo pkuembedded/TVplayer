@@ -3,6 +3,7 @@
 
 CMakeFiles/parse.dir/src/parse.c.o: ../src/libffmpeg.h
 CMakeFiles/parse.dir/src/parse.c.o: ../src/libsdl.h
+CMakeFiles/parse.dir/src/parse.c.o: ../src/log.h
 CMakeFiles/parse.dir/src/parse.c.o: ../src/parse.c
 CMakeFiles/parse.dir/src/parse.c.o: ../src/parse.h
 CMakeFiles/parse.dir/src/parse.c.o: ../src/queue.h

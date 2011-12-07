@@ -20,6 +20,8 @@ SDL.h
 SDL_thread.h
 -
 
+/home/infinite/Project/TVplayer/src/log.h
+
 /home/infinite/Project/TVplayer/src/queue.c
 queue.h
 /home/infinite/Project/TVplayer/src/queue.h
@@ -35,6 +37,10 @@ libsdl.h
 /home/infinite/Project/TVplayer/src/libsdl.h
 utility.h
 /home/infinite/Project/TVplayer/src/utility.h
+log.h
+/home/infinite/Project/TVplayer/src/log.h
+fcntl.h
+-
 
 /home/infinite/Project/TVplayer/src/utility.h
 

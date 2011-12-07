@@ -67,7 +67,6 @@ int video_refresh_timer(void *arg)
     if(state->video->stream) {
 	if(state->video->frame_buf_size == 0) {
 	    schedule_refresh(state, 1);
-	    fprintf(stderr, "enter A : delay 1 ms\n");
 	} else {
 	    vf = &state->video->frame_buf[state->video->frame_index];
 	    state->video->video_current_pts = vf->pts;
@@ -96,7 +95,6 @@ int video_refresh_timer(void *arg)
 		actual_delay = 0.010;
 	    }
 	    schedule_refresh(state, (int)(actual_delay * 50 + 0.5));
-	    fprintf(stderr, "enter B : delay %d ms\n", (int)(actual_delay * 50 + 0.5));
 	    play_video(state->video);
 	    if(++state->video->frame_index == VIDEO_FRAME_QUEUE_SIZE) {
 		state->video->frame_index = 0;
@@ -108,7 +106,6 @@ int video_refresh_timer(void *arg)
 	}
     } else {
 	schedule_refresh(state, 100);
-	fprintf(stderr, "enter C : delay 100 ms\n");
     }
     return 0;
 }

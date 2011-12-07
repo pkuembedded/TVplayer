@@ -6,6 +6,8 @@ CMakeFiles/audio.dir/src/audio.c.o
  /home/infinite/Project/TVplayer/src/audio.h
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h
+ /home/infinite/Project/TVplayer/src/log.h
+ /home/infinite/Project/TVplayer/src/parse.h
  /home/infinite/Project/TVplayer/src/structures.h
  /home/infinite/Project/TVplayer/src/utility.h
  /usr/local/include/SDL/SDL.h

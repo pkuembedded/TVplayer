@@ -13,8 +13,8 @@ audio.h
 /home/infinite/Project/TVplayer/src/audio.h
 structures.h
 /home/infinite/Project/TVplayer/src/structures.h
-content.h
-/home/infinite/Project/TVplayer/src/content.h
+parse.h
+/home/infinite/Project/TVplayer/src/parse.h
 
 /home/infinite/Project/TVplayer/src/libffmpeg.h
 libavcodec/avcodec.h
@@ -30,6 +30,12 @@ SDL.h
 SDL_thread.h
 -
 
+/home/infinite/Project/TVplayer/src/log.h
+
+/home/infinite/Project/TVplayer/src/parse.h
+structures.h
+/home/infinite/Project/TVplayer/src/structures.h
+
 /home/infinite/Project/TVplayer/src/structures.h
 libffmpeg.h
 /home/infinite/Project/TVplayer/src/libffmpeg.h
@@ -37,6 +43,10 @@ libsdl.h
 /home/infinite/Project/TVplayer/src/libsdl.h
 utility.h
 /home/infinite/Project/TVplayer/src/utility.h
+log.h
+/home/infinite/Project/TVplayer/src/log.h
+fcntl.h
+-
 
 /home/infinite/Project/TVplayer/src/utility.h
 

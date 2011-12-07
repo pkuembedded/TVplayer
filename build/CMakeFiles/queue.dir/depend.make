@@ -3,6 +3,7 @@
 
 CMakeFiles/queue.dir/src/queue.c.o: ../src/libffmpeg.h
 CMakeFiles/queue.dir/src/queue.c.o: ../src/libsdl.h
+CMakeFiles/queue.dir/src/queue.c.o: ../src/log.h
 CMakeFiles/queue.dir/src/queue.c.o: ../src/queue.c
 CMakeFiles/queue.dir/src/queue.c.o: ../src/queue.h
 CMakeFiles/queue.dir/src/queue.c.o: ../src/structures.h

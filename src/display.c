@@ -4,7 +4,7 @@ int init_screen(Media *video)
 {
     screen = SDL_SetVideoMode(video->codec_ctx->width, video->codec_ctx->height, 0, 0);
     if(!screen) {
-	fprintf(stderr, "SDL: cannot init video mode : init_screen\n");
+	LOGV("SDL: cannot init video mode : init_screen");
 	exit(1);
     }
     return 0;

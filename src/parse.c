@@ -48,7 +48,7 @@ int find_decoder(Media *media)
     }
     if(avcodec_open(media->codec_ctx, media->codec) < 0)
     {
-	fprintf(stderr, "fail to open codec : find_decoder\n");
+	LOGV("fail to open codec : find_decoder");
 	return -1;
     }
 
@@ -67,7 +67,7 @@ int find_decoder(Media *media)
 	break;
 
     default:
-	fprintf(stderr, "unknown media type : find_decoder\n");
+	LOGV("unknown media type : find_decoder");
 	return -1;
     }
     
@@ -75,6 +75,7 @@ int find_decoder(Media *media)
 }
 
 int queue_av_pkt(void *arg) {
+    LOGV("created reading thread");
     AVPacket *pkt = av_mallocz(sizeof(AVPacket));
     State *state = (State *)arg;
     init_queue(&state->audio->raw_data_buf);
@@ -92,7 +93,7 @@ int queue_av_pkt(void *arg) {
 		SDL_Delay(100);
 		continue;
 	    }else {
-		fprintf(stderr, "read frame error, maybe come to end of content : queue_av_pkt\n");
+		LOGV("read frame error, maybe come to end of content : queue_av_pkt");
 		break;		// error or end of content
 	    }
 	}
@@ -102,7 +103,7 @@ int queue_av_pkt(void *arg) {
 	}else if(pkt->stream_index == state->audio->track) {
 	    add_to_queue(&state->audio->raw_data_buf, pkt);
 	}else {
-	    fprintf(stderr, "neither audio or video track : queue_av_pkt\n");
+	    LOGV("neither audio or video track : queue_av_pkt");
 	    av_free_packet(pkt);
 	}
     }
@@ -113,4 +114,5 @@ void get_av_info(void *arg) {
     Media *media = (Media *)arg;
     int is_output = false;//make msg short
     avcodec_string(media->info, sizeof(media->info), media->codec_ctx, is_output);
+    LOGV(media->info);
 }

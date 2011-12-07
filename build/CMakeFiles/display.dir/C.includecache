@@ -28,6 +28,8 @@ SDL.h
 SDL_thread.h
 -
 
+/home/infinite/Project/TVplayer/src/log.h
+
 /home/infinite/Project/TVplayer/src/structures.h
 libffmpeg.h
 /home/infinite/Project/TVplayer/src/libffmpeg.h
@@ -35,6 +37,8 @@ libsdl.h
 /home/infinite/Project/TVplayer/src/libsdl.h
 utility.h
 /home/infinite/Project/TVplayer/src/utility.h
+log.h
+/home/infinite/Project/TVplayer/src/log.h
 
 /home/infinite/Project/TVplayer/src/utility.h
 

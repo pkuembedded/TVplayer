@@ -5,6 +5,7 @@ CMakeFiles/display.dir/src/display.c.o: ../src/display.c
 CMakeFiles/display.dir/src/display.c.o: ../src/display.h
 CMakeFiles/display.dir/src/display.c.o: ../src/libffmpeg.h
 CMakeFiles/display.dir/src/display.c.o: ../src/libsdl.h
+CMakeFiles/display.dir/src/display.c.o: ../src/log.h
 CMakeFiles/display.dir/src/display.c.o: ../src/structures.h
 CMakeFiles/display.dir/src/display.c.o: ../src/utility.h
 CMakeFiles/display.dir/src/display.c.o: /usr/local/include/SDL/SDL.h

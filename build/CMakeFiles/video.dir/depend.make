@@ -4,6 +4,8 @@
 CMakeFiles/video.dir/src/video.c.o: ../src/display.h
 CMakeFiles/video.dir/src/video.c.o: ../src/libffmpeg.h
 CMakeFiles/video.dir/src/video.c.o: ../src/libsdl.h
+CMakeFiles/video.dir/src/video.c.o: ../src/log.h
+CMakeFiles/video.dir/src/video.c.o: ../src/parse.h
 CMakeFiles/video.dir/src/video.c.o: ../src/queue.h
 CMakeFiles/video.dir/src/video.c.o: ../src/structures.h
 CMakeFiles/video.dir/src/video.c.o: ../src/sync.h
