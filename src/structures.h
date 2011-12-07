@@ -10,12 +10,11 @@
 #define MAX_NAME_LEN 1024
 #define VIDEO_FRAME_QUEUE_SIZE 1
 
-FILE *fp;
-
 enum {
     AUDIO,
     VIDEO,
 };
+
 enum {
   AV_SYNC_AUDIO_MASTER,
   AV_SYNC_VIDEO_MASTER,

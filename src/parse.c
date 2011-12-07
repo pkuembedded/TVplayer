@@ -43,12 +43,12 @@ int find_decoder(Media *media)
     media->codec = avcodec_find_decoder(media->codec_ctx->codec_id);
     if(media->codec == NULL)
     {
-	fprintf(stderr, "fail to find codec : find_decoder\n");
+	LOGE("fail to find codec : find_decoder");
 	return -1;
     }
     if(avcodec_open(media->codec_ctx, media->codec) < 0)
     {
-	LOGV("fail to open codec : find_decoder");
+	LOGE("fail to open codec : find_decoder");
 	return -1;
     }
 
@@ -75,7 +75,8 @@ int find_decoder(Media *media)
 }
 
 int queue_av_pkt(void *arg) {
-    LOGV("created reading thread");
+    LOGI("created reading thread");
+
     AVPacket *pkt = av_mallocz(sizeof(AVPacket));
     State *state = (State *)arg;
     init_queue(&state->audio->raw_data_buf);
@@ -112,7 +113,7 @@ int queue_av_pkt(void *arg) {
 
 void get_av_info(void *arg) {
     Media *media = (Media *)arg;
-    int is_output = false;//make msg short
+    int is_output = false; //make msg short
     avcodec_string(media->info, sizeof(media->info), media->codec_ctx, is_output);
-    LOGV(media->info);
+    LOGI("%s", media->info);
 }

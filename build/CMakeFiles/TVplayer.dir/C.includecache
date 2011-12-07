@@ -6,25 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/infinite/Project/TVplayer/src/TVplayer.c
-stdio.h
--
-math.h
--
+/home/infinite/Project/TVplayer/src/display.h
 structures.h
 /home/infinite/Project/TVplayer/src/structures.h
-video.h
-/home/infinite/Project/TVplayer/src/video.h
-audio.h
-/home/infinite/Project/TVplayer/src/audio.h
-sync.h
-/home/infinite/Project/TVplayer/src/sync.h
-
-/home/infinite/Project/TVplayer/src/audio.h
-structures.h
-/home/infinite/Project/TVplayer/src/structures.h
-parse.h
-/home/infinite/Project/TVplayer/src/parse.h
 
 /home/infinite/Project/TVplayer/src/libffmpeg.h
 libavcodec/avcodec.h
@@ -41,6 +25,12 @@ SDL_thread.h
 -
 
 /home/infinite/Project/TVplayer/src/log.h
+
+/home/infinite/Project/TVplayer/src/parse.c
+parse.h
+/home/infinite/Project/TVplayer/src/parse.h
+video.h
+/home/infinite/Project/TVplayer/src/video.h
 
 /home/infinite/Project/TVplayer/src/parse.h
 structures.h
@@ -67,6 +57,14 @@ structures.h
 /home/infinite/Project/TVplayer/src/structures.h
 
 /home/infinite/Project/TVplayer/src/utility.h
+
+/home/infinite/Project/TVplayer/src/video.c
+video.h
+/home/infinite/Project/TVplayer/src/video.h
+display.h
+/home/infinite/Project/TVplayer/src/display.h
+sync.h
+/home/infinite/Project/TVplayer/src/sync.h
 
 /home/infinite/Project/TVplayer/src/video.h
 structures.h

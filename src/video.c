@@ -4,7 +4,7 @@
 
 int decode_video(void *arg)
 {
-    LOGV("created decode thread");
+    LOGI("created decode thread");
     Media *video = (Media *)arg;
     AVFrame *pFrame;
     int frameFinished;
@@ -14,7 +14,7 @@ int decode_video(void *arg)
     pFrame = avcodec_alloc_frame();
     while(true) {
 	if(get_from_queue(&video->raw_data_buf, pkt) < 0) {
-	    LOGV("fail to get video pkt from queue : decode_video");
+	    LOGE("%s", "fail to get video pkt from queue : decode_video");
 	    break;
 	}
 	if(pkt->data == flush_pkt.data) {
@@ -76,7 +76,7 @@ int video_frame_convert(Media *video, AVFrame *pFrame, double pts)
 	    int h = video->stream->codec->height;
 	    imgConvertCtx = sws_getContext(w, h, video->stream->codec->pix_fmt, w, h, dstPixFmt, SWS_BICUBIC, NULL, NULL, NULL);
 	    if(imgConvertCtx == NULL) {
-		LOGV("fail to init the conversion context : video_frame_queue");
+		LOGE("fail to init the conversion context : video_frame_queue");
 		exit(-1);
 	    }
 	}
