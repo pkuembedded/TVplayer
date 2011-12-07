@@ -1,56 +1,37 @@
-#include "file.h"
+#include "parse.h"
+#include "video.h"
 
-
-int our_get_buffer(AVCodecContext *codec_ctx, AVFrame *frame) 
+int get_content_info(Content *content)
 {
-    int ret = avcodec_default_get_buffer(codec_ctx, frame);
-    uint64_t *pts = av_malloc(sizeof(uint64_t));
-    *pts = global_video_pkt_pts;
-    frame->opaque = pts;
-    return ret;
-}
-
-void our_release_buffer(AVCodecContext *codec_ctx, AVFrame *frame)
-{
-    if(frame)
-	av_freep(&frame->opaque);
-    avcodec_default_release_buffer(codec_ctx, frame);
-}
-
-
-int get_file_info(File *file)
-{
-    if(av_open_input_file(&file->format_ctx, file->name, NULL, 0, NULL) != 0)
+    if(av_open_input_file(&content->format_ctx, content->name, NULL, 0, NULL) != 0)
     {
-	fprintf(stderr, "fail to open file : av_open_input_file\n");
 	return -1;
     }
-    if(av_find_stream_info(file->format_ctx) < 0)
+    if(av_find_stream_info(content->format_ctx) < 0)
     {
-	fprintf(stderr, "fail to read stream : av_open_input_file\n");
 	return -1;
     }
 
-    av_dump_format(file->format_ctx, 0, file->name, 0);
+    av_dump_format(content->format_ctx, 0, content->name, 0);
     return 0;
 }
 
 
-void find_av_streams(File *file, Media *video, Media *audio) {
+void find_av_streams(Content *content, Media *video, Media *audio) {
     int i;
     video->track = -1;
     audio->track = -1;
-    for (i = 0; i < file->format_ctx->nb_streams; i++)
+    for (i = 0; i < content->format_ctx->nb_streams; i++)
     {
-	if(file->format_ctx->streams[i]->codec->codec_type == AVMEDIA_TYPE_VIDEO) {
+	if(content->format_ctx->streams[i]->codec->codec_type == AVMEDIA_TYPE_VIDEO) {
 	    video->track = i;
-	    video->stream = file->format_ctx->streams[i];
-	    video->codec_ctx = file->format_ctx->streams[i]->codec;
+	    video->stream = content->format_ctx->streams[i];
+	    video->codec_ctx = content->format_ctx->streams[i]->codec;
 	}
-	if(file->format_ctx->streams[i]->codec->codec_type == AVMEDIA_TYPE_AUDIO) {
+	if(content->format_ctx->streams[i]->codec->codec_type == AVMEDIA_TYPE_AUDIO) {
 	    audio->track = i;
-	    audio->stream = file->format_ctx->streams[i];
-	    audio->codec_ctx = file->format_ctx->streams[i]->codec;
+	    audio->stream = content->format_ctx->streams[i];
+	    audio->codec_ctx = content->format_ctx->streams[i]->codec;
 	    find_audio_decoder(audio);
 	}
     }
@@ -106,13 +87,13 @@ int queue_av_pkt(void *arg) {
 	    continue;
 	}
 	//if packet is valid
-	if(av_read_frame(state->file->format_ctx, pkt) < 0) {
-	    if(url_ferror(state->file->format_ctx->pb) == 0) {
+	if(av_read_frame(state->content->format_ctx, pkt) < 0) {
+	    if(url_ferror(state->content->format_ctx->pb) == 0) {
 		SDL_Delay(100);
 		continue;
 	    }else {
-		fprintf(stderr, "read frame error, maybe come to end of file : queue_av_pkt\n");
-		break;		// error or end of file
+		fprintf(stderr, "read frame error, maybe come to end of content : queue_av_pkt\n");
+		break;		// error or end of content
 	    }
 	}
 	//put packet into AV queue

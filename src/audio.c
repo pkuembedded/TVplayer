@@ -1,15 +1,5 @@
 #include "audio.h"
 
-void init_audio(Media *audio)
-{
-    memset(audio, 0, sizeof(Media));
-    audio->media_type = AUDIO;
-    audio->play_cond = SDL_CreateCond();    
-    audio->play_mutex = SDL_CreateMutex();    
-    audio->find_codec = find_decoder;
-    audio->get_info = get_av_info;
-}
-
 void audio_callback(void *userdata, Uint8 *stream, int len) 
 {
     Media *audio = (Media *)userdata;
@@ -117,4 +107,14 @@ int decode_audio(Media *audio, uint8_t *audio_buf, int buf_size, double *pts_ptr
 	    audio->clk = av_q2d(audio->codec_ctx->time_base)*pkt->pts;
 	}
     }
+}
+
+void init_audio(Media *audio)
+{
+    memset(audio, 0, sizeof(Media));
+    audio->media_type = AUDIO;
+    audio->play_cond = SDL_CreateCond();    
+    audio->play_mutex = SDL_CreateMutex();    
+    audio->find_codec = find_audio_decoder;
+    audio->get_info = get_av_info;
 }

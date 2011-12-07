@@ -170,6 +170,9 @@ display_LIB_DEPENDS:STATIC=
 file_LIB_DEPENDS:STATIC=
 
 //Dependencies for target
+parse_LIB_DEPENDS:STATIC=
+
+//Dependencies for target
 queue_LIB_DEPENDS:STATIC=
 
 //Dependencies for target

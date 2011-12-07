@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_C
-  "/home/infinite/Project/TVplayer/src/parse.c" "/home/infinite/Project/TVplayer/build/CMakeFiles/file.dir/src/parse.c.o"
+  "/home/infinite/Project/TVplayer/src/parse.c" "/home/infinite/Project/TVplayer/build/CMakeFiles/parse.dir/src/parse.c.o"
   )
 SET(CMAKE_C_COMPILER_ID "GNU")
 

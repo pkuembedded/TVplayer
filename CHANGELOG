@@ -1,3 +1,10 @@
+2011-12-7
+rename some data struct
+add method of getting media info
+
+2011-12-6
+update SDL lib to 1.3
+
 2011-12-5
 modify names of variable
 

@@ -37,12 +37,11 @@ typedef struct PacketQueue {
     SDL_cond *cond;
 } PacketQueue;
 
-typedef struct File {
+typedef struct Content {
     AVFormatContext *format_ctx;
-//    int hours, mins, secs, us;
     int duration;
     char name[MAX_NAME_LEN];
-} File;
+} Content;
 
 
 typedef struct Media {
@@ -83,7 +82,7 @@ typedef struct Media {
 
 
 typedef struct State {
-    File *file;
+    Content *content;
     Media *audio,*video;
 } State;
 

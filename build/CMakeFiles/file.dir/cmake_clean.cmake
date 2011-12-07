@@ -1,5 +1,5 @@
 FILE(REMOVE_RECURSE
-  "CMakeFiles/file.dir/src/file.c.o"
+  "CMakeFiles/file.dir/src/parse.c.o"
   "libfile.pdb"
   "libfile.so"
 )

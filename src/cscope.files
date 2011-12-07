@@ -3,10 +3,10 @@ audio.c
 audio.h
 display.c
 display.h
-file.c
-file.h
 libffmpeg.h
 libsdl.h
+parse.c
+parse.h
 queue.c
 queue.h
 structures.h

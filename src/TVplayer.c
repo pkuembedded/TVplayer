@@ -15,19 +15,19 @@ int main(int argc, char **argv)
     uint64_t global_video_pkt_pts;
     SDL_Surface *screen;
     SDL_Event event;
-    File *file = av_mallocz(sizeof(File));
+    Content *content = av_mallocz(sizeof(Content));
     Media *video = av_mallocz(sizeof(Media));
     Media *audio = av_mallocz(sizeof(Media));
     State *state = av_mallocz(sizeof(State));
     SDL_Thread *video_decode_tid;
     SDL_Thread *read_pkt_tid;
     SDL_Thread *play_tid;
-    state->file = file;
+    state->content = content;
     state->video = video;
     state->audio = audio;
     init_video(video);
     if(argc < 2) {
-	fprintf(stderr, "Usage : play <file>\n");
+	fprintf(stderr, "Usage : play <content>\n");
 	exit(1);
     }
     av_register_all();
@@ -35,9 +35,9 @@ int main(int argc, char **argv)
 	fprintf(stderr, "fail to initialize SDL - %s\n", SDL_GetError());
 	exit(1);
     }
-    av_strlcpy(file->name, argv[1], sizeof(file->name));
-    get_file_info(file);
-    find_av_streams(file, video, audio);
+    av_strlcpy(content->name, argv[1], sizeof(content->name));
+    get_content_info(content);
+    find_av_streams(content, video, audio);
     find_decoder(video);
     video->get_info(video);
     init_screen(video);

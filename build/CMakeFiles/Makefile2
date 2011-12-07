@@ -56,11 +56,11 @@ CMAKE_BINARY_DIR = /home/infinite/Project/TVplayer/build
 # Target rules for target CMakeFiles/TVplayer.dir
 
 # All Build rule for target.
-CMakeFiles/TVplayer.dir/all: CMakeFiles/video.dir/all
-CMakeFiles/TVplayer.dir/all: CMakeFiles/queue.dir/all
 CMakeFiles/TVplayer.dir/all: CMakeFiles/audio.dir/all
+CMakeFiles/TVplayer.dir/all: CMakeFiles/video.dir/all
+CMakeFiles/TVplayer.dir/all: CMakeFiles/parse.dir/all
 CMakeFiles/TVplayer.dir/all: CMakeFiles/sync.dir/all
-CMakeFiles/TVplayer.dir/all: CMakeFiles/file.dir/all
+CMakeFiles/TVplayer.dir/all: CMakeFiles/queue.dir/all
 CMakeFiles/TVplayer.dir/all: CMakeFiles/display.dir/all
 	$(MAKE) -f CMakeFiles/TVplayer.dir/build.make CMakeFiles/TVplayer.dir/depend
 	$(MAKE) -f CMakeFiles/TVplayer.dir/build.make CMakeFiles/TVplayer.dir/build
@@ -163,38 +163,38 @@ clean: CMakeFiles/display.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/file.dir
+# Target rules for target CMakeFiles/parse.dir
 
 # All Build rule for target.
-CMakeFiles/file.dir/all:
-	$(MAKE) -f CMakeFiles/file.dir/build.make CMakeFiles/file.dir/depend
-	$(MAKE) -f CMakeFiles/file.dir/build.make CMakeFiles/file.dir/build
+CMakeFiles/parse.dir/all:
+	$(MAKE) -f CMakeFiles/parse.dir/build.make CMakeFiles/parse.dir/depend
+	$(MAKE) -f CMakeFiles/parse.dir/build.make CMakeFiles/parse.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles  10
-	@echo "Built target file"
-.PHONY : CMakeFiles/file.dir/all
+	@echo "Built target parse"
+.PHONY : CMakeFiles/parse.dir/all
 
 # Include target in all.
-all: CMakeFiles/file.dir/all
+all: CMakeFiles/parse.dir/all
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/file.dir/rule: cmake_check_build_system
+CMakeFiles/parse.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/infinite/Project/TVplayer/build/CMakeFiles 1
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/file.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/parse.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/infinite/Project/TVplayer/build/CMakeFiles 0
-.PHONY : CMakeFiles/file.dir/rule
+.PHONY : CMakeFiles/parse.dir/rule
 
 # Convenience name for target.
-file: CMakeFiles/file.dir/rule
-.PHONY : file
+parse: CMakeFiles/parse.dir/rule
+.PHONY : parse
 
 # clean rule for target.
-CMakeFiles/file.dir/clean:
-	$(MAKE) -f CMakeFiles/file.dir/build.make CMakeFiles/file.dir/clean
-.PHONY : CMakeFiles/file.dir/clean
+CMakeFiles/parse.dir/clean:
+	$(MAKE) -f CMakeFiles/parse.dir/build.make CMakeFiles/parse.dir/clean
+.PHONY : CMakeFiles/parse.dir/clean
 
 # clean rule for target.
-clean: CMakeFiles/file.dir/clean
+clean: CMakeFiles/parse.dir/clean
 .PHONY : clean
 
 #=============================================================================

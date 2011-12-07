@@ -91,6 +91,23 @@ int video_frame_convert(Media *video, AVFrame *pFrame, double pts)
 }
 
 
+int our_get_buffer(AVCodecContext *codec_ctx, AVFrame *frame)
+{
+    int ret = avcodec_default_get_buffer(codec_ctx, frame);
+    uint64_t *pts = av_malloc(sizeof(uint64_t));
+    *pts = global_video_pkt_pts;
+    frame->opaque = pts;
+    return ret;
+}
+
+void our_release_buffer(AVCodecContext *codec_ctx, AVFrame *frame)
+{
+    if(frame)
+	av_freep(&frame->opaque);
+    avcodec_default_release_buffer(codec_ctx, frame);
+}
+
+
 void init_video(Media *video)
 {
     memset(video, 0, sizeof(Media));

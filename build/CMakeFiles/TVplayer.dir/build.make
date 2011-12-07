@@ -49,32 +49,9 @@ include CMakeFiles/TVplayer.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/TVplayer.dir/flags.make
 
-CMakeFiles/TVplayer.dir/src/file.c.o: CMakeFiles/TVplayer.dir/flags.make
-CMakeFiles/TVplayer.dir/src/file.c.o: ../src/file.c
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/TVplayer.dir/src/file.c.o"
-	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/TVplayer.dir/src/file.c.o   -c /home/infinite/Project/TVplayer/src/file.c
-
-CMakeFiles/TVplayer.dir/src/file.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/TVplayer.dir/src/file.c.i"
-	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -E /home/infinite/Project/TVplayer/src/file.c > CMakeFiles/TVplayer.dir/src/file.c.i
-
-CMakeFiles/TVplayer.dir/src/file.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/TVplayer.dir/src/file.c.s"
-	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -S /home/infinite/Project/TVplayer/src/file.c -o CMakeFiles/TVplayer.dir/src/file.c.s
-
-CMakeFiles/TVplayer.dir/src/file.c.o.requires:
-.PHONY : CMakeFiles/TVplayer.dir/src/file.c.o.requires
-
-CMakeFiles/TVplayer.dir/src/file.c.o.provides: CMakeFiles/TVplayer.dir/src/file.c.o.requires
-	$(MAKE) -f CMakeFiles/TVplayer.dir/build.make CMakeFiles/TVplayer.dir/src/file.c.o.provides.build
-.PHONY : CMakeFiles/TVplayer.dir/src/file.c.o.provides
-
-CMakeFiles/TVplayer.dir/src/file.c.o.provides.build: CMakeFiles/TVplayer.dir/src/file.c.o
-
 CMakeFiles/TVplayer.dir/src/queue.c.o: CMakeFiles/TVplayer.dir/flags.make
 CMakeFiles/TVplayer.dir/src/queue.c.o: ../src/queue.c
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/TVplayer.dir/src/queue.c.o"
 	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/TVplayer.dir/src/queue.c.o   -c /home/infinite/Project/TVplayer/src/queue.c
 
@@ -97,7 +74,7 @@ CMakeFiles/TVplayer.dir/src/queue.c.o.provides.build: CMakeFiles/TVplayer.dir/sr
 
 CMakeFiles/TVplayer.dir/src/video.c.o: CMakeFiles/TVplayer.dir/flags.make
 CMakeFiles/TVplayer.dir/src/video.c.o: ../src/video.c
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/TVplayer.dir/src/video.c.o"
 	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/TVplayer.dir/src/video.c.o   -c /home/infinite/Project/TVplayer/src/video.c
 
@@ -120,7 +97,7 @@ CMakeFiles/TVplayer.dir/src/video.c.o.provides.build: CMakeFiles/TVplayer.dir/sr
 
 CMakeFiles/TVplayer.dir/src/display.c.o: CMakeFiles/TVplayer.dir/flags.make
 CMakeFiles/TVplayer.dir/src/display.c.o: ../src/display.c
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/TVplayer.dir/src/display.c.o"
 	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/TVplayer.dir/src/display.c.o   -c /home/infinite/Project/TVplayer/src/display.c
 
@@ -143,7 +120,7 @@ CMakeFiles/TVplayer.dir/src/display.c.o.provides.build: CMakeFiles/TVplayer.dir/
 
 CMakeFiles/TVplayer.dir/src/TVplayer.c.o: CMakeFiles/TVplayer.dir/flags.make
 CMakeFiles/TVplayer.dir/src/TVplayer.c.o: ../src/TVplayer.c
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/TVplayer.dir/src/TVplayer.c.o"
 	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/TVplayer.dir/src/TVplayer.c.o   -c /home/infinite/Project/TVplayer/src/TVplayer.c
 
@@ -166,7 +143,7 @@ CMakeFiles/TVplayer.dir/src/TVplayer.c.o.provides.build: CMakeFiles/TVplayer.dir
 
 CMakeFiles/TVplayer.dir/src/sync.c.o: CMakeFiles/TVplayer.dir/flags.make
 CMakeFiles/TVplayer.dir/src/sync.c.o: ../src/sync.c
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/TVplayer.dir/src/sync.c.o"
 	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/TVplayer.dir/src/sync.c.o   -c /home/infinite/Project/TVplayer/src/sync.c
 
@@ -189,7 +166,7 @@ CMakeFiles/TVplayer.dir/src/sync.c.o.provides.build: CMakeFiles/TVplayer.dir/src
 
 CMakeFiles/TVplayer.dir/src/audio.c.o: CMakeFiles/TVplayer.dir/flags.make
 CMakeFiles/TVplayer.dir/src/audio.c.o: ../src/audio.c
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/TVplayer.dir/src/audio.c.o"
 	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/TVplayer.dir/src/audio.c.o   -c /home/infinite/Project/TVplayer/src/audio.c
 
@@ -210,29 +187,52 @@ CMakeFiles/TVplayer.dir/src/audio.c.o.provides: CMakeFiles/TVplayer.dir/src/audi
 
 CMakeFiles/TVplayer.dir/src/audio.c.o.provides.build: CMakeFiles/TVplayer.dir/src/audio.c.o
 
+CMakeFiles/TVplayer.dir/src/parse.c.o: CMakeFiles/TVplayer.dir/flags.make
+CMakeFiles/TVplayer.dir/src/parse.c.o: ../src/parse.c
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/TVplayer.dir/src/parse.c.o"
+	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/TVplayer.dir/src/parse.c.o   -c /home/infinite/Project/TVplayer/src/parse.c
+
+CMakeFiles/TVplayer.dir/src/parse.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/TVplayer.dir/src/parse.c.i"
+	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -E /home/infinite/Project/TVplayer/src/parse.c > CMakeFiles/TVplayer.dir/src/parse.c.i
+
+CMakeFiles/TVplayer.dir/src/parse.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/TVplayer.dir/src/parse.c.s"
+	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -S /home/infinite/Project/TVplayer/src/parse.c -o CMakeFiles/TVplayer.dir/src/parse.c.s
+
+CMakeFiles/TVplayer.dir/src/parse.c.o.requires:
+.PHONY : CMakeFiles/TVplayer.dir/src/parse.c.o.requires
+
+CMakeFiles/TVplayer.dir/src/parse.c.o.provides: CMakeFiles/TVplayer.dir/src/parse.c.o.requires
+	$(MAKE) -f CMakeFiles/TVplayer.dir/build.make CMakeFiles/TVplayer.dir/src/parse.c.o.provides.build
+.PHONY : CMakeFiles/TVplayer.dir/src/parse.c.o.provides
+
+CMakeFiles/TVplayer.dir/src/parse.c.o.provides.build: CMakeFiles/TVplayer.dir/src/parse.c.o
+
 # Object files for target TVplayer
 TVplayer_OBJECTS = \
-"CMakeFiles/TVplayer.dir/src/file.c.o" \
 "CMakeFiles/TVplayer.dir/src/queue.c.o" \
 "CMakeFiles/TVplayer.dir/src/video.c.o" \
 "CMakeFiles/TVplayer.dir/src/display.c.o" \
 "CMakeFiles/TVplayer.dir/src/TVplayer.c.o" \
 "CMakeFiles/TVplayer.dir/src/sync.c.o" \
-"CMakeFiles/TVplayer.dir/src/audio.c.o"
+"CMakeFiles/TVplayer.dir/src/audio.c.o" \
+"CMakeFiles/TVplayer.dir/src/parse.c.o"
 
 # External object files for target TVplayer
 TVplayer_EXTERNAL_OBJECTS =
 
-TVplayer: CMakeFiles/TVplayer.dir/src/file.c.o
 TVplayer: CMakeFiles/TVplayer.dir/src/queue.c.o
 TVplayer: CMakeFiles/TVplayer.dir/src/video.c.o
 TVplayer: CMakeFiles/TVplayer.dir/src/display.c.o
 TVplayer: CMakeFiles/TVplayer.dir/src/TVplayer.c.o
 TVplayer: CMakeFiles/TVplayer.dir/src/sync.c.o
 TVplayer: CMakeFiles/TVplayer.dir/src/audio.c.o
+TVplayer: CMakeFiles/TVplayer.dir/src/parse.c.o
 TVplayer: libaudio.so
 TVplayer: libvideo.so
-TVplayer: libfile.so
+TVplayer: libparse.so
 TVplayer: libsync.so
 TVplayer: libqueue.so
 TVplayer: libdisplay.so
@@ -245,13 +245,13 @@ TVplayer: CMakeFiles/TVplayer.dir/link.txt
 CMakeFiles/TVplayer.dir/build: TVplayer
 .PHONY : CMakeFiles/TVplayer.dir/build
 
-CMakeFiles/TVplayer.dir/requires: CMakeFiles/TVplayer.dir/src/file.c.o.requires
 CMakeFiles/TVplayer.dir/requires: CMakeFiles/TVplayer.dir/src/queue.c.o.requires
 CMakeFiles/TVplayer.dir/requires: CMakeFiles/TVplayer.dir/src/video.c.o.requires
 CMakeFiles/TVplayer.dir/requires: CMakeFiles/TVplayer.dir/src/display.c.o.requires
 CMakeFiles/TVplayer.dir/requires: CMakeFiles/TVplayer.dir/src/TVplayer.c.o.requires
 CMakeFiles/TVplayer.dir/requires: CMakeFiles/TVplayer.dir/src/sync.c.o.requires
 CMakeFiles/TVplayer.dir/requires: CMakeFiles/TVplayer.dir/src/audio.c.o.requires
+CMakeFiles/TVplayer.dir/requires: CMakeFiles/TVplayer.dir/src/parse.c.o.requires
 .PHONY : CMakeFiles/TVplayer.dir/requires
 
 CMakeFiles/TVplayer.dir/clean:

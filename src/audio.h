@@ -1,5 +1,5 @@
 #include "structures.h"
-#include "file.h"
+#include "parse.h"
 
 #ifndef AUDIO_DECODE_H
 #define AUDIO_DECODE_H

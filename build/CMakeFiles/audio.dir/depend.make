@@ -3,7 +3,6 @@
 
 CMakeFiles/audio.dir/src/audio.c.o: ../src/audio.c
 CMakeFiles/audio.dir/src/audio.c.o: ../src/audio.h
-CMakeFiles/audio.dir/src/audio.c.o: ../src/file.h
 CMakeFiles/audio.dir/src/audio.c.o: ../src/libffmpeg.h
 CMakeFiles/audio.dir/src/audio.c.o: ../src/libsdl.h
 CMakeFiles/audio.dir/src/audio.c.o: ../src/structures.h

@@ -49,37 +49,37 @@ include CMakeFiles/file.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/file.dir/flags.make
 
-CMakeFiles/file.dir/src/file.c.o: CMakeFiles/file.dir/flags.make
-CMakeFiles/file.dir/src/file.c.o: ../src/file.c
+CMakeFiles/file.dir/src/parse.c.o: CMakeFiles/file.dir/flags.make
+CMakeFiles/file.dir/src/parse.c.o: ../src/parse.c
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/file.dir/src/file.c.o"
-	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/file.dir/src/file.c.o   -c /home/infinite/Project/TVplayer/src/file.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/file.dir/src/parse.c.o"
+	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/file.dir/src/parse.c.o   -c /home/infinite/Project/TVplayer/src/parse.c
 
-CMakeFiles/file.dir/src/file.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/file.dir/src/file.c.i"
-	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -E /home/infinite/Project/TVplayer/src/file.c > CMakeFiles/file.dir/src/file.c.i
+CMakeFiles/file.dir/src/parse.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/file.dir/src/parse.c.i"
+	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -E /home/infinite/Project/TVplayer/src/parse.c > CMakeFiles/file.dir/src/parse.c.i
 
-CMakeFiles/file.dir/src/file.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/file.dir/src/file.c.s"
-	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -S /home/infinite/Project/TVplayer/src/file.c -o CMakeFiles/file.dir/src/file.c.s
+CMakeFiles/file.dir/src/parse.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/file.dir/src/parse.c.s"
+	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -S /home/infinite/Project/TVplayer/src/parse.c -o CMakeFiles/file.dir/src/parse.c.s
 
-CMakeFiles/file.dir/src/file.c.o.requires:
-.PHONY : CMakeFiles/file.dir/src/file.c.o.requires
+CMakeFiles/file.dir/src/parse.c.o.requires:
+.PHONY : CMakeFiles/file.dir/src/parse.c.o.requires
 
-CMakeFiles/file.dir/src/file.c.o.provides: CMakeFiles/file.dir/src/file.c.o.requires
-	$(MAKE) -f CMakeFiles/file.dir/build.make CMakeFiles/file.dir/src/file.c.o.provides.build
-.PHONY : CMakeFiles/file.dir/src/file.c.o.provides
+CMakeFiles/file.dir/src/parse.c.o.provides: CMakeFiles/file.dir/src/parse.c.o.requires
+	$(MAKE) -f CMakeFiles/file.dir/build.make CMakeFiles/file.dir/src/parse.c.o.provides.build
+.PHONY : CMakeFiles/file.dir/src/parse.c.o.provides
 
-CMakeFiles/file.dir/src/file.c.o.provides.build: CMakeFiles/file.dir/src/file.c.o
+CMakeFiles/file.dir/src/parse.c.o.provides.build: CMakeFiles/file.dir/src/parse.c.o
 
 # Object files for target file
 file_OBJECTS = \
-"CMakeFiles/file.dir/src/file.c.o"
+"CMakeFiles/file.dir/src/parse.c.o"
 
 # External object files for target file
 file_EXTERNAL_OBJECTS =
 
-libfile.so: CMakeFiles/file.dir/src/file.c.o
+libfile.so: CMakeFiles/file.dir/src/parse.c.o
 libfile.so: CMakeFiles/file.dir/build.make
 libfile.so: CMakeFiles/file.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking C shared library libfile.so"
@@ -89,7 +89,7 @@ libfile.so: CMakeFiles/file.dir/link.txt
 CMakeFiles/file.dir/build: libfile.so
 .PHONY : CMakeFiles/file.dir/build
 
-CMakeFiles/file.dir/requires: CMakeFiles/file.dir/src/file.c.o.requires
+CMakeFiles/file.dir/requires: CMakeFiles/file.dir/src/parse.c.o.requires
 .PHONY : CMakeFiles/file.dir/requires
 
 CMakeFiles/file.dir/clean:

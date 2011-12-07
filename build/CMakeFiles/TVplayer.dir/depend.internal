@@ -4,9 +4,9 @@
 CMakeFiles/TVplayer.dir/src/TVplayer.c.o
  /home/infinite/Project/TVplayer/src/TVplayer.c
  /home/infinite/Project/TVplayer/src/audio.h
- /home/infinite/Project/TVplayer/src/file.h
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h
+ /home/infinite/Project/TVplayer/src/parse.h
  /home/infinite/Project/TVplayer/src/queue.h
  /home/infinite/Project/TVplayer/src/structures.h
  /home/infinite/Project/TVplayer/src/sync.h
@@ -54,11 +54,13 @@ CMakeFiles/TVplayer.dir/src/TVplayer.c.o
 CMakeFiles/TVplayer.dir/src/audio.c.o
  /home/infinite/Project/TVplayer/src/audio.c
  /home/infinite/Project/TVplayer/src/audio.h
- /home/infinite/Project/TVplayer/src/file.h
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h
+ /home/infinite/Project/TVplayer/src/parse.h
+ /home/infinite/Project/TVplayer/src/queue.h
  /home/infinite/Project/TVplayer/src/structures.h
  /home/infinite/Project/TVplayer/src/utility.h
+ /home/infinite/Project/TVplayer/src/video.h
  /usr/local/include/SDL/SDL.h
  /usr/local/include/SDL/SDL_assert.h
  /usr/local/include/SDL/SDL_atomic.h
@@ -144,13 +146,15 @@ CMakeFiles/TVplayer.dir/src/display.c.o
  /usr/local/include/SDL/SDL_video.h
  /usr/local/include/SDL/begin_code.h
  /usr/local/include/SDL/close_code.h
-CMakeFiles/TVplayer.dir/src/file.c.o
- /home/infinite/Project/TVplayer/src/file.c
- /home/infinite/Project/TVplayer/src/file.h
+CMakeFiles/TVplayer.dir/src/parse.c.o
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h
+ /home/infinite/Project/TVplayer/src/parse.c
+ /home/infinite/Project/TVplayer/src/parse.h
+ /home/infinite/Project/TVplayer/src/queue.h
  /home/infinite/Project/TVplayer/src/structures.h
  /home/infinite/Project/TVplayer/src/utility.h
+ /home/infinite/Project/TVplayer/src/video.h
  /usr/local/include/SDL/SDL.h
  /usr/local/include/SDL/SDL_assert.h
  /usr/local/include/SDL/SDL_atomic.h
@@ -284,9 +288,9 @@ CMakeFiles/TVplayer.dir/src/sync.c.o
  /usr/local/include/SDL/close_code.h
 CMakeFiles/TVplayer.dir/src/video.c.o
  /home/infinite/Project/TVplayer/src/display.h
- /home/infinite/Project/TVplayer/src/file.h
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h
+ /home/infinite/Project/TVplayer/src/parse.h
  /home/infinite/Project/TVplayer/src/queue.h
  /home/infinite/Project/TVplayer/src/structures.h
  /home/infinite/Project/TVplayer/src/sync.h

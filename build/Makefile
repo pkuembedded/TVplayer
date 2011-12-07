@@ -138,17 +138,17 @@ display/fast:
 .PHONY : display/fast
 
 #=============================================================================
-# Target rules for targets named file
+# Target rules for targets named parse
 
 # Build rule for target.
-file: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 file
-.PHONY : file
+parse: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 parse
+.PHONY : parse
 
 # fast build rule for target.
-file/fast:
-	$(MAKE) -f CMakeFiles/file.dir/build.make CMakeFiles/file.dir/build
-.PHONY : file/fast
+parse/fast:
+	$(MAKE) -f CMakeFiles/parse.dir/build.make CMakeFiles/parse.dir/build
+.PHONY : parse/fast
 
 #=============================================================================
 # Target rules for targets named queue
@@ -267,32 +267,32 @@ src/display.c.s:
 	$(MAKE) -f CMakeFiles/display.dir/build.make CMakeFiles/display.dir/src/display.c.s
 .PHONY : src/display.c.s
 
-src/file.o: src/file.c.o
-.PHONY : src/file.o
+src/parse.o: src/parse.c.o
+.PHONY : src/parse.o
 
 # target to build an object file
-src/file.c.o:
-	$(MAKE) -f CMakeFiles/TVplayer.dir/build.make CMakeFiles/TVplayer.dir/src/file.c.o
-	$(MAKE) -f CMakeFiles/file.dir/build.make CMakeFiles/file.dir/src/file.c.o
-.PHONY : src/file.c.o
+src/parse.c.o:
+	$(MAKE) -f CMakeFiles/TVplayer.dir/build.make CMakeFiles/TVplayer.dir/src/parse.c.o
+	$(MAKE) -f CMakeFiles/parse.dir/build.make CMakeFiles/parse.dir/src/parse.c.o
+.PHONY : src/parse.c.o
 
-src/file.i: src/file.c.i
-.PHONY : src/file.i
+src/parse.i: src/parse.c.i
+.PHONY : src/parse.i
 
 # target to preprocess a source file
-src/file.c.i:
-	$(MAKE) -f CMakeFiles/TVplayer.dir/build.make CMakeFiles/TVplayer.dir/src/file.c.i
-	$(MAKE) -f CMakeFiles/file.dir/build.make CMakeFiles/file.dir/src/file.c.i
-.PHONY : src/file.c.i
+src/parse.c.i:
+	$(MAKE) -f CMakeFiles/TVplayer.dir/build.make CMakeFiles/TVplayer.dir/src/parse.c.i
+	$(MAKE) -f CMakeFiles/parse.dir/build.make CMakeFiles/parse.dir/src/parse.c.i
+.PHONY : src/parse.c.i
 
-src/file.s: src/file.c.s
-.PHONY : src/file.s
+src/parse.s: src/parse.c.s
+.PHONY : src/parse.s
 
 # target to generate assembly for a file
-src/file.c.s:
-	$(MAKE) -f CMakeFiles/TVplayer.dir/build.make CMakeFiles/TVplayer.dir/src/file.c.s
-	$(MAKE) -f CMakeFiles/file.dir/build.make CMakeFiles/file.dir/src/file.c.s
-.PHONY : src/file.c.s
+src/parse.c.s:
+	$(MAKE) -f CMakeFiles/TVplayer.dir/build.make CMakeFiles/TVplayer.dir/src/parse.c.s
+	$(MAKE) -f CMakeFiles/parse.dir/build.make CMakeFiles/parse.dir/src/parse.c.s
+.PHONY : src/parse.c.s
 
 src/queue.o: src/queue.c.o
 .PHONY : src/queue.o
@@ -385,7 +385,7 @@ help:
 	@echo "... audio"
 	@echo "... display"
 	@echo "... edit_cache"
-	@echo "... file"
+	@echo "... parse"
 	@echo "... queue"
 	@echo "... rebuild_cache"
 	@echo "... sync"
@@ -399,9 +399,9 @@ help:
 	@echo "... src/display.o"
 	@echo "... src/display.i"
 	@echo "... src/display.s"
-	@echo "... src/file.o"
-	@echo "... src/file.i"
-	@echo "... src/file.s"
+	@echo "... src/parse.o"
+	@echo "... src/parse.i"
+	@echo "... src/parse.s"
 	@echo "... src/queue.o"
 	@echo "... src/queue.i"
 	@echo "... src/queue.s"

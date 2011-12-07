@@ -44,7 +44,7 @@ SET(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/TVplayer.dir/DependInfo.cmake"
   "CMakeFiles/audio.dir/DependInfo.cmake"
   "CMakeFiles/display.dir/DependInfo.cmake"
-  "CMakeFiles/file.dir/DependInfo.cmake"
+  "CMakeFiles/parse.dir/DependInfo.cmake"
   "CMakeFiles/queue.dir/DependInfo.cmake"
   "CMakeFiles/sync.dir/DependInfo.cmake"
   "CMakeFiles/video.dir/DependInfo.cmake"
