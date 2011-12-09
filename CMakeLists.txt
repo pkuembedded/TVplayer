@@ -22,5 +22,5 @@ ADD_LIBRARY(queue SHARED ${LIBQUEUE_SRC})
 SET(LIBDISPLAY_SRC ./src/display.h ./src/display.c)
 ADD_LIBRARY(display SHARED ${LIBDISPLAY_SRC})
 
-LINK_DIRECTORIES(/usr/local/lib /usr/lib)
-TARGET_LINK_LIBRARIES(TVplayer audio video parse sync queue display avutil avformat avcodec avfilter SDL)
+LINK_DIRECTORIES(/usr/local/lib/ /usr/lib)
+TARGET_LINK_LIBRARIES(TVplayer audio video parse sync queue display avutil avformat avcodec avfilter /usr/local/lib/libSDL.so)

@@ -82,19 +82,17 @@ int queue_av_pkt(void *arg) {
     init_queue(&state->audio->raw_data_buf);
     init_queue(&state->video->raw_data_buf);
     while(true) {
-	//if queue is full, wait for eat
 	if(state->video->raw_data_buf.size > MAX_VIDEO_QUEUE_SIZE || state->audio->raw_data_buf.size > MAX_AUDIO_QUEUE_SIZE) {
 	    SDL_Delay(10);
-//	    fprintf(stderr, "queue is full, waiting for decoding : queue_av_pkt\n");
+//	    LOGW("queue is full, waiting for decoding");
 	    continue;
 	}
-	//if packet is valid
 	if(av_read_frame(state->content->format_ctx, pkt) < 0) {
 	    if(url_ferror(state->content->format_ctx->pb) == 0) {
 		SDL_Delay(100);
 		continue;
 	    }else {
-		LOGV("read frame error, maybe come to end of content : queue_av_pkt");
+		LOGW("read frame error, maybe come to end of content : queue_av_pkt");
 		break;		// error or end of content
 	    }
 	}

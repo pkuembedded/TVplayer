@@ -1,4 +1,4 @@
-cscope 15 $HOMEProject/TVplayer/src               0000584355
+cscope 15 $HOMEProject/TVplayer/src               0000616007
 	@TVplayer.c
 
 1 
@@ -25,45 +25,11 @@ cscope 15 $HOMEProject/TVplayer/src               0000584355
 	~"sync.h
 "
 
-7 
-	#VIDEO_FRAME_QUEUE_SIZE
- 1
+7 
+	~"evít.h
+"
 
-	)
-
-8 
-	#FF_ALLOC_EVENT
- (
-SDL_USEREVENT
-)
-
-	)
-
-9 
-	#FF_REFRESH_EVENT
- (
-SDL_USEREVENT
- + 1)
-
-	)
-
-10 
-	#FF_QUIT_EVENT
- (
-SDL_USEREVENT
- + 2)
-
-	)
-
-12 
-Medü
- 
-	gvideo
-, 
-	gaudio
-;
-
-13 
+10 
 	$maö
 (
 ¨gc
@@ -71,33 +37,21 @@ Medü
 ¨gv
 )
 
-15 
-uöt64_t
- 
-globÆ_video_pkt_±s
-;
-
-16 
-SDL_SurÁ˚
- *
-s¸ìn
-;
-
-17 
+12 
 SDL_Evít
  
 evít
 ;
 
-18 
-Fûe
+13 
+C⁄ã¡
  *
-fûe
+c⁄ã¡
  = 
 	`av_mÆlocz
 ((Content));
 
-19 
+14 
 Medü
  *
 video
@@ -105,7 +59,7 @@ video
 	`av_mÆlocz
 ((Media));
 
-20 
+15 
 Medü
  *
 audio
@@ -113,7 +67,7 @@ audio
 	`av_mÆlocz
 ((Media));
 
-21 
+16 
 Sèã
  *
 °©e
@@ -121,67 +75,59 @@ Sèã
 	`av_mÆlocz
 ((State));
 
-22 
+17 
 SDL_Thªad
  *
 video_decode_tid
 ;
 
-23 
+18 
 SDL_Thªad
  *
 ªad_pkt_tid
 ;
 
-24 
-SDL_Thªad
- *
-∂ay_tid
-;
-
-25 
+19 
 °©e
 ->
-fûe
+c⁄ã¡
  = content;
 
-26 
+20 
 °©e
 ->
 video
  = video;
 
-27 
+21 
 °©e
 ->
 audio
  =áudio;
 
-28 
+22 
 	`öô_video
 (
 video
 );
 
-29 if(
+23 if(
 ¨gc
  < 2) {
 
-30 
-	`Ârötf
-(
-°dîr
-, "Usage :Ölay <content>\n");
+24 
+	`LOGE
+("Usage :Ölay <content>");
 
-31 
+25 
 	`exô
 (1);
 
-33 
+27 
 	`av_ªgi°î_Æl
 ();
 
-34 if(
+28 if(
 	`SDL_Inô
 (
 SDL_INIT_VIDEO
@@ -191,63 +137,75 @@ SDL_INIT_AUDIO
 SDL_INIT_TIMER
 )) {
 
-35 
-	`Ârötf
-(
-°dîr
-, "ÁûÅÿöôülizêSDL - %s\n", 
-	`SDL_GëEº‹
-());
+29 
+	`LOGE
+("failÅo initialize SDL");
 
-36 
+30 
 	`exô
 (1);
 
-38 
+32 
 	`av_°æ˝y
 (
-fûe
+c⁄ã¡
 ->
 «me
 , 
 ¨gv
 [1], (content->name));
 
-39 
-	`gë_fûe_öfo
+33 
+	`gë_c⁄ã¡_öfo
 (
-fûe
+c⁄ã¡
 );
 
-40 
+34 
+	`LOGI
+("finding streams");
+
+35 
 	`föd_av_°ªams
 (
-fûe
+c⁄ã¡
 , 
 video
 , 
 audio
 );
 
-41 
+36 
+	`LOGI
+("finding decoder");
+
+37 
 	`föd_decodî
 (
 video
 );
 
-42 
+38 
 video
 ->
 	`gë_öfo
 (video);
 
-43 
+39 
+	`LOGI
+("initing screen");
+
+40 
 	`öô_s¸ìn
 (
 video
 );
 
-44 
+41 
+	`LOGI
+("creatingÑeadingÅhread...");
+
+42 
 ªad_pkt_tid
  = 
 	`SDL_Cª©eThªad
@@ -257,13 +215,17 @@ queue_av_pkt
 °©e
 );
 
-45 
+43 
 	`öô_‰ame
 (
 video
 );
 
-46 
+44 
+	`LOGI
+("creating decodeÅhread...");
+
+45 
 video_decode_tid
  = 
 	`SDL_Cª©eThªad
@@ -272,6 +234,10 @@ decode_video
 , "decode", 
 video
 );
+
+46 
+	`LOGI
+("scheduleÑefreshing");
 
 47 
 	`scheduÀ_ª‰esh
@@ -291,27 +257,27 @@ video
 d©a
  = "FLUSH";
 
-50 
+51 
 åue
 ) {
 
-51 
+52 
 	`SDL_WaôEvít
 (&
 evít
 );
 
-52 
+53 
 evít
 .
 ty≥
 ) {
 
-53 
+54 
 FF_REFRESH_EVENT
 :
 
-54 
+55 
 	`video_ª‰esh_timî
 (
 evít
@@ -321,7 +287,29 @@ u£r
 d©a1
 );
 
-61 
+57 
+FF_QUIT_EVENT
+:
+
+59 
+	`exô
+(1);
+
+61 
+FF_ALLOC_EVENT
+:
+
+62 
+	`öô_‰ame
+(
+evít
+.
+u£r
+.
+d©a1
+);
+
+69 
 	}
 }
 
@@ -406,6 +394,20 @@ audio_buf_size
 );
 
 17 
+audio_size
+ = 
+	`sync_audio
+(
+audio
+, (
+öt16_t
+ *Ôudio->
+audio_buf
+,áudio_size, 
+±s
+);
+
+18 
 audio
 ->
 audio_buf_size
@@ -413,13 +415,13 @@ audio_buf_size
 audio_size
 ;
 
-19 
+20 
 audio
 ->
 audio_buf_ödex
  = 0;
 
-21 
+22 
 Àn1
  = 
 audio
@@ -429,19 +431,19 @@ audio_buf_size
 audio_buf_ödex
 ;
 
-22 if(
+23 if(
 Àn1
  > 
 Àn
 )
 
-23 
+24 
 Àn1
  = 
 Àn
 ;
 
-24 
+25 
 	`mem˝y
 (
 °ªam
@@ -457,19 +459,19 @@ audio_buf_ödex
 Àn1
 );
 
-25 
+26 
 Àn
  -
 Àn1
 ;
 
-26 
+27 
 °ªam
  +
 Àn1
 ;
 
-27 
+28 
 audio
 ->
 audio_buf_ödex
@@ -477,11 +479,11 @@ audio_buf_ödex
 Àn1
 ;
 
-29 
+30 
 	}
 }
 
-31 
+32 
 	$föd_audio_decodî
 (
 Medü
@@ -489,13 +491,13 @@ Medü
 audio
 )
 
-33 
+34 
 AVCodec
  *
 aCodec
 ;
 
-34 
+35 
 SDL_AudioS≥c
  
 w™ãd_•ec
@@ -503,7 +505,7 @@ w™ãd_•ec
 •ec
 ;
 
-35 
+36 
 w™ãd_•ec
 .
 ‰eq
@@ -515,7 +517,7 @@ codec_˘x
 ßm∂e_øã
 ;
 
-36 
+37 
 w™ãd_•ec
 .
 f‹m©
@@ -523,7 +525,7 @@ f‹m©
 AUDIO_S16SYS
 ;
 
-37 
+38 
 w™ãd_•ec
 .
 ch™√ls
@@ -533,13 +535,13 @@ audio
 codec_˘x
 ->channels;
 
-38 
+39 
 w™ãd_•ec
 .
 sûí˚
  = 0;
 
-39 
+40 
 w™ãd_•ec
 .
 ßm∂es
@@ -547,7 +549,7 @@ w™ãd_•ec
 SDL_AUDIO_BUFFER_SIZE
 ;
 
-40 
+41 
 w™ãd_•ec
 .
 ˇŒback
@@ -555,7 +557,7 @@ w™ãd_•ec
 audio_ˇŒback
 ;
 
-41 
+42 
 w™ãd_•ec
 .
 u£rd©a
@@ -563,7 +565,7 @@ u£rd©a
 audio
 ;
 
-43 if(
+44 if(
 	`SDL_O≥nAudio
 (&
 w™ãd_•ec
@@ -571,15 +573,11 @@ w™ãd_•ec
 •ec
 ) < 0) {
 
-44 
-	`Ârötf
-(
-°dîr
-, "SDL_O≥nAudio: %s\n", 
-	`SDL_GëEº‹
-());
+45 
+	`LOGV
+("SDL_OpenAudio : find_audio_decoder");
 
-47 
+48 
 audio
 ->
 audio_hw_buf_size
@@ -589,7 +587,7 @@ audio_hw_buf_size
 size
 ;
 
-49 
+50 
 aCodec
  = 
 	`avcodec_föd_decodî
@@ -601,19 +599,17 @@ codec_˘x
 codec_id
 );
 
-50 if(
+51 if(
 aCodec
  =
 NULL
 )
 
-52 
-	`Ârötf
-(
-°dîr
-, "CodecÇot found!\n");
+53 
+	`LOGV
+("CodecÇot found : find_audio_decoder");
 
-55 if(
+56 if(
 	`avcodec_›í
 (
 audio
@@ -623,19 +619,19 @@ codec_˘x
 aCodec
 ) < 0)
 
-58 
+59 
 audio
 ->
 audio_buf_size
  = 0;
 
-59 
+60 
 audio
 ->
 audio_buf_ödex
  = 0;
 
-60 
+61 
 	`mem£t
 (&
 audio
@@ -643,15 +639,15 @@ audio
 audio_pkt
 , 0, (audio->audio_pkt));
 
-61 
+62 
 	`SDL_Pau£Audio
 (0);
 
-63 
+64 
 	}
 }
 
-66 
+67 
 	$decode_audio
 (
 Medü
@@ -667,7 +663,7 @@ buf_size
 ±s_±r
 )
 
-68 
+69 
 Àn1
 , 
 d©a_size
@@ -675,7 +671,7 @@ d©a_size
 n
 ;
 
-69 
+70 
 AVPackë
  *
 pkt
@@ -685,23 +681,23 @@ audio
 audio_pkt
 ;
 
-70 
+71 
 ±s
 ;
 
-73 
+74 
 audio
 ->
 audio_pkt_size
  > 0) {
 
-74 
+75 
 d©a_size
  = 
 buf_size
 ;
 
-75 
+76 
 Àn1
  = 
 	`avcodec_decode_audio3
@@ -711,7 +707,7 @@ audio
 codec_˘x
 ,
 
-76 (
+77 (
 öt16_t
  *)
 audio_buf
@@ -721,17 +717,17 @@ d©a_size
 pkt
 );
 
-77 if(
+78 if(
 Àn1
  < 0) {
 
-79 
+80 
 audio
 ->
 audio_pkt_size
  = 0;
 
-82 
+83 
 audio
 ->
 audio_pkt_d©a
@@ -739,7 +735,7 @@ audio_pkt_d©a
 Àn1
 ;
 
-83 
+84 
 audio
 ->
 audio_pkt_size
@@ -747,11 +743,11 @@ audio_pkt_size
 Àn1
 ;
 
-84 if(
+85 if(
 d©a_size
  <= 0) {
 
-88 
+89 
 ±s
  = 
 audio
@@ -759,17 +755,17 @@ audio
 ˛k
 ;
 
-89 *
+90 *
 ±s_±r
  = 
 ±s
 ;
 
-90 
+91 
 n
  = 2;
 
-91 
+92 
 audio
 ->
 ˛k
@@ -777,7 +773,7 @@ audio
 d©a_size
  /
 
-92 ()(
+93 ()(
 n
  * 
 audio
@@ -787,23 +783,23 @@ codec_˘x
 ßm∂e_øã
 );
 
-95  
+96  
 d©a_size
 ;
 
-97 if(
+98 if(
 pkt
 ->
 d©a
 )
 
-98 
+99 
 	`av_‰ì_∑ckë
 (
 pkt
 );
 
-100 if(
+101 if(
 	`gë_‰om_queue
 (&
 audio
@@ -813,7 +809,7 @@ audio
 pkt
 ) < 0) {
 
-103 
+104 
 audio
 ->
 audio_pkt_d©a
@@ -823,7 +819,7 @@ pkt
 d©a
 ;
 
-104 
+105 
 audio
 ->
 audio_pkt_size
@@ -833,7 +829,7 @@ pkt
 size
 ;
 
-106 if(
+107 if(
 pkt
 ->
 ±s
@@ -841,7 +837,7 @@ pkt
 AV_NOPTS_VALUE
 ) {
 
-107 
+108 
 audio
 ->
 ˛k
@@ -857,11 +853,11 @@ pkt
 ±s
 ;
 
-110 
+111 
 	}
 }
 
-112 
+113 
 	$öô_audio
 (
 Medü
@@ -869,7 +865,7 @@ Medü
 audio
 )
 
-114 
+115 
 	`mem£t
 (
 audio
@@ -877,7 +873,7 @@ audio
 Medü
 ));
 
-115 
+116 
 audio
 ->
 medü_ty≥
@@ -885,7 +881,7 @@ medü_ty≥
 AUDIO
 ;
 
-116 
+117 
 audio
 ->
 ∂ay_c⁄d
@@ -893,7 +889,7 @@ audio
 	`SDL_Cª©eC⁄d
 ();
 
-117 
+118 
 audio
 ->
 ∂ay_muãx
@@ -901,7 +897,7 @@ audio
 	`SDL_Cª©eMuãx
 ();
 
-118 
+119 
 audio
 ->
 föd_codec
@@ -909,7 +905,7 @@ föd_codec
 föd_audio_decodî
 ;
 
-119 
+120 
 audio
 ->
 gë_öfo
@@ -917,7 +913,7 @@ gë_öfo
 gë_av_öfo
 ;
 
-120 
+121 
 	}
 }
 
@@ -931,11 +927,15 @@ gë_av_öfo
 	~"∑r£.h
 "
 
-4 #i‚de‡
+3 
+	~"sync.h
+"
+
+5 #i‚de‡
 AUDIO_DECODE_H
 
 
-5 
+6 
 	#AUDIO_DECODE_H
 
 
@@ -947,7 +947,7 @@ AUDIO_DECODE_H
 
 	)
 
-11 
+10 
 öô_audio
 (
 Medü
@@ -955,7 +955,7 @@ Medü
 audio
 );
 
-12 
+11 
 föd_audio_decodî
 (
 Medü
@@ -963,7 +963,7 @@ Medü
 audio
 );
 
-13 
+12 
 audio_ˇŒback
 (*
 u£rd©a
@@ -975,7 +975,7 @@ Uöt8
 Àn
 );
 
-14 
+13 
 decode_audio
 (
 Medü
@@ -1009,25 +1009,15 @@ video
 s¸ìn
  = 
 	`SDL_SëVideoMode
-(
-video
-->
-codec_˘x
-->
-width
-, video->codec_˘x->
-height
-, 0, 0);
+(800, 480, 0, 0);
 
 6 if(!
 s¸ìn
 ) {
 
 7 
-	`Ârötf
-(
-°dîr
-, "SDL: cannot init video mode : init_screen\n");
+	`LOGV
+("SDL: cannot init video mode : init_screen");
 
 8 
 	`exô
@@ -1057,7 +1047,9 @@ vf
 video
 ->
 ‰ame_buf
-;
+[video->
+ödex
+];
 
 16 if(
 vf
@@ -1131,29 +1123,59 @@ video
 codec
 ->height;
 
-25 
+26 
+	`SDL_LockMuãx
+(
+video
+->
+‰ame_buf_muãx
+);
+
+27 
+vf
+->
+Æloˇãd
+ = 1;
+
+28 
+	`SDL_C⁄dSig«l
+(
+video
+->
+‰ame_buf_c⁄d
+);
+
+29 
+	`SDL_U∆ockMuãx
+(
+video
+->
+‰ame_buf_muãx
+);
+
+30 
 	}
 }
 
-27 
+32 
 	$∂ay_video
 (*
 ¨g
 )
 
-29 
+34 
 SDL_Re˘
  
 ª˘
 ;
 
-30 
+35 
 VideoFøme
  *
 vf
 ;
 
-31 
+36 
 w
 , 
 h
@@ -1163,11 +1185,11 @@ x
 y
 ;
 
-32 
+37 
 a•e˘_øtio
 ;
 
-33 
+38 
 Medü
  *
 video
@@ -1175,7 +1197,7 @@ video
 ¨g
 ;
 
-34 
+39 
 vf
  = &
 video
@@ -1185,13 +1207,13 @@ video
 ‰ame_ödex
 ];
 
-36 if(
+41 if(
 vf
 ->
 bmp
 )
 
-38 if(
+43 if(
 video
 ->
 °ªam
@@ -1203,11 +1225,11 @@ codec
 num
  == 0) {
 
-39 
+44 
 a•e˘_øtio
  = 0;
 
-41 
+46 
 a•e˘_øtio
  = 
 	`av_q2d
@@ -1225,11 +1247,11 @@ width
 height
 ;
 
-43 if(
+48 if(
 a•e˘_øtio
  <= 0.0) {
 
-44 
+49 
 a•e˘_øtio
  = ()
 video
@@ -1243,13 +1265,13 @@ width
 height
 ;
 
-46 
+51 
 h
  = 
 s¸ìn
 ->h;
 
-47 
+52 
 w
  = (()
 	`röt
@@ -1259,19 +1281,19 @@ h
 a•e˘_øtio
 )) & -3;
 
-48 if(
+53 if(
 w
  > 
 s¸ìn
 ->w) {
 
-49 
+54 
 w
  = 
 s¸ìn
 ->w;
 
-50 
+55 
 h
  = (()
 	`röt
@@ -1281,7 +1303,7 @@ w
 a•e˘_øtio
 )) & -3;
 
-52 
+57 
 x
  = (
 s¸ìn
@@ -1289,7 +1311,7 @@ s¸ìn
 w
  - w) / 2;
 
-53 
+58 
 y
  = (
 s¸ìn
@@ -1297,43 +1319,31 @@ s¸ìn
 h
  - h) / 2;
 
-55 
+60 
 ª˘
 .
 x
  = 0;
 
-56 
+61 
 ª˘
 .
 y
  = 0;
 
-57 
+62 
 ª˘
 .
 w
- = 
-video
-->
-codec_˘x
-->
-width
-;
+ = 800;
 
-58 
+63 
 ª˘
 .
 h
- = 
-video
-->
-codec_˘x
-->
-height
-;
+ = 480;
 
-59 
+64 
 	`SDL_Di•œyYUVOvîœy
 (
 vf
@@ -1343,7 +1353,7 @@ bmp
 ª˘
 );
 
-63 
+68 
 	}
 }
 
@@ -1454,7 +1464,7 @@ c⁄ã¡
 )
 
 6 if(
-	`av_›í_öput_c⁄ã¡
+	`av_›í_öput_fûe
 (&
 c⁄ã¡
 ->
@@ -1674,10 +1684,8 @@ NULL
 )
 
 46 
-	`Ârötf
-(
-°dîr
-, "failÅo find codec : find_decoder\n");
+	`LOGE
+("failÅo find codec : find_decoder");
 
 49 if(
 	`avcodec_›í
@@ -1690,10 +1698,8 @@ codec
 ) < 0)
 
 51 
-	`Ârötf
-(
-°dîr
-, "failÅo open codec : find_decoder\n");
+	`LOGE
+("failÅo open codec : find_decoder");
 
 55 
 medü
@@ -1754,10 +1760,8 @@ audio_pkt
 (0);
 
 70 
-	`Ârötf
-(
-°dîr
-, "unknown mediaÅype : find_decoder\n");
+	`LOGV
+("unknown mediaÅype : find_decoder");
 
 75 
 	}
@@ -1770,6 +1774,10 @@ audio_pkt
 ) {
 
 78 
+	`LOGI
+("createdÑeadingÅhread");
+
+80 
 AVPackë
  *
 pkt
@@ -1777,7 +1785,7 @@ pkt
 	`av_mÆlocz
 ((AVPacket));
 
-79 
+81 
 Sèã
  *
 °©e
@@ -1785,7 +1793,7 @@ Sèã
 ¨g
 ;
 
-80 
+82 
 	`öô_queue
 (&
 °©e
@@ -1795,7 +1803,7 @@ audio
 øw_d©a_buf
 );
 
-81 
+83 
 	`öô_queue
 (&
 °©e
@@ -1805,11 +1813,11 @@ video
 øw_d©a_buf
 );
 
-82 
+84 
 åue
 ) {
 
-84 if(
+85 if(
 °©e
 ->
 video
@@ -1825,7 +1833,7 @@ audio
 MAX_AUDIO_QUEUE_SIZE
 ) {
 
-85 
+86 
 	`SDL_Dñay
 (10);
 
@@ -1858,10 +1866,8 @@ pb
 (100);
 
 95 
-	`Ârötf
-(
-°dîr
-, "read frameÉrror, maybe comeÅoÉnd of content : queue_av_pkt\n");
+	`LOGW
+("read frameÉrror, maybe comeÅoÉnd of content : queue_av_pkt");
 
 100 if(
 pkt
@@ -1912,10 +1918,8 @@ pkt
 );
 
 105 
-	`Ârötf
-(
-°dîr
-, "neitheráudio or videoÅrack : queue_av_pkt\n");
+	`LOGV
+("neitheráudio or videoÅrack : queue_av_pkt");
 
 106 
 	`av_‰ì_∑ckë
@@ -1960,6 +1964,14 @@ is_ouçut
 );
 
 116 
+	`LOGI
+("%s", 
+medü
+->
+öfo
+);
+
+117 
 	}
 }
 
@@ -2039,7 +2051,7 @@ gë_av_öfo
 	~"queue.h
 "
 
-4 
+3 
 	$öô_queue
 (
 PackëQueue
@@ -2047,7 +2059,7 @@ PackëQueue
 queue
 )
 
-6 
+5 
 	`mem£t
 (
 queue
@@ -2055,7 +2067,7 @@ queue
 PackëQueue
 ));
 
-7 
+6 
 queue
 ->
 muãx
@@ -2063,7 +2075,7 @@ muãx
 	`SDL_Cª©eMuãx
 ();
 
-8 
+7 
 queue
 ->
 c⁄d
@@ -2071,11 +2083,11 @@ c⁄d
 	`SDL_Cª©eC⁄d
 ();
 
-9 
+8 
 	}
 }
 
-12 
+11 
 	$add_to_queue
 (
 PackëQueue
@@ -2087,13 +2099,13 @@ AVPackë
 pkt
 )
 
-14 
+13 
 AVPackëLi°
  *
 pkt1
 ;
 
-15 if(!(
+14 if(!(
 pkt1
  = 
 	`av_mÆloc
@@ -2101,13 +2113,11 @@ pkt1
 AVPackëLi°
 ))))
 
-17 
-	`Ârötf
-(
-°dîr
-, "failÅo malloc :ádd_to_queue\n");
+16 
+	`LOGV
+("failÅo malloc :ádd_to_queue");
 
-20 if(
+19 if(
 pkt
  !&
 Êush_pkt
@@ -2115,19 +2125,17 @@ pkt
 	`av_dup_∑ckë
 (pkt) < 0)
 
-22 
-	`Ârötf
-(
-°dîr
-, "av_dup_packet :ádd_to_queue\n");
+21 
+	`LOGV
+("av_dup_packet :ádd_to_queue");
 
-26 
+25 
 pkt1
 ->
 pkt
  = *pkt;
 
-27 
+26 
 pkt1
 ->
 √xt
@@ -2135,7 +2143,7 @@ pkt1
 NULL
 ;
 
-28 
+27 
 	`SDL_LockMuãx
 (
 queue
@@ -2167,7 +2175,7 @@ queue
 pkt1
 ;
 
-33 
+34 
 queue
 ->
 íd
@@ -2175,13 +2183,13 @@ queue
 pkt1
 ;
 
-34 
+35 
 queue
 ->
 pkt_num
 ++;
 
-35 
+36 
 queue
 ->
 size
@@ -2191,7 +2199,7 @@ pkt1
 pkt
 .size;
 
-36 
+37 
 	`SDL_C⁄dSig«l
 (
 queue
@@ -2199,7 +2207,7 @@ queue
 c⁄d
 );
 
-37 
+38 
 	`SDL_U∆ockMuãx
 (
 queue
@@ -2207,11 +2215,11 @@ queue
 muãx
 );
 
-39 
+40 
 	}
 }
 
-42 
+43 
 	$gë_‰om_queue
 (
 PackëQueue
@@ -2223,17 +2231,17 @@ AVPackë
 pkt
 )
 
-44 
+45 
 AVPackëLi°
  *
 pkt1
 ;
 
-45 
+46 
 ªt
 ;
 
-46 
+47 
 	`SDL_LockMuãx
 (
 queue
@@ -2241,11 +2249,11 @@ queue
 muãx
 );
 
-47 
+48 
 åue
 ) {
 
-48 
+49 
 pkt1
  = 
 queue
@@ -2253,7 +2261,7 @@ queue
 hódî
 ;
 
-49 if(
+50 if(
 pkt1
 ) {
 
@@ -2311,7 +2319,7 @@ pkt1
 ªt
  = 1;
 
-62 
+61 
 	`SDL_C⁄dWaô
 (
 queue
@@ -2321,7 +2329,7 @@ c⁄d
 muãx
 );
 
-65 
+64 
 	`SDL_U∆ockMuãx
 (
 queue
@@ -2329,15 +2337,15 @@ queue
 muãx
 );
 
-66  
+65  
 ªt
 ;
 
-67 
+66 
 	}
 }
 
-70 
+69 
 	$queue_Êush
 (
 PackëQueue
@@ -2345,7 +2353,7 @@ PackëQueue
 queue
 )
 
-72 
+71 
 AVPackëLi°
  *
 pkt
@@ -2353,7 +2361,7 @@ pkt
 pkt1
 ;
 
-73 
+72 
 	`SDL_LockMuãx
 (
 queue
@@ -2361,7 +2369,7 @@ queue
 muãx
 );
 
-74 
+73 
 pkt
  = 
 queue
@@ -2373,7 +2381,7 @@ NULL
 pkt1
 ) {
 
-75 
+74 
 pkt1
  = 
 pkt
@@ -2381,19 +2389,19 @@ pkt
 √xt
 ;
 
-76 
+75 
 	`av_‰ì_∑ckë
 (&
 pkt
 ->pkt);
 
-77 
+76 
 	`av_‰ìp
 (&
 pkt
 );
 
-79 
+78 
 queue
 ->
 hódî
@@ -2401,7 +2409,7 @@ hódî
 NULL
 ;
 
-80 
+79 
 queue
 ->
 íd
@@ -2409,19 +2417,19 @@ queue
 NULL
 ;
 
-81 
+80 
 queue
 ->
 pkt_num
  = 0;
 
-82 
+81 
 queue
 ->
 size
  = 0;
 
-83 
+82 
 	`SDL_U∆ockMuãx
 (
 queue
@@ -2429,7 +2437,7 @@ queue
 muãx
 );
 
-84 
+83 
 	}
 }
 
@@ -2439,23 +2447,27 @@ muãx
 	~"°ru˘uªs.h
 "
 
-2 #i‚de‡
+2 
+	~"evít.h
+"
+
+4 #i‚de‡
 QUEUE_H
 
 
-3 
+5 
 	#QUEUE_H
 
 
 	)
 
-5 
+7 
 AVPackë
  
 	gÊush_pkt
 ;
 
-6 
+8 
 öô_queue
 (
 PackëQueue
@@ -2463,7 +2475,7 @@ PackëQueue
 queue
 );
 
-7 
+9 
 add_to_queue
 (
 PackëQueue
@@ -2475,7 +2487,7 @@ AVPackë
 pkt
 );
 
-8 
+10 
 gë_‰om_queue
 (
 PackëQueue
@@ -2487,13 +2499,17 @@ AVPackë
 pkt
 );
 
-9 
+11 
 queue_Êush
 (
 PackëQueue
  *
 queue
 );
+
+12 
+quô
+();
 
 	@structures.h
 
@@ -2509,89 +2525,97 @@ queue
 	~"utûôy.h
 "
 
-6 #i‚de‡
+4 
+	~"log.h
+"
+
+5 
+	~<f˙é.h
+>
+
+7 #i‚de‡
 STRUCTURES_H
 
 
-7 
+8 
 	#STRUCTURES_H
 
 
 	)
 
-9 
+10 
 	#MAX_NAME_LEN
  1024
 
 	)
 
-10 
+11 
 	#VIDEO_FRAME_QUEUE_SIZE
  1
 
 	)
 
-12 
+14 
 	mAUDIO
 ,
 
-13 
+15 
 	mVIDEO
 ,
 
-16 
+19 
 	mAV_SYNC_AUDIO_MASTER
 ,
 
-17 
+20 
 	mAV_SYNC_VIDEO_MASTER
 ,
 
-18 
+21 
 	mAV_SYNC_EXTERNAL_MASTER
 ,
 
-21 
+24 
 	tuöt
 ;
 
-22 
+25 
 	tuch¨
 ;
 
-24 
+27 
 	sVideoFøme
  {
 
-25 
+28 
 	mwidth
 , 
 	mheight
 ;
 
-26 
+29 
 	mÆloˇãd
 ;
 
-27 
+30 
 	m±s
 ;
 
-28 
+31 
 SDL_Ovîœy
  *
 	mbmp
 ;
 
-29 } 
+32 } 
 	tVideoFøme
 ;
 
-32 
+35 
 	sPackëQueue
  {
 
-33 
+36 
 AVPackëLi°
  *
 	mhódî
@@ -2599,97 +2623,97 @@ AVPackëLi°
 	míd
 ;
 
-34 
+37 
 	mpkt_num
 ;
 
-35 
+38 
 	msize
 ;
 
-36 
+39 
 SDL_muãx
  *
 	mmuãx
 ;
 
-37 
+40 
 SDL_c⁄d
  *
 	mc⁄d
 ;
 
-38 } 
+41 } 
 	tPackëQueue
 ;
 
-40 
-	sFûe
+43 
+	sC⁄ã¡
  {
 
-41 
+44 
 AVF‹m©C⁄ãxt
  *
 	mf‹m©_˘x
 ;
 
-43 
+45 
 	mduøti⁄
 ;
 
-44 
+46 
 	m«me
 [
 MAX_NAME_LEN
 ];
 
-45 } 
-	tFûe
+47 } 
+	tC⁄ã¡
 ;
 
-48 
+50 
 	sMedü
  {
 
-49 
+51 
 	mmedü_ty≥
 ;
 
-50 
+52 
 	möfo
 [
 MAX_NAME_LEN
 ];
 
-51 
+53 
 	måack
 ;
 
-52 
+54 
 PackëQueue
  
 	møw_d©a_buf
 ;
 
-53 
+55 
 AVSåóm
  *
 	m°ªam
 ;
 
-54 
+56 
 AVCodecC⁄ãxt
  *
 	mcodec_˘x
 ;
 
-55 
+57 
 AVCodec
  *
 	mcodec
 ;
 
-56 
+58 
 VideoFøme
  
 	m‰ame_buf
@@ -2697,61 +2721,65 @@ VideoFøme
 VIDEO_FRAME_QUEUE_SIZE
 ];
 
-57 
+59 
 	m‰ame_buf_size
 ;
 
-58 
+60 
 	m‰ame_ödex
 ;
 
-59 
-	m˛k
-;
-
-60 
-	m‰ame_timî
-;
-
-61 
-	m‰ame_œ°_±s
+61 
+	mödex
 ;
 
 62 
-	m‰ame_œ°_dñay
+	m˛k
 ;
 
 63 
-	mvideo_cuºít_±s
+	m‰ame_timî
 ;
 
 64 
+	m‰ame_œ°_±s
+;
+
+65 
+	m‰ame_œ°_dñay
+;
+
+66 
+	mvideo_cuºít_±s
+;
+
+67 
 	mvideo_cuºít_±s_time
 ;
 
-65 
+68 
 uöt
  
 	maudio_buf_size
 ;
 
-66 
+69 
 uöt
  
 	maudio_buf_ödex
 ;
 
-67 
+70 
 AVPackë
  
 	maudio_pkt
 ;
 
-68 
+71 
 	maudio_hw_buf_size
 ;
 
-69 
+72 
 uöt8_t
  
 	maudio_buf
@@ -2759,91 +2787,107 @@ uöt8_t
 AVCODEC_MAX_AUDIO_FRAME_SIZE
  * 3) / 2];
 
-70 
+73 
 uöt8_t
  *
 	maudio_pkt_d©a
 ;
 
-71 
+74 
 	maudio_pkt_size
 ;
 
-72 
+75 
+	maudio_diff_cum
+;
+
+76 
+	maudio_diff_avg_c€f
+;
+
+77 
+	maudio_diff_thªshﬁd
+;
+
+78 
+	maudio_diff_avg_cou¡
+;
+
+80 
 SDL_muãx
  *
 	m‰ame_buf_muãx
 ;
 
-73 
+81 
 SDL_muãx
  *
 	m‰ame_buf_c⁄d
 ;
 
-74 
+82 
 SDL_c⁄d
  *
 	m∂ay_c⁄d
 ;
 
-75 
+83 
 SDL_muãx
  *
 	m∂ay_muãx
 ;
 
-76 (*
+84 (*
 	möô
 )(*
 	m¨g
 );
 
-77 (*
+85 (*
 	mföd_°ªam
 )(*
 	m¨g
 );
 
-78 (*
+86 (*
 	mgë_öfo
 )(*
 	m¨g
 );
 
-79 (*
+87 (*
 	mföd_codec
 )(*
 	m¨g
 );
 
-80 (*
+88 (*
 	m∂ay
 )(*
 	m¨g
 );
 
-81 (*
+89 (*
 	m∑u£
 )(*
 	m¨g
 );
 
-82 } 
+90 } 
 	tMedü
 ;
 
-85 
+93 
 	sSèã
  {
 
-86 
-Fûe
+94 
+C⁄ã¡
  *
-	mfûe
+	mc⁄ã¡
 ;
 
-87 
+95 
 Medü
  *
 	maudio
@@ -2851,7 +2895,7 @@ Medü
 	mvideo
 ;
 
-88 } 
+96 } 
 	tSèã
 ;
 
@@ -3149,31 +3193,23 @@ dñè
 
 57 
 	$gë_ma°î_˛ock
-(
-Sèã
- *
-°©e
-)
+()
 
-59  
-	`gë_video_˛ock
-(
-°©e
-->
-video
-);
+60  
+	`gë_exã∫Æ_˛ock
+();
 
-60 
+61 
 	}
 }
 
-62 
+63 
 	$video_ª‰esh_timî
 (*
 ¨g
 )
 
-64 
+65 
 Sèã
  *
 °©e
@@ -3181,13 +3217,13 @@ Sèã
 ¨g
 ;
 
-65 
+66 
 VideoFøme
  *
 vf
 ;
 
-66 
+67 
 a˘uÆ_dñay
 , 
 dñay
@@ -3199,7 +3235,7 @@ sync_thªshﬁd
 diff
 ;
 
-67 if(
+68 if(
 °©e
 ->
 video
@@ -3207,7 +3243,7 @@ video
 °ªam
 ) {
 
-68 if(
+69 if(
 °©e
 ->
 video
@@ -3215,19 +3251,17 @@ video
 ‰ame_buf_size
  == 0) {
 
-69 
+70 
 	`scheduÀ_ª‰esh
 (
 °©e
 , 1);
 
-70 
-	`Ârötf
-(
-°dîr
-, "enter A : delay 1 ms\n");
+71 
+	`LOGW
+("delay : 1");
 
-72 
+73 
 vf
  = &
 °©e
@@ -3239,7 +3273,7 @@ video
 ‰ame_ödex
 ];
 
-73 
+74 
 °©e
 ->
 video
@@ -3251,7 +3285,7 @@ vf
 ±s
 ;
 
-74 
+75 
 °©e
 ->
 video
@@ -3261,7 +3295,7 @@ video_cuºít_±s_time
 	`av_gëtime
 ();
 
-75 
+76 
 dñay
  = 
 vf
@@ -3275,11 +3309,11 @@ video
 ‰ame_œ°_±s
 ;
 
-76 if(
+77 if(
 dñay
  <= 0 || delay >= 1.0) {
 
-77 
+78 
 dñay
  = 
 °©e
@@ -3287,19 +3321,19 @@ dñay
 video
 ->
 ‰ame_œ°_dñay
-;
-
-79 
-°©e
-->
-video
-->
-‰ame_œ°_dñay
- = 
-dñay
 ;
 
 80 
+°©e
+->
+video
+->
+‰ame_œ°_dñay
+ = 
+dñay
+;
+
+81 
 °©e
 ->
 video
@@ -3311,7 +3345,7 @@ vf
 ±s
 ;
 
-81 if(
+82 if(
 °©e
 ->
 audio
@@ -3319,7 +3353,7 @@ audio
 °ªam
 ) {
 
-82 
+83 
 ªf_˛k
  = 
 	`gë_audio_˛ock
@@ -3329,7 +3363,7 @@ audio
 audio
 );
 
-83 
+84 
 diff
  = 
 vf
@@ -3339,7 +3373,7 @@ vf
 ªf_˛k
 ;
 
-84 
+85 
 sync_thªshﬁd
  = (
 dñay
@@ -3347,7 +3381,7 @@ dñay
 AV_SYNC_THRESHOLD
 ) ? delay : AV_SYNC_THRESHOLD;
 
-85 if(
+86 if(
 	`Ábs
 (
 diff
@@ -3355,27 +3389,27 @@ diff
 AV_NOSYNC_THRESHOLD
 ) {
 
-86 if(
+87 if(
 diff
  <-
 sync_thªshﬁd
 ) {
 
-87 
+88 
 dñay
  = 0;
 
-88 } if(
+89 } if(
 diff
  > 
 sync_thªshﬁd
 ) {
 
-89 
+90 
 dñay
  = 2 * delay;
 
-93 
+94 
 °©e
 ->
 video
@@ -3385,7 +3419,7 @@ video
 dñay
 ;
 
-94 
+95 
 a˘uÆ_dñay
  = 
 °©e
@@ -3397,31 +3431,29 @@ video
 	`av_gëtime
 () / 1000000.0);
 
-95 if(
+102 if(
 a˘uÆ_dñay
  < 0.010) {
 
-96 
+103 
 a˘uÆ_dñay
  = 0.010;
 
-98 
+105 
+	`LOGW
+("%†: %d", "dñay", ()(
+a˘uÆ_dñay
+ * 1000 + 0.5));
+
+106 
 	`scheduÀ_ª‰esh
 (
 °©e
 , ()(
 a˘uÆ_dñay
- * 50 + 0.5));
+ * 1000 + 0.5));
 
-99 
-	`Ârötf
-(
-°dîr
-, "íã∏B : dñay %d ms\n", ()(
-a˘uÆ_dñay
- * 50 + 0.5));
-
-100 
+107 
 	`∂ay_video
 (
 °©e
@@ -3429,7 +3461,7 @@ a˘uÆ_dñay
 video
 );
 
-101 if(++
+108 if(++
 °©e
 ->
 video
@@ -3439,7 +3471,7 @@ video
 VIDEO_FRAME_QUEUE_SIZE
 ) {
 
-102 
+109 
 °©e
 ->
 video
@@ -3447,7 +3479,7 @@ video
 ‰ame_ödex
  = 0;
 
-104 
+111 
 	`SDL_LockMuãx
 (
 °©e
@@ -3457,7 +3489,7 @@ video
 ‰ame_buf_muãx
 );
 
-105 
+112 
 °©e
 ->
 video
@@ -3465,7 +3497,7 @@ video
 ‰ame_buf_size
 --;
 
-106 
+113 
 	`SDL_C⁄dSig«l
 (
 °©e
@@ -3475,7 +3507,7 @@ video
 ‰ame_buf_c⁄d
 );
 
-107 
+114 
 	`SDL_U∆ockMuãx
 (
 °©e
@@ -3485,19 +3517,297 @@ video
 ‰ame_buf_muãx
 );
 
-110 
+117 
 	`scheduÀ_ª‰esh
 (
 °©e
 , 100);
 
-111 
-	`Ârötf
-(
-°dîr
-, "enter C : delay 100 ms\n");
+120 
+	}
+}
 
-114 
+123 
+	$sync_audio
+(
+Medü
+ *
+audio
+, *
+ßm∂es
+, 
+ßm∂es_size
+, 
+±s
+)
+
+125 
+n
+;
+
+126 
+ªf_˛k
+;
+
+127 
+n
+ = 2 * 
+audio
+->
+°ªam
+->
+codec
+->
+ch™√ls
+;
+
+128 
+diff
+, 
+avg_diff
+;
+
+129 
+w™ãd_size
+, 
+mö_size
+, 
+max_size
+, 
+nb_ßm∂es
+;
+
+130 
+ªf_˛k
+ = 
+	`gë_ma°î_˛ock
+();
+
+131 
+diff
+ = 
+	`gë_audio_˛ock
+(
+audio
+Ë- 
+ªf_˛k
+;
+
+132 if(
+diff
+ < 
+AV_NOSYNC_THRESHOLD
+) {
+
+133 
+audio
+->
+audio_diff_cum
+ = 
+diff
+ +áudio->
+audio_diff_avg_c€f
+ *áudio->audio_diff_cum;
+
+134 if(
+audio
+->
+audio_diff_avg_cou¡
+ < 
+AUDIO_DIFF_AVG_NB
+) {
+
+135 
+audio
+->
+audio_diff_avg_cou¡
+++;
+
+137 
+avg_diff
+ = 
+audio
+->
+audio_diff_cum
+ * (1.0 -áudio->
+audio_diff_avg_c€f
+);
+
+138 if(
+	`Ábs
+(
+avg_diff
+Ë>
+audio
+->
+audio_diff_thªshﬁd
+) {
+
+139 
+w™ãd_size
+ = 
+ßm∂es_size
+ + (()(
+diff
+ * 
+audio
+->
+°ªam
+->
+codec
+->
+ßm∂e_øã
+Ë* 
+n
+);
+
+140 
+mö_size
+ = 
+ßm∂es_size
+ * ((100 - 
+SAMPLE_CORRECTION_PERCENT_MAX
+) / 100);
+
+141 
+max_size
+ = 
+ßm∂es_size
+ * ((100 + 
+SAMPLE_CORRECTION_PERCENT_MAX
+) / 100);
+
+142 if(
+w™ãd_size
+ < 
+mö_size
+) {
+
+143 
+w™ãd_size
+ = 
+mö_size
+;
+
+144 } i‡(
+w™ãd_size
+ > 
+max_size
+) {
+
+145 
+w™ãd_size
+ = 
+max_size
+;
+
+147 if(
+w™ãd_size
+ < 
+ßm∂es_size
+) {
+
+149 
+ßm∂es_size
+ = 
+w™ãd_size
+;
+
+150 } if(
+w™ãd_size
+ > 
+ßm∂es_size
+) {
+
+151 
+uöt8_t
+ *
+ßm∂es_íd
+, *
+q
+;
+
+152 
+nb
+;
+
+153 
+nb
+ = (
+ßm∂es_size
+ - 
+w™ãd_size
+);
+
+154 
+ßm∂es_íd
+ = (
+uöt8_t
+ *)
+ßm∂es
+ + 
+ßm∂es_size
+ - 
+n
+;
+
+155 
+q
+ = 
+ßm∂es_íd
+ + 
+n
+;
+
+156 
+nb
+ > 0) {
+
+157 
+	`mem˝y
+(
+q
+, 
+ßm∂es_íd
+, 
+n
+);
+
+158 
+q
+ +
+n
+;
+
+159 
+nb
+ -
+n
+;
+
+161 
+ßm∂es_size
+ = 
+w™ãd_size
+;
+
+167 
+audio
+->
+audio_diff_avg_cou¡
+ = 0;
+
+168 
+audio
+->
+audio_diff_cum
+ = 0;
+
+170  
+ßm∂es_size
+;
+
+171 
 	}
 }
 
@@ -3553,7 +3863,19 @@ SDL_USEREVENT
 
 	)
 
-12 
+10 
+	#AUDIO_DIFF_AVG_NB
+ 20
+
+	)
+
+11 
+	#SAMPLE_CORRECTION_PERCENT_MAX
+ 10
+
+	)
+
+13 
 sync_video
 (
 Medü
@@ -3567,7 +3889,7 @@ AVFøme
 ±s
 );
 
-13 
+14 
 Uöt32
  
 sdl_ª‰esh_timî_cb
@@ -3577,7 +3899,7 @@ sdl_ª‰esh_timî_cb
 ›aque
 );
 
-14 
+15 
 scheduÀ_ª‰esh
 (
 Sèã
@@ -3587,7 +3909,7 @@ Sèã
 dñay
 );
 
-15 
+16 
 gë_audio_˛ock
 (
 Medü
@@ -3595,7 +3917,7 @@ Medü
 audio
 );
 
-16 
+17 
 gë_video_˛ock
 (
 Medü
@@ -3603,14 +3925,28 @@ Medü
 video
 );
 
-17 
+18 
 gë_exã∫Æ_˛ock
 ();
 
-18 
+19 
 video_ª‰esh_timî
 (*
 ¨g
+);
+
+20 
+sync_audio
+(
+Medü
+ *
+audio
+, *
+ßm∂es
+, 
+ßm∂es_size
+, 
+±s
 );
 
 	@utility.h
@@ -3658,6 +3994,10 @@ UTILITY_H
 )
 
 7 
+	`LOGI
+("created decodeÅhread");
+
+8 
 Medü
  *
 video
@@ -3665,27 +4005,27 @@ video
 ¨g
 ;
 
-8 
+9 
 AVFøme
  *
 pFøme
 ;
 
-9 
+10 
 ‰ameFöished
 ;
 
-10 
+11 
 ±s
 ;
 
-11 
+12 
 AVPackë
  
 ∑ckë
 ;
 
-12 
+13 
 AVPackë
  *
 pkt
@@ -3693,17 +4033,17 @@ pkt
 ∑ckë
 ;
 
-13 
+14 
 pFøme
  = 
 	`avcodec_Æloc_‰ame
 ();
 
-14 
+15 
 åue
 ) {
 
-15 if(
+16 if(
 	`gë_‰om_queue
 (&
 video
@@ -3713,13 +4053,11 @@ video
 pkt
 ) < 0) {
 
-16 
-	`Ârötf
-(
-°dîr
-, "failÅo get videoÖkt from queue : decode_video\n");
+17 
+	`LOGE
+("%s", "failÅo get videoÖkt from queue : decode_video");
 
-19 if(
+20 if(
 pkt
 ->
 d©a
@@ -3727,7 +4065,7 @@ d©a
 Êush_pkt
 .data) {
 
-20 
+21 
 	`avcodec_Êush_buf„rs
 (
 video
@@ -3737,11 +4075,11 @@ video
 codec
 );
 
-23 
+24 
 ±s
  = 0;
 
-24 
+25 
 globÆ_video_pkt_±s
  = 
 pkt
@@ -3749,7 +4087,7 @@ pkt
 ±s
 ;
 
-25 
+26 
 	`avcodec_decode_video2
 (
 video
@@ -3763,21 +4101,25 @@ pFøme
 ∑ckë
 );
 
-26 if(
+27 if(
 pkt
 ->
 dts
- !
+ =
 AV_NOPTS_VALUE
- && 
+
+
+28 && 
 pFøme
 ->
 ›aque
  && *(
 uöt64_t
- *)pFrame->opaque != AV_NOPTS_VALUE) {
+ *ÌFøme->›aquê!
+AV_NOPTS_VALUE
+) {
 
-27 
+29 
 ±s
  = *(
 uöt64_t
@@ -3787,7 +4129,7 @@ pFøme
 ›aque
 ;
 
-28 } if(
+30 } if(
 pkt
 ->
 dts
@@ -3795,7 +4137,7 @@ dts
 AV_NOPTS_VALUE
 ) {
 
-29 
+31 
 ±s
  = 
 pkt
@@ -3803,11 +4145,11 @@ pkt
 dts
 ;
 
-32 
+33 
 ±s
  = 0;
 
-34 
+35 
 ±s
  *
 	`av_q2d
@@ -3819,11 +4161,11 @@ video
 time_ba£
 );
 
-36 if(
+37 if(
 ‰ameFöished
 ) {
 
-37 
+38 
 ±s
  = 
 	`sync_video
@@ -3833,7 +4175,7 @@ video
 pFøme
 ,Öts);
 
-38 if(
+39 if(
 	`video_‰ame_c⁄vît
 (
 video
@@ -3849,17 +4191,17 @@ pFøme
 pkt
 );
 
-43 
+44 
 	`av_‰ì
 (
 pFøme
 );
 
-45 
+46 
 	}
 }
 
-48 
+49 
 	$video_‰ame_c⁄vît
 (
 Medü
@@ -3873,29 +4215,29 @@ pFøme
 ±s
 )
 
-50 
+51 
 AVPi˘uª
  
 pi˘
 ;
 
-51 
+52 
 d°PixFmt
 ;
 
-52 
+53 
 SwsC⁄ãxt
  *
 imgC⁄vîtCtx
 ;
 
-53 
+54 
 VideoFøme
  *
 vf
 ;
 
-55 
+56 
 	`SDL_LockMuãx
 (
 video
@@ -3903,7 +4245,7 @@ video
 ‰ame_buf_muãx
 );
 
-56 
+57 
 video
 ->
 ‰ame_buf_size
@@ -3911,7 +4253,7 @@ video
 VIDEO_FRAME_QUEUE_SIZE
 ) {
 
-57 
+58 
 	`SDL_C⁄dWaô
 (
 video
@@ -3921,7 +4263,7 @@ video
 ‰ame_buf_muãx
 );
 
-59 
+60 
 	`SDL_U∆ockMuãx
 (
 video
@@ -3929,23 +4271,121 @@ video
 ‰ame_buf_muãx
 );
 
-61 
+62 
 vf
  = &
 video
 ->
 ‰ame_buf
 [video->
-‰ame_ödex
+ödex
 ];
 
-62 if(
+64 if(!
+vf
+->
+bmp
+ ||
+
+65 
+vf
+->
+width
+ !
+video
+->
+°ªam
+->
+codec
+->width ||
+
+66 
+vf
+->
+height
+ !
+video
+->
+°ªam
+->
+codec
+->height) {
+
+67 
+SDL_Evít
+ 
+evít
+;
+
+68 
+vf
+->
+Æloˇãd
+ = 0;
+
+70 
+evít
+.
+ty≥
+ = 
+FF_ALLOC_EVENT
+;
+
+71 
+evít
+.
+u£r
+.
+d©a1
+ = 
+video
+;
+
+72 
+	`SDL_PushEvít
+(&
+evít
+);
+
+75 
+	`SDL_LockMuãx
+(
+video
+->
+‰ame_buf_muãx
+);
+
+76 !
+vf
+->
+Æloˇãd
+) {
+
+77 
+	`SDL_C⁄dWaô
+(
+video
+->
+‰ame_buf_c⁄d
+, video->
+‰ame_buf_muãx
+);
+
+79 
+	`SDL_U∆ockMuãx
+(
+video
+->
+‰ame_buf_muãx
+);
+
+82 if(
 vf
 ->
 bmp
 ) {
 
-63 
+83 
 	`SDL_LockYUVOvîœy
 (
 vf
@@ -3953,13 +4393,13 @@ vf
 bmp
 );
 
-64 
+84 
 d°PixFmt
  = 
 PIX_FMT_YUV420P
 ;
 
-65 
+85 
 pi˘
 .
 d©a
@@ -3971,7 +4411,7 @@ bmp
 pixñs
 [0];
 
-66 
+86 
 pi˘
 .
 d©a
@@ -3983,7 +4423,7 @@ bmp
 pixñs
 [2];
 
-67 
+87 
 pi˘
 .
 d©a
@@ -3995,7 +4435,7 @@ bmp
 pixñs
 [1];
 
-69 
+89 
 pi˘
 .
 löesize
@@ -4007,7 +4447,7 @@ bmp
 pôches
 [0];
 
-70 
+90 
 pi˘
 .
 löesize
@@ -4019,7 +4459,7 @@ bmp
 pôches
 [2];
 
-71 
+91 
 pi˘
 .
 löesize
@@ -4031,13 +4471,13 @@ bmp
 pôches
 [1];
 
-73 if(
+93 if(
 imgC⁄vîtCtx
  =
 NULL
 ) {
 
-74 
+94 
 w
  = 
 video
@@ -4049,7 +4489,7 @@ codec
 width
 ;
 
-75 
+95 
 h
  = 
 video
@@ -4061,7 +4501,7 @@ codec
 height
 ;
 
-76 
+96 
 imgC⁄vîtCtx
  = 
 	`sws_gëC⁄ãxt
@@ -4077,31 +4517,31 @@ video
 codec
 ->
 pix_fmt
-, w, h, 
+,
+
+97 800, 480, 
 d°PixFmt
 , 
-SWS_BICUBIC
+SWS_FAST_BILINEAR
 , 
 NULL
 , NULL, NULL);
 
-77 if(
+98 if(
 imgC⁄vîtCtx
  =
 NULL
 ) {
 
-78 
-	`Ârötf
-(
-°dîr
-, "failÅo initÅhe conversion context : video_frame_queue\n");
+99 
+	`LOGE
+("failÅo initÅhe conversion context : video_frame_queue");
 
-79 
+100 
 	`exô
 (-1);
 
-82 
+103 
 	`sws_sˇÀ
 (
 imgC⁄vîtCtx
@@ -4123,7 +4563,7 @@ height
 pi˘
 .data,Öict.linesize);
 
-83 
+105 
 	`SDL_U∆ockYUVOvîœy
 (
 vf
@@ -4131,13 +4571,27 @@ vf
 bmp
 );
 
-84 
+106 
 vf
 ->
 ±s
  =Öts;
 
-86 
+108 if(++
+video
+->
+ödex
+ =
+VIDEO_FRAME_QUEUE_SIZE
+) {
+
+109 
+video
+->
+ödex
+ = 0;
+
+111 
 	`SDL_LockMuãx
 (
 video
@@ -4145,13 +4599,13 @@ video
 ‰ame_buf_muãx
 );
 
-87 
+112 
 video
 ->
 ‰ame_buf_size
 ++;
 
-88 
+113 
 	`SDL_U∆ockMuãx
 (
 video
@@ -4159,11 +4613,99 @@ video
 ‰ame_buf_muãx
 );
 
-91 
+116 
 	}
 }
 
-94 
+119 
+	$our_gë_buf„r
+(
+AVCodecC⁄ãxt
+ *
+codec_˘x
+, 
+AVFøme
+ *
+‰ame
+)
+
+121 
+ªt
+ = 
+	`avcodec_deÁu…_gë_buf„r
+(
+codec_˘x
+, 
+‰ame
+);
+
+122 
+uöt64_t
+ *
+±s
+ = 
+	`av_mÆloc
+((uint64_t));
+
+123 *
+±s
+ = 
+globÆ_video_pkt_±s
+;
+
+124 
+‰ame
+->
+›aque
+ = 
+±s
+;
+
+125  
+ªt
+;
+
+126 
+	}
+}
+
+128 
+	$our_ªÀa£_buf„r
+(
+AVCodecC⁄ãxt
+ *
+codec_˘x
+, 
+AVFøme
+ *
+‰ame
+)
+
+130 if(
+‰ame
+)
+
+131 
+	`av_‰ìp
+(&
+‰ame
+->
+›aque
+);
+
+132 
+	`avcodec_deÁu…_ªÀa£_buf„r
+(
+codec_˘x
+, 
+‰ame
+);
+
+133 
+	}
+}
+
+136 
 	$öô_video
 (
 Medü
@@ -4171,7 +4713,7 @@ Medü
 video
 )
 
-96 
+138 
 	`mem£t
 (
 video
@@ -4179,13 +4721,13 @@ video
 Medü
 ));
 
-97 
+139 
 globÆ_video_pkt_±s
  = 
 AV_NOPTS_VALUE
 ;
 
-98 
+140 
 video
 ->
 medü_ty≥
@@ -4193,7 +4735,7 @@ medü_ty≥
 VIDEO
 ;
 
-99 
+141 
 video
 ->
 ‰ame_timî
@@ -4201,13 +4743,13 @@ video
 	`av_gëtime
 () / 1000000.0;
 
-100 
+142 
 video
 ->
 ‰ame_œ°_dñay
  = 40e-3;
 
-101 
+143 
 video
 ->
 föd_°ªam
@@ -4215,7 +4757,7 @@ föd_°ªam
 föd_av_°ªams
 ;
 
-102 
+144 
 video
 ->
 föd_codec
@@ -4223,7 +4765,7 @@ föd_codec
 föd_decodî
 ;
 
-103 
+145 
 video
 ->
 ‰ame_buf_muãx
@@ -4231,7 +4773,7 @@ video
 	`SDL_Cª©eMuãx
 ();
 
-104 
+146 
 video
 ->
 ‰ame_buf_c⁄d
@@ -4239,7 +4781,7 @@ video
 	`SDL_Cª©eC⁄d
 ();
 
-105 
+147 
 video
 ->
 ∂ay_c⁄d
@@ -4247,7 +4789,7 @@ video
 	`SDL_Cª©eC⁄d
 ();
 
-106 
+148 
 video
 ->
 ∂ay_muãx
@@ -4255,13 +4797,13 @@ video
 	`SDL_Cª©eMuãx
 ();
 
-107 
+149 
 video
 ->
 ‰ame_œ°_dñay
  = 40e-3;
 
-108 
+150 
 video
 ->
 video_cuºít_±s_time
@@ -4269,7 +4811,7 @@ video_cuºít_±s_time
 	`av_gëtime
 ();
 
-109 
+151 
 video
 ->
 ‰ame_timî
@@ -4277,7 +4819,7 @@ video
 	`av_gëtime
 () / 1000000.0;
 
-110 
+152 
 video
 ->
 ∂ay
@@ -4285,7 +4827,7 @@ video
 ∂ay_video
 ;
 
-111 
+153 
 video
 ->
 gë_öfo
@@ -4293,7 +4835,7 @@ gë_öfo
 gë_av_öfo
 ;
 
-112 
+154 
 	}
 }
 
@@ -4384,6 +4926,850 @@ Medü
  *
 video
 );
+
+	@/usr/include/fcntl.h
+
+24 #i‚def 
+_FCNTL_H
+
+
+25 
+	#_FCNTL_H
+ 1
+
+	)
+
+27 
+	~<„©uªs.h
+>
+
+30 
+	g__BEGIN_DECLS
+
+
+34 
+	~<bôs/f˙é.h
+>
+
+37 #i‡
+deföed
+ 
+__USE_XOPEN
+ || deföed 
+__USE_XOPEN2K8
+
+
+38 
+	~<bôs/ty≥s.h
+>
+
+39 
+	#__√ed_time•ec
+
+
+	)
+
+40 
+	~<time.h
+>
+
+41 
+	~<bôs/°©.h
+>
+
+43 
+	#S_IFMT
+ 
+__S_IFMT
+
+
+	)
+
+44 
+	#S_IFDIR
+ 
+__S_IFDIR
+
+
+	)
+
+45 
+	#S_IFCHR
+ 
+__S_IFCHR
+
+
+	)
+
+46 
+	#S_IFBLK
+ 
+__S_IFBLK
+
+
+	)
+
+47 
+	#S_IFREG
+ 
+__S_IFREG
+
+
+	)
+
+48 #ifde‡
+__S_IFIFO
+
+
+49 
+	#S_IFIFO
+ 
+__S_IFIFO
+
+
+	)
+
+51 #ifde‡
+__S_IFLNK
+
+
+52 
+	#S_IFLNK
+ 
+__S_IFLNK
+
+
+	)
+
+54 #i‡(
+deföed
+ 
+__USE_UNIX98
+ || deföed 
+__USE_XOPEN2K8
+Ë&& deföed 
+__S_IFSOCK
+
+
+55 
+	#S_IFSOCK
+ 
+__S_IFSOCK
+
+
+	)
+
+60 
+	#S_ISUID
+ 
+__S_ISUID
+
+
+	)
+
+61 
+	#S_ISGID
+ 
+__S_ISGID
+
+
+	)
+
+63 #i‡
+deföed
+ 
+__USE_BSD
+ || deföed 
+__USE_MISC
+ || deföed 
+__USE_XOPEN
+
+
+65 
+	#S_ISVTX
+ 
+__S_ISVTX
+
+
+	)
+
+68 
+	#S_IRUSR
+ 
+__S_IREAD
+
+
+	)
+
+69 
+	#S_IWUSR
+ 
+__S_IWRITE
+
+
+	)
+
+70 
+	#S_IXUSR
+ 
+__S_IEXEC
+
+
+	)
+
+72 
+	#S_IRWXU
+ (
+__S_IREAD
+|
+__S_IWRITE
+|
+__S_IEXEC
+)
+
+	)
+
+74 
+	#S_IRGRP
+ (
+S_IRUSR
+ >> 3Ë
+
+	)
+
+75 
+	#S_IWGRP
+ (
+S_IWUSR
+ >> 3Ë
+
+	)
+
+76 
+	#S_IXGRP
+ (
+S_IXUSR
+ >> 3Ë
+
+	)
+
+78 
+	#S_IRWXG
+ (
+S_IRWXU
+ >> 3)
+
+	)
+
+80 
+	#S_IROTH
+ (
+S_IRGRP
+ >> 3Ë
+
+	)
+
+81 
+	#S_IWOTH
+ (
+S_IWGRP
+ >> 3Ë
+
+	)
+
+82 
+	#S_IXOTH
+ (
+S_IXGRP
+ >> 3Ë
+
+	)
+
+84 
+	#S_IRWXO
+ (
+S_IRWXG
+ >> 3)
+
+	)
+
+87 #ifdef 
+__USE_MISC
+
+
+88 #i‚de‡
+R_OK
+
+
+91 
+	#R_OK
+ 4
+
+	)
+
+92 
+	#W_OK
+ 2
+
+	)
+
+93 
+	#X_OK
+ 1
+
+	)
+
+94 
+	#F_OK
+ 0
+
+	)
+
+99 #i‡
+deföed
+ 
+__USE_XOPEN
+ || deföed 
+__USE_XOPEN2K8
+
+
+100 
+	#SEEK_SET
+ 0
+
+	)
+
+101 
+	#SEEK_CUR
+ 1
+
+	)
+
+102 
+	#SEEK_END
+ 2
+
+	)
+
+105 #ifde‡
+__USE_ATFILE
+
+
+106 
+	#AT_FDCWD
+ -100
+
+	)
+
+109 
+	#AT_SYMLINK_NOFOLLOW
+ 0x100
+
+	)
+
+110 
+	#AT_REMOVEDIR
+ 0x200
+
+	)
+
+112 
+	#AT_SYMLINK_FOLLOW
+ 0x400
+
+	)
+
+113 
+	#AT_EACCESS
+ 0x200
+
+	)
+
+122 
+f˙é
+ (
+__fd
+, 
+__cmd
+, ...);
+
+130 #i‚de‡
+__USE_FILE_OFFSET64
+
+
+131 
+	$›í
+ (
+__c⁄°
+ *
+__fûe
+, 
+__oÊag
+, ...Ë
+	`__n⁄nuŒ
+ ((1));
+
+133 #ifde‡
+__REDIRECT
+
+
+134 
+	`__REDIRECT
+ (
+›í
+, (
+__c⁄°
+ *
+__fûe
+, 
+__oÊag
+, ...), 
+›í64
+)
+
+135 
+	`__n⁄nuŒ
+ ((1));
+
+137 
+	#›í
+ 
+›í64
+
+
+	)
+
+140 #ifde‡
+__USE_LARGEFILE64
+
+
+141 
+	$›í64
+ (
+__c⁄°
+ *
+__fûe
+, 
+__oÊag
+, ...Ë
+	`__n⁄nuŒ
+ ((1));
+
+144 #ifde‡
+__USE_ATFILE
+
+
+154 #i‚de‡
+__USE_FILE_OFFSET64
+
+
+155 
+	$›í©
+ (
+__fd
+, 
+__c⁄°
+ *
+__fûe
+, 
+__oÊag
+, ...)
+
+156 
+	`__n⁄nuŒ
+ ((2));
+
+158 #ifde‡
+__REDIRECT
+
+
+159 
+	`__REDIRECT
+ (
+›í©
+, (
+__fd
+, 
+__c⁄°
+ *
+__fûe
+, 
+__oÊag
+,
+
+160 ...), 
+›í©64
+Ë
+	`__n⁄nuŒ
+ ((2));
+
+162 
+	#›í©
+ 
+›í©64
+
+
+	)
+
+165 #ifde‡
+__USE_LARGEFILE64
+
+
+166 
+	$›í©64
+ (
+__fd
+, 
+__c⁄°
+ *
+__fûe
+, 
+__oÊag
+, ...)
+
+167 
+	`__n⁄nuŒ
+ ((2));
+
+176 #i‚de‡
+__USE_FILE_OFFSET64
+
+
+177 
+	$¸ót
+ (
+__c⁄°
+ *
+__fûe
+, 
+__mode_t
+ 
+__mode
+Ë
+	`__n⁄nuŒ
+ ((1));
+
+179 #ifde‡
+__REDIRECT
+
+
+180 
+	`__REDIRECT
+ (
+¸ót
+, (
+__c⁄°
+ *
+__fûe
+, 
+__mode_t
+ 
+__mode
+),
+
+181 
+¸ót64
+Ë
+	`__n⁄nuŒ
+ ((1));
+
+183 
+	#¸ót
+ 
+¸ót64
+
+
+	)
+
+186 #ifde‡
+__USE_LARGEFILE64
+
+
+187 
+	$¸ót64
+ (
+__c⁄°
+ *
+__fûe
+, 
+__mode_t
+ 
+__mode
+Ë
+	`__n⁄nuŒ
+ ((1));
+
+190 #i‡!
+deföed
+ 
+F_LOCK
+ && (deföed 
+__USE_MISC
+ || (deföed 
+__USE_XOPEN_EXTENDED
+ \
+
+191 && !
+deföed
+ 
+__USE_POSIX
+))
+
+200 
+	#F_ULOCK
+ 0
+
+	)
+
+201 
+	#F_LOCK
+ 1
+
+	)
+
+202 
+	#F_TLOCK
+ 2
+
+	)
+
+203 
+	#F_TEST
+ 3
+
+	)
+
+205 #i‚de‡
+__USE_FILE_OFFSET64
+
+
+206 
+	`lockf
+ (
+__fd
+, 
+__cmd
+, 
+__off_t
+ 
+__Àn
+);
+
+208 #ifde‡
+__REDIRECT
+
+
+209 
+	`__REDIRECT
+ (
+lockf
+, (
+__fd
+, 
+__cmd
+, 
+__off64_t
+ 
+__Àn
+), 
+lockf64
+);
+
+211 
+	#lockf
+ 
+lockf64
+
+
+	)
+
+214 #ifde‡
+__USE_LARGEFILE64
+
+
+215 
+	`lockf64
+ (
+__fd
+, 
+__cmd
+, 
+__off64_t
+ 
+__Àn
+);
+
+219 #ifde‡
+__USE_XOPEN2K
+
+
+222 #i‚de‡
+__USE_FILE_OFFSET64
+
+
+223 
+	$posix_Ádvi£
+ (
+__fd
+, 
+__off_t
+ 
+__off£t
+, __off_à
+__Àn
+,
+
+224 
+__advi£
+Ë
+__THROW
+;
+
+226 #ifde‡
+__REDIRECT_NTH
+
+
+227 
+	`__REDIRECT_NTH
+ (
+posix_Ádvi£
+, (
+__fd
+, 
+__off64_t
+ 
+__off£t
+,
+
+228 
+__off64_t
+ 
+__Àn
+, 
+__advi£
+),
+
+229 
+posix_Ádvi£64
+);
+
+231 
+	#posix_Ádvi£
+ 
+posix_Ádvi£64
+
+
+	)
+
+234 #ifde‡
+__USE_LARGEFILE64
+
+
+235 
+	$posix_Ádvi£64
+ (
+__fd
+, 
+__off64_t
+ 
+__off£t
+, __off64_à
+__Àn
+,
+
+236 
+__advi£
+Ë
+__THROW
+;
+
+244 #i‚de‡
+__USE_FILE_OFFSET64
+
+
+245 
+	`posix_ÁŒoˇã
+ (
+__fd
+, 
+__off_t
+ 
+__off£t
+, __off_à
+__Àn
+);
+
+247 #ifde‡
+__REDIRECT
+
+
+248 
+	`__REDIRECT
+ (
+posix_ÁŒoˇã
+, (
+__fd
+, 
+__off64_t
+ 
+__off£t
+,
+
+249 
+__off64_t
+ 
+__Àn
+),
+
+250 
+posix_ÁŒoˇã64
+);
+
+252 
+	#posix_ÁŒoˇã
+ 
+posix_ÁŒoˇã64
+
+
+	)
+
+255 #ifde‡
+__USE_LARGEFILE64
+
+
+256 
+	`posix_ÁŒoˇã64
+ (
+__fd
+, 
+__off64_t
+ 
+__off£t
+, __off64_à
+__Àn
+);
+
+262 #i‡
+__USE_FORTIFY_LEVEL
+ > 0 && 
+deföed
+ 
+__exã∫_Æways_ölöe
+ \
+
+263 && 
+deföed
+ 
+__va_¨g_∑ck_Àn
+
+
+264 
+	~<bôs/f˙é2.h
+>
+
+267 
+__END_DECLS
+
 
 	@/usr/include/libavcodec/avcodec.h
 
@@ -19657,6 +21043,1702 @@ __LDBL_COMPAT
 __END_DECLS
 
 
+	@event.h
+
+1 #i‚de‡
+EVENT_H
+
+
+2 
+	#EVENT_H
+
+
+	)
+
+4 
+	#FF_ALLOC_EVENT
+ (
+SDL_USEREVENT
+)
+
+	)
+
+5 
+	#FF_REFRESH_EVENT
+ (
+SDL_USEREVENT
+ + 1)
+
+	)
+
+6 
+	#FF_QUIT_EVENT
+ (
+SDL_USEREVENT
+ + 2)
+
+	)
+
+	@log.h
+
+1 #i‚de‡
+LOG_H
+
+
+2 
+	#LOG_H
+
+
+	)
+
+4 
+	#LOGV
+(
+fmt
+, 
+¨gs
+...Ë
+	`Ârötf
+(
+°dîr
+, "VORBOSE : "fmt" \n", ##¨gs)
+
+	)
+
+5 
+	#LOGW
+(
+fmt
+, 
+¨gs
+...Ë
+	`Ârötf
+(
+°dîr
+, "WARNING : "fmt" \n", ##¨gs)
+
+	)
+
+6 
+	#LOGD
+(
+fmt
+, 
+¨gs
+...Ë
+	`Ârötf
+(
+°dîr
+, "DEBUG : "fmt" \n", ##¨gs)
+
+	)
+
+7 
+	#LOGE
+(
+fmt
+, 
+¨gs
+...Ë
+	`Ârötf
+(
+°dîr
+, "ERROR : "fmt" \n", ##¨gs)
+
+	)
+
+8 
+	#LOGI
+(
+fmt
+, 
+¨gs
+...Ë
+	`Ârötf
+(
+°dîr
+, "INFO : "fmt" \n", ##¨gs)
+
+	)
+
+	@/usr/include/bits/fcntl.h
+
+21 #i‚def 
+_FCNTL_H
+
+
+25 
+	~<sys/ty≥s.h
+>
+
+26 #ifde‡
+__USE_GNU
+
+
+27 
+	~<bôs/uio.h
+>
+
+33 
+	#O_ACCMODE
+ 0003
+
+	)
+
+34 
+	#O_RDONLY
+ 00
+
+	)
+
+35 
+	#O_WRONLY
+ 01
+
+	)
+
+36 
+	#O_RDWR
+ 02
+
+	)
+
+37 
+	#O_CREAT
+ 0100
+
+	)
+
+38 
+	#O_EXCL
+ 0200
+
+	)
+
+39 
+	#O_NOCTTY
+ 0400
+
+	)
+
+40 
+	#O_TRUNC
+ 01000
+
+	)
+
+41 
+	#O_APPEND
+ 02000
+
+	)
+
+42 
+	#O_NONBLOCK
+ 04000
+
+	)
+
+43 
+	#O_NDELAY
+ 
+O_NONBLOCK
+
+
+	)
+
+44 
+	#O_SYNC
+ 04010000
+
+	)
+
+45 
+	#O_FSYNC
+ 
+O_SYNC
+
+
+	)
+
+46 
+	#O_ASYNC
+ 020000
+
+	)
+
+48 #ifde‡
+__USE_XOPEN2K8
+
+
+49 
+	#O_DIRECTORY
+ 0200000
+
+	)
+
+50 
+	#O_NOFOLLOW
+ 0400000
+
+	)
+
+51 
+	#O_CLOEXEC
+ 02000000
+
+	)
+
+53 #ifde‡
+__USE_GNU
+
+
+54 
+	#O_DIRECT
+ 040000
+
+	)
+
+55 
+	#O_NOATIME
+ 01000000
+
+	)
+
+61 #i‡
+deföed
+ 
+__USE_POSIX199309
+ || deföed 
+__USE_UNIX98
+
+
+62 
+	#O_DSYNC
+ 010000
+
+	)
+
+63 
+	#O_RSYNC
+ 
+O_SYNC
+
+
+	)
+
+66 #ifde‡
+__USE_LARGEFILE64
+
+
+67 
+	#O_LARGEFILE
+ 0100000
+
+	)
+
+71 
+	#F_DUPFD
+ 0
+
+	)
+
+72 
+	#F_GETFD
+ 1
+
+	)
+
+73 
+	#F_SETFD
+ 2
+
+	)
+
+74 
+	#F_GETFL
+ 3
+
+	)
+
+75 
+	#F_SETFL
+ 4
+
+	)
+
+76 #i‚de‡
+__USE_FILE_OFFSET64
+
+
+77 
+	#F_GETLK
+ 5
+
+	)
+
+78 
+	#F_SETLK
+ 6
+
+	)
+
+79 
+	#F_SETLKW
+ 7
+
+	)
+
+81 
+	#F_GETLK
+ 
+F_GETLK64
+
+
+	)
+
+82 
+	#F_SETLK
+ 
+F_SETLK64
+
+
+	)
+
+83 
+	#F_SETLKW
+ 
+F_SETLKW64
+
+
+	)
+
+85 
+	#F_GETLK64
+ 12
+
+	)
+
+86 
+	#F_SETLK64
+ 13
+
+	)
+
+87 
+	#F_SETLKW64
+ 14
+
+	)
+
+89 #i‡
+deföed
+ 
+__USE_BSD
+ || deföed 
+__USE_UNIX98
+ || deföed 
+__USE_XOPEN2K8
+
+
+90 
+	#F_SETOWN
+ 8
+
+	)
+
+91 
+	#F_GETOWN
+ 9
+
+	)
+
+94 #ifde‡
+__USE_GNU
+
+
+95 
+	#F_SETSIG
+ 10
+
+	)
+
+96 
+	#F_GETSIG
+ 11
+
+	)
+
+97 
+	#F_SETOWN_EX
+ 15
+
+	)
+
+98 
+	#F_GETOWN_EX
+ 16
+
+	)
+
+101 #ifde‡
+__USE_GNU
+
+
+102 
+	#F_SETLEASE
+ 1024
+
+	)
+
+103 
+	#F_GETLEASE
+ 1025
+
+	)
+
+104 
+	#F_NOTIFY
+ 1026
+
+	)
+
+106 #ifde‡
+__USE_XOPEN2K8
+
+
+107 
+	#F_DUPFD_CLOEXEC
+ 1030
+
+	)
+
+112 
+	#FD_CLOEXEC
+ 1
+
+	)
+
+115 
+	#F_RDLCK
+ 0
+
+	)
+
+116 
+	#F_WRLCK
+ 1
+
+	)
+
+117 
+	#F_UNLCK
+ 2
+
+	)
+
+120 
+	#F_EXLCK
+ 4
+
+	)
+
+121 
+	#F_SHLCK
+ 8
+
+	)
+
+123 #ifde‡
+__USE_BSD
+
+
+125 
+	#LOCK_SH
+ 1
+
+	)
+
+126 
+	#LOCK_EX
+ 2
+
+	)
+
+127 
+	#LOCK_NB
+ 4
+
+	)
+
+129 
+	#LOCK_UN
+ 8
+
+	)
+
+132 #ifde‡
+__USE_GNU
+
+
+133 
+	#LOCK_MAND
+ 32
+
+	)
+
+134 
+	#LOCK_READ
+ 64
+
+	)
+
+135 
+	#LOCK_WRITE
+ 128
+
+	)
+
+136 
+	#LOCK_RW
+ 192
+
+	)
+
+139 #ifde‡
+__USE_GNU
+
+
+141 
+	#DN_ACCESS
+ 0x00000001
+
+	)
+
+142 
+	#DN_MODIFY
+ 0x00000002
+
+	)
+
+143 
+	#DN_CREATE
+ 0x00000004
+
+	)
+
+144 
+	#DN_DELETE
+ 0x00000008
+
+	)
+
+145 
+	#DN_RENAME
+ 0x00000010
+
+	)
+
+146 
+	#DN_ATTRIB
+ 0x00000020
+
+	)
+
+147 
+	#DN_MULTISHOT
+ 0x80000000
+
+	)
+
+150 
+	sÊock
+
+
+152 
+	ml_ty≥
+;
+
+153 
+	ml_whí˚
+;
+
+154 #i‚de‡
+__USE_FILE_OFFSET64
+
+
+155 
+__off_t
+ 
+	ml_°¨t
+;
+
+156 
+__off_t
+ 
+	ml_Àn
+;
+
+158 
+__off64_t
+ 
+	ml_°¨t
+;
+
+159 
+__off64_t
+ 
+	ml_Àn
+;
+
+161 
+__pid_t
+ 
+	ml_pid
+;
+
+164 #ifde‡
+__USE_LARGEFILE64
+
+
+165 
+	sÊock64
+
+
+167 
+	ml_ty≥
+;
+
+168 
+	ml_whí˚
+;
+
+169 
+__off64_t
+ 
+	ml_°¨t
+;
+
+170 
+__off64_t
+ 
+	ml_Àn
+;
+
+171 
+__pid_t
+ 
+	ml_pid
+;
+
+175 #ifde‡
+__USE_GNU
+
+
+177 
+	e__pid_ty≥
+
+
+179 
+	mF_OWNER_TID
+ = 0,
+
+180 
+	mF_OWNER_PID
+,
+
+181 
+	mF_OWNER_PGRP
+,
+
+182 
+	mF_OWNER_GID
+ = 
+F_OWNER_PGRP
+
+
+186 
+	sf_ow√r_ex
+
+
+188 
+__pid_ty≥
+ 
+	mty≥
+;
+
+189 
+__pid_t
+ 
+	mpid
+;
+
+195 #ifdef 
+__USE_BSD
+
+
+196 
+	#FAPPEND
+ 
+O_APPEND
+
+
+	)
+
+197 
+	#FFSYNC
+ 
+O_FSYNC
+
+
+	)
+
+198 
+	#FASYNC
+ 
+O_ASYNC
+
+
+	)
+
+199 
+	#FNONBLOCK
+ 
+O_NONBLOCK
+
+
+	)
+
+200 
+	#FNDELAY
+ 
+O_NDELAY
+
+
+	)
+
+204 #ifde‡
+__USE_XOPEN2K
+
+
+205 
+	#POSIX_FADV_NORMAL
+ 0
+
+	)
+
+206 
+	#POSIX_FADV_RANDOM
+ 1
+
+	)
+
+207 
+	#POSIX_FADV_SEQUENTIAL
+ 2
+
+	)
+
+208 
+	#POSIX_FADV_WILLNEED
+ 3
+
+	)
+
+209 
+	#POSIX_FADV_DONTNEED
+ 4
+
+	)
+
+210 
+	#POSIX_FADV_NOREUSE
+ 5
+
+	)
+
+214 #ifde‡
+__USE_GNU
+
+
+216 
+	#SYNC_FILE_RANGE_WAIT_BEFORE
+ 1
+
+	)
+
+219 
+	#SYNC_FILE_RANGE_WRITE
+ 2
+
+	)
+
+222 
+	#SYNC_FILE_RANGE_WAIT_AFTER
+ 4
+
+	)
+
+227 
+	#SPLICE_F_MOVE
+ 1
+
+	)
+
+228 
+	#SPLICE_F_NONBLOCK
+ 2
+
+	)
+
+231 
+	#SPLICE_F_MORE
+ 4
+
+	)
+
+232 
+	#SPLICE_F_GIFT
+ 8
+
+	)
+
+235 
+	g__BEGIN_DECLS
+
+
+237 #ifde‡
+__USE_GNU
+
+
+240 
+ssize_t
+ 
+	$ªadahód
+ (
+__fd
+, 
+__off64_t
+ 
+__off£t
+, 
+size_t
+ 
+__cou¡
+)
+
+241 
+__THROW
+;
+
+245 
+	`sync_fûe_ønge
+ (
+__fd
+, 
+__off64_t
+ 
+__off£t
+, __off64_à
+__cou¡
+,
+
+246 
+__Êags
+);
+
+250 
+ssize_t
+ 
+	`vm•li˚
+ (
+__fdout
+, c⁄° 
+iovec
+ *
+__iov
+,
+
+251 
+size_t
+ 
+__cou¡
+, 
+__Êags
+);
+
+254 
+ssize_t
+ 
+	`•li˚
+ (
+__fdö
+, 
+__off64_t
+ *
+__offö
+, 
+__fdout
+,
+
+255 
+__off64_t
+ *
+__offout
+, 
+size_t
+ 
+__Àn
+,
+
+256 
+__Êags
+);
+
+259 
+ssize_t
+ 
+	`ãe
+ (
+__fdö
+, 
+__fdout
+, 
+size_t
+ 
+__Àn
+,
+
+260 
+__Êags
+);
+
+263 #i‚de‡
+__USE_FILE_OFFSET64
+
+
+264 
+	`ÁŒoˇã
+ (
+__fd
+, 
+__mode
+, 
+__off_t
+ 
+__off£t
+, __off_à
+__Àn
+);
+
+266 #ifde‡
+__REDIRECT
+
+
+267 
+	`__REDIRECT
+ (
+ÁŒoˇã
+, (
+__fd
+, 
+__mode
+, 
+__off64_t
+ 
+__off£t
+,
+
+268 
+__off64_t
+ 
+__Àn
+),
+
+269 
+ÁŒoˇã64
+);
+
+271 
+	#ÁŒoˇã
+ 
+ÁŒoˇã64
+
+
+	)
+
+274 #ifde‡
+__USE_LARGEFILE64
+
+
+275 
+	`ÁŒoˇã64
+ (
+__fd
+, 
+__mode
+, 
+__off64_t
+ 
+__off£t
+,
+
+276 
+__off64_t
+ 
+__Àn
+);
+
+281 
+__END_DECLS
+
+
+	@/usr/include/bits/fcntl2.h
+
+20 #i‚def 
+_FCNTL_H
+
+
+26 #i‚de‡
+__USE_FILE_OFFSET64
+
+
+27 
+	$__›í_2
+ (
+__c⁄°
+ *
+__∑th
+, 
+__oÊag
+Ë
+	`__n⁄nuŒ
+ ((1));
+
+28 
+	`__REDIRECT
+ (
+__›í_Æüs
+, (
+__c⁄°
+ *
+__∑th
+, 
+__oÊag
+, ...),
+
+29 
+›í
+Ë
+	`__n⁄nuŒ
+ ((1));
+
+31 
+	`__REDIRECT
+ (
+__›í_2
+, (
+__c⁄°
+ *
+__∑th
+, 
+__oÊag
+),
+
+32 
+__›í64_2
+Ë
+	`__n⁄nuŒ
+ ((1));
+
+33 
+	`__REDIRECT
+ (
+__›í_Æüs
+, (
+__c⁄°
+ *
+__∑th
+, 
+__oÊag
+, ...),
+
+34 
+›í64
+Ë
+	`__n⁄nuŒ
+ ((1));
+
+36 
+	`__îr‹de˛
+ (
+__›í_too_m™y_¨gs
+,
+
+38 
+	`__îr‹de˛
+ (
+__›í_missög_mode
+,
+
+41 
+__exã∫_Æways_ölöe
+ 
+
+42 
+	$›í
+ (
+__c⁄°
+ *
+__∑th
+, 
+__oÊag
+, ...)
+
+44 i‡(
+	`__va_¨g_∑ck_Àn
+ () > 1)
+
+45 
+	`__›í_too_m™y_¨gs
+ ();
+
+47 i‡(
+	`__buûtö_c⁄°™t_p
+ (
+__oÊag
+))
+
+49 i‡((
+__oÊag
+ & 
+O_CREAT
+Ë!0 && 
+	`__va_¨g_∑ck_Àn
+ () < 1)
+
+51 
+	`__›í_missög_mode
+ ();
+
+52  
+	`__›í_2
+ (
+__∑th
+, 
+__oÊag
+);
+
+54  
+	`__›í_Æüs
+ (
+__∑th
+, 
+__oÊag
+, 
+	`__va_¨g_∑ck
+ ());
+
+57 i‡(
+	`__va_¨g_∑ck_Àn
+ () < 1)
+
+58  
+	`__›í_2
+ (
+__∑th
+, 
+__oÊag
+);
+
+60  
+	`__›í_Æüs
+ (
+__∑th
+, 
+__oÊag
+, 
+	`__va_¨g_∑ck
+ ());
+
+61 
+	}
+}
+
+64 #ifde‡
+__USE_LARGEFILE64
+
+
+65 
+	$__›í64_2
+ (
+__c⁄°
+ *
+__∑th
+, 
+__oÊag
+Ë
+	`__n⁄nuŒ
+ ((1));
+
+66 
+	`__REDIRECT
+ (
+__›í64_Æüs
+, (
+__c⁄°
+ *
+__∑th
+, 
+__oÊag
+,
+
+67 ...), 
+›í64
+Ë
+	`__n⁄nuŒ
+ ((1));
+
+68 
+	`__îr‹de˛
+ (
+__›í64_too_m™y_¨gs
+,
+
+70 
+	`__îr‹de˛
+ (
+__›í64_missög_mode
+,
+
+73 
+__exã∫_Æways_ölöe
+ 
+
+74 
+	$›í64
+ (
+__c⁄°
+ *
+__∑th
+, 
+__oÊag
+, ...)
+
+76 i‡(
+	`__va_¨g_∑ck_Àn
+ () > 1)
+
+77 
+	`__›í64_too_m™y_¨gs
+ ();
+
+79 i‡(
+	`__buûtö_c⁄°™t_p
+ (
+__oÊag
+))
+
+81 i‡((
+__oÊag
+ & 
+O_CREAT
+Ë!0 && 
+	`__va_¨g_∑ck_Àn
+ () < 1)
+
+83 
+	`__›í64_missög_mode
+ ();
+
+84  
+	`__›í64_2
+ (
+__∑th
+, 
+__oÊag
+);
+
+86  
+	`__›í64_Æüs
+ (
+__∑th
+, 
+__oÊag
+, 
+	`__va_¨g_∑ck
+ ());
+
+89 i‡(
+	`__va_¨g_∑ck_Àn
+ () < 1)
+
+90  
+	`__›í64_2
+ (
+__∑th
+, 
+__oÊag
+);
+
+92  
+	`__›í64_Æüs
+ (
+__∑th
+, 
+__oÊag
+, 
+	`__va_¨g_∑ck
+ ());
+
+93 
+	}
+}
+
+97 #ifde‡
+__USE_ATFILE
+
+
+98 #i‚de‡
+__USE_FILE_OFFSET64
+
+
+99 
+	$__›í©_2
+ (
+__fd
+, 
+__c⁄°
+ *
+__∑th
+, 
+__oÊag
+)
+
+100 
+	`__n⁄nuŒ
+ ((2));
+
+101 
+	`__REDIRECT
+ (
+__›í©_Æüs
+, (
+__fd
+, 
+__c⁄°
+ *
+__∑th
+,
+
+102 
+__oÊag
+, ...), 
+›í©
+)
+
+103 
+	`__n⁄nuŒ
+ ((2));
+
+105 
+	`__REDIRECT
+ (
+__›í©_2
+, (
+__fd
+, 
+__c⁄°
+ *
+__∑th
+,
+
+106 
+__oÊag
+), 
+__›í©64_2
+)
+
+107 
+	`__n⁄nuŒ
+ ((2));
+
+108 
+	`__REDIRECT
+ (
+__›í©_Æüs
+, (
+__fd
+, 
+__c⁄°
+ *
+__∑th
+,
+
+109 
+__oÊag
+, ...), 
+›í©64
+)
+
+110 
+	`__n⁄nuŒ
+ ((2));
+
+112 
+	`__îr‹de˛
+ (
+__›í©_too_m™y_¨gs
+,
+
+114 
+	`__îr‹de˛
+ (
+__›í©_missög_mode
+,
+
+117 
+__exã∫_Æways_ölöe
+ 
+
+118 
+	$›í©
+ (
+__fd
+, 
+__c⁄°
+ *
+__∑th
+, 
+__oÊag
+, ...)
+
+120 i‡(
+	`__va_¨g_∑ck_Àn
+ () > 1)
+
+121 
+	`__›í©_too_m™y_¨gs
+ ();
+
+123 i‡(
+	`__buûtö_c⁄°™t_p
+ (
+__oÊag
+))
+
+125 i‡((
+__oÊag
+ & 
+O_CREAT
+Ë!0 && 
+	`__va_¨g_∑ck_Àn
+ () < 1)
+
+127 
+	`__›í©_missög_mode
+ ();
+
+128  
+	`__›í©_2
+ (
+__fd
+, 
+__∑th
+, 
+__oÊag
+);
+
+130  
+	`__›í©_Æüs
+ (
+__fd
+, 
+__∑th
+, 
+__oÊag
+, 
+	`__va_¨g_∑ck
+ ());
+
+133 i‡(
+	`__va_¨g_∑ck_Àn
+ () < 1)
+
+134  
+	`__›í©_2
+ (
+__fd
+, 
+__∑th
+, 
+__oÊag
+);
+
+136  
+	`__›í©_Æüs
+ (
+__fd
+, 
+__∑th
+, 
+__oÊag
+, 
+	`__va_¨g_∑ck
+ ());
+
+137 
+	}
+}
+
+140 #ifde‡
+__USE_LARGEFILE64
+
+
+141 
+	$__›í©64_2
+ (
+__fd
+, 
+__c⁄°
+ *
+__∑th
+, 
+__oÊag
+)
+
+142 
+	`__n⁄nuŒ
+ ((2));
+
+143 
+	`__REDIRECT
+ (
+__›í©64_Æüs
+, (
+__fd
+, 
+__c⁄°
+ *
+__∑th
+,
+
+144 
+__oÊag
+, ...), 
+›í©64
+)
+
+145 
+	`__n⁄nuŒ
+ ((2));
+
+146 
+	`__îr‹de˛
+ (
+__›í©64_too_m™y_¨gs
+,
+
+148 
+	`__îr‹de˛
+ (
+__›í©64_missög_mode
+,
+
+151 
+__exã∫_Æways_ölöe
+ 
+
+152 
+	$›í©64
+ (
+__fd
+, 
+__c⁄°
+ *
+__∑th
+, 
+__oÊag
+, ...)
+
+154 i‡(
+	`__va_¨g_∑ck_Àn
+ () > 1)
+
+155 
+	`__›í©64_too_m™y_¨gs
+ ();
+
+157 i‡(
+	`__buûtö_c⁄°™t_p
+ (
+__oÊag
+))
+
+159 i‡((
+__oÊag
+ & 
+O_CREAT
+Ë!0 && 
+	`__va_¨g_∑ck_Àn
+ () < 1)
+
+161 
+	`__›í©64_missög_mode
+ ();
+
+162  
+	`__›í©64_2
+ (
+__fd
+, 
+__∑th
+, 
+__oÊag
+);
+
+164  
+	`__›í©64_Æüs
+ (
+__fd
+, 
+__∑th
+, 
+__oÊag
+, 
+	`__va_¨g_∑ck
+ ());
+
+167 i‡(
+	`__va_¨g_∑ck_Àn
+ () < 1)
+
+168  
+	`__›í©64_2
+ (
+__fd
+, 
+__∑th
+, 
+__oÊag
+);
+
+170  
+	`__›í©64_Æüs
+ (
+__fd
+, 
+__∑th
+, 
+__oÊag
+, 
+	`__va_¨g_∑ck
+ ());
+
+171 
+	}
+}
+
 	@/usr/include/bits/huge_val.h
 
 22 #i‚de‡
@@ -24706,6 +27788,570 @@ __«n_uni⁄
 .
 __d
 )
+
+	)
+
+	@/usr/include/bits/stat.h
+
+19 #i‡!
+deföed
+ 
+_SYS_STAT_H
+ && !deföed 
+_FCNTL_H
+
+
+23 #i‚de‡
+_BITS_STAT_H
+
+
+24 
+	#_BITS_STAT_H
+ 1
+
+	)
+
+27 
+	#_STAT_VER_LINUX_OLD
+ 1
+
+	)
+
+28 
+	#_STAT_VER_KERNEL
+ 1
+
+	)
+
+29 
+	#_STAT_VER_SVR4
+ 2
+
+	)
+
+30 
+	#_STAT_VER_LINUX
+ 3
+
+	)
+
+31 
+	#_STAT_VER
+ 
+_STAT_VER_LINUX
+
+
+	)
+
+34 
+	#_MKNOD_VER_LINUX
+ 1
+
+	)
+
+35 
+	#_MKNOD_VER_SVR4
+ 2
+
+	)
+
+36 
+	#_MKNOD_VER
+ 
+_MKNOD_VER_LINUX
+
+
+	)
+
+39 
+	s°©
+
+
+41 
+__dev_t
+ 
+	m°_dev
+;
+
+42 
+	m__∑d1
+;
+
+43 #i‚de‡
+__USE_FILE_OFFSET64
+
+
+44 
+__öo_t
+ 
+	m°_öo
+;
+
+46 
+__öo_t
+ 
+	m__°_öo
+;
+
+48 
+__mode_t
+ 
+	m°_mode
+;
+
+49 
+__∆ök_t
+ 
+	m°_∆ök
+;
+
+50 
+__uid_t
+ 
+	m°_uid
+;
+
+51 
+__gid_t
+ 
+	m°_gid
+;
+
+52 
+__dev_t
+ 
+	m°_rdev
+;
+
+53 
+	m__∑d2
+;
+
+54 #i‚de‡
+__USE_FILE_OFFSET64
+
+
+55 
+__off_t
+ 
+	m°_size
+;
+
+57 
+__off64_t
+ 
+	m°_size
+;
+
+59 
+__blksize_t
+ 
+	m°_blksize
+;
+
+61 #i‚de‡
+__USE_FILE_OFFSET64
+
+
+62 
+__blk˙t_t
+ 
+	m°_blocks
+;
+
+64 
+__blk˙t64_t
+ 
+	m°_blocks
+;
+
+66 #i‡
+deföed
+ 
+__USE_MISC
+ || deföed 
+__USE_XOPEN2K8
+
+
+73 
+time•ec
+ 
+	m°_©im
+;
+
+74 
+time•ec
+ 
+	m°_mtim
+;
+
+75 
+time•ec
+ 
+	m°_˘im
+;
+
+76 
+	#°_©ime
+ 
+°_©im
+.
+tv_£c
+
+
+	)
+
+77 
+	#°_mtime
+ 
+°_mtim
+.
+tv_£c
+
+
+	)
+
+78 
+	#°_˘ime
+ 
+°_˘im
+.
+tv_£c
+
+
+	)
+
+80 
+__time_t
+ 
+	m°_©ime
+;
+
+81 
+	m°_©imí£c
+;
+
+82 
+__time_t
+ 
+	m°_mtime
+;
+
+83 
+	m°_mtimí£c
+;
+
+84 
+__time_t
+ 
+	m°_˘ime
+;
+
+85 
+	m°_˘imí£c
+;
+
+87 #i‚de‡
+__USE_FILE_OFFSET64
+
+
+88 
+	m__unu£d4
+;
+
+89 
+	m__unu£d5
+;
+
+91 
+__öo64_t
+ 
+	m°_öo
+;
+
+95 #ifde‡
+__USE_LARGEFILE64
+
+
+96 
+	s°©64
+
+
+98 
+__dev_t
+ 
+	m°_dev
+;
+
+99 
+	m__∑d1
+;
+
+101 
+__öo_t
+ 
+	m__°_öo
+;
+
+102 
+__mode_t
+ 
+	m°_mode
+;
+
+103 
+__∆ök_t
+ 
+	m°_∆ök
+;
+
+104 
+__uid_t
+ 
+	m°_uid
+;
+
+105 
+__gid_t
+ 
+	m°_gid
+;
+
+106 
+__dev_t
+ 
+	m°_rdev
+;
+
+107 
+	m__∑d2
+;
+
+108 
+__off64_t
+ 
+	m°_size
+;
+
+109 
+__blksize_t
+ 
+	m°_blksize
+;
+
+111 
+__blk˙t64_t
+ 
+	m°_blocks
+;
+
+112 #i‡
+deföed
+ 
+__USE_MISC
+ || deföed 
+__USE_XOPEN2K8
+
+
+119 
+time•ec
+ 
+	m°_©im
+;
+
+120 
+time•ec
+ 
+	m°_mtim
+;
+
+121 
+time•ec
+ 
+	m°_˘im
+;
+
+123 
+__time_t
+ 
+	m°_©ime
+;
+
+124 
+	m°_©imí£c
+;
+
+125 
+__time_t
+ 
+	m°_mtime
+;
+
+126 
+	m°_mtimí£c
+;
+
+127 
+__time_t
+ 
+	m°_˘ime
+;
+
+128 
+	m°_˘imí£c
+;
+
+130 
+__öo64_t
+ 
+	m°_öo
+;
+
+135 
+	#_STATBUF_ST_BLKSIZE
+
+
+	)
+
+136 
+	#_STATBUF_ST_RDEV
+
+
+	)
+
+138 
+	#_STATBUF_ST_NSEC
+
+
+	)
+
+142 
+	#__S_IFMT
+ 0170000
+
+	)
+
+145 
+	#__S_IFDIR
+ 0040000
+
+	)
+
+146 
+	#__S_IFCHR
+ 0020000
+
+	)
+
+147 
+	#__S_IFBLK
+ 0060000
+
+	)
+
+148 
+	#__S_IFREG
+ 0100000
+
+	)
+
+149 
+	#__S_IFIFO
+ 0010000
+
+	)
+
+150 
+	#__S_IFLNK
+ 0120000
+
+	)
+
+151 
+	#__S_IFSOCK
+ 0140000
+
+	)
+
+155 
+	#__S_TYPEISMQ
+(
+buf
+Ë((buf)->
+°_mode
+ - (buf)->°_mode)
+
+	)
+
+156 
+	#__S_TYPEISSEM
+(
+buf
+Ë((buf)->
+°_mode
+ - (buf)->°_mode)
+
+	)
+
+157 
+	#__S_TYPEISSHM
+(
+buf
+Ë((buf)->
+°_mode
+ - (buf)->°_mode)
+
+	)
+
+161 
+	#__S_ISUID
+ 04000
+
+	)
+
+162 
+	#__S_ISGID
+ 02000
+
+	)
+
+163 
+	#__S_ISVTX
+ 01000
+
+	)
+
+164 
+	#__S_IREAD
+ 0400
+
+	)
+
+165 
+	#__S_IWRITE
+ 0200
+
+	)
+
+166 
+	#__S_IEXEC
+ 0100
+
+	)
+
+168 #ifde‡
+__USE_ATFILE
+
+
+169 
+	#UTIME_NOW
+ ((1»<< 30Ë- 1l)
+
+	)
+
+170 
+	#UTIME_OMIT
+ ((1»<< 30Ë- 2l)
 
 	)
 
@@ -36149,6 +39795,50 @@ __SWORD_TYPE
 
 	)
 
+	@/usr/include/bits/uio.h
+
+19 #i‡!
+deföed
+ 
+_SYS_UIO_H
+ && !deföed 
+_FCNTL_H
+
+
+23 #i‚de‡
+_BITS_UIO_H
+
+
+24 
+	#_BITS_UIO_H
+ 1
+
+	)
+
+26 
+	~<sys/ty≥s.h
+>
+
+40 
+	#UIO_MAXIOV
+ 1024
+
+	)
+
+44 
+	siovec
+
+
+46 *
+	miov_ba£
+;
+
+47 
+size_t
+ 
+	miov_Àn
+;
+
 	@/usr/include/bits/wordsize.h
 
 19 
@@ -40243,6 +43933,848 @@ __REDIRECT
 
 	)
 
+	@/usr/include/sys/types.h
+
+23 #i‚def 
+_SYS_TYPES_H
+
+
+24 
+	#_SYS_TYPES_H
+ 1
+
+	)
+
+26 
+	~<„©uªs.h
+>
+
+28 
+	g__BEGIN_DECLS
+
+
+30 
+	~<bôs/ty≥s.h
+>
+
+32 #ifdef 
+__USE_BSD
+
+
+33 #i‚de‡
+__u_ch¨_deföed
+
+
+34 
+__u_ch¨
+ 
+	tu_ch¨
+;
+
+35 
+__u_sh‹t
+ 
+	tu_sh‹t
+;
+
+36 
+__u_öt
+ 
+	tu_öt
+;
+
+37 
+__u_l⁄g
+ 
+	tu_l⁄g
+;
+
+38 
+__quad_t
+ 
+	tquad_t
+;
+
+39 
+__u_quad_t
+ 
+	tu_quad_t
+;
+
+40 
+__fsid_t
+ 
+	tfsid_t
+;
+
+41 
+	#__u_ch¨_deföed
+
+
+	)
+
+45 
+__loff_t
+ 
+	tloff_t
+;
+
+47 #i‚de‡
+__öo_t_deföed
+
+
+48 #i‚de‡
+__USE_FILE_OFFSET64
+
+
+49 
+__öo_t
+ 
+	töo_t
+;
+
+51 
+__öo64_t
+ 
+	töo_t
+;
+
+53 
+	#__öo_t_deföed
+
+
+	)
+
+55 #i‡
+deföed
+ 
+__USE_LARGEFILE64
+ && !deföed 
+__öo64_t_deföed
+
+
+56 
+__öo64_t
+ 
+	töo64_t
+;
+
+57 
+	#__öo64_t_deföed
+
+
+	)
+
+60 #i‚de‡
+__dev_t_deföed
+
+
+61 
+__dev_t
+ 
+	tdev_t
+;
+
+62 
+	#__dev_t_deföed
+
+
+	)
+
+65 #i‚de‡
+__gid_t_deföed
+
+
+66 
+__gid_t
+ 
+	tgid_t
+;
+
+67 
+	#__gid_t_deföed
+
+
+	)
+
+70 #i‚de‡
+__mode_t_deföed
+
+
+71 
+__mode_t
+ 
+	tmode_t
+;
+
+72 
+	#__mode_t_deföed
+
+
+	)
+
+75 #i‚de‡
+__∆ök_t_deföed
+
+
+76 
+__∆ök_t
+ 
+	t∆ök_t
+;
+
+77 
+	#__∆ök_t_deföed
+
+
+	)
+
+80 #i‚de‡
+__uid_t_deföed
+
+
+81 
+__uid_t
+ 
+	tuid_t
+;
+
+82 
+	#__uid_t_deföed
+
+
+	)
+
+85 #i‚de‡
+__off_t_deföed
+
+
+86 #i‚de‡
+__USE_FILE_OFFSET64
+
+
+87 
+__off_t
+ 
+	toff_t
+;
+
+89 
+__off64_t
+ 
+	toff_t
+;
+
+91 
+	#__off_t_deföed
+
+
+	)
+
+93 #i‡
+deföed
+ 
+__USE_LARGEFILE64
+ && !deföed 
+__off64_t_deföed
+
+
+94 
+__off64_t
+ 
+	toff64_t
+;
+
+95 
+	#__off64_t_deföed
+
+
+	)
+
+98 #i‚de‡
+__pid_t_deföed
+
+
+99 
+__pid_t
+ 
+	tpid_t
+;
+
+100 
+	#__pid_t_deföed
+
+
+	)
+
+103 #i‡(
+deföed
+ 
+__USE_SVID
+ || deföed 
+__USE_XOPEN
+ || deföed 
+__USE_XOPEN2K8
+) \
+
+104 && !
+deföed
+ 
+__id_t_deföed
+
+
+105 
+__id_t
+ 
+	tid_t
+;
+
+106 
+	#__id_t_deföed
+
+
+	)
+
+109 #i‚de‡
+__ssize_t_deföed
+
+
+110 
+__ssize_t
+ 
+	tssize_t
+;
+
+111 
+	#__ssize_t_deföed
+
+
+	)
+
+114 #ifdef 
+__USE_BSD
+
+
+115 #i‚de‡
+__daddr_t_deföed
+
+
+116 
+__daddr_t
+ 
+	tdaddr_t
+;
+
+117 
+__ˇddr_t
+ 
+	tˇddr_t
+;
+
+118 
+	#__daddr_t_deföed
+
+
+	)
+
+122 #i‡(
+deföed
+ 
+__USE_SVID
+ || deföed 
+__USE_XOPEN
+Ë&& !deföed 
+__key_t_deföed
+
+
+123 
+__key_t
+ 
+	tkey_t
+;
+
+124 
+	#__key_t_deföed
+
+
+	)
+
+127 #i‡
+deföed
+ 
+__USE_XOPEN
+ || deföed 
+__USE_XOPEN2K8
+
+
+128 
+	#__√ed_˛ock_t
+
+
+	)
+
+130 
+	#__√ed_time_t
+
+
+	)
+
+131 
+	#__√ed_timî_t
+
+
+	)
+
+132 
+	#__√ed_˛ockid_t
+
+
+	)
+
+133 
+	~<time.h
+>
+
+135 #ifde‡
+__USE_XOPEN
+
+
+136 #i‚de‡
+__u£c⁄ds_t_deföed
+
+
+137 
+__u£c⁄ds_t
+ 
+	tu£c⁄ds_t
+;
+
+138 
+	#__u£c⁄ds_t_deföed
+
+
+	)
+
+140 #i‚de‡
+__su£c⁄ds_t_deföed
+
+
+141 
+__su£c⁄ds_t
+ 
+	tsu£c⁄ds_t
+;
+
+142 
+	#__su£c⁄ds_t_deföed
+
+
+	)
+
+146 
+	#__√ed_size_t
+
+
+	)
+
+147 
+	~<°ddef.h
+>
+
+149 #ifde‡
+__USE_MISC
+
+
+151 
+	tul⁄g
+;
+
+152 
+	tush‹t
+;
+
+153 
+	tuöt
+;
+
+158 #i‡!
+__GNUC_PREREQ
+ (2, 7)
+
+161 #i‚de‡
+__öt8_t_deföed
+
+
+162 
+	#__öt8_t_deföed
+
+
+	)
+
+163 
+	töt8_t
+;
+
+164 
+	töt16_t
+;
+
+165 
+	töt32_t
+;
+
+166 #i‡
+__WORDSIZE
+ == 64
+
+167 
+	töt64_t
+;
+
+168 #ñi‡
+__GLIBC_HAVE_LONG_LONG
+
+
+169 
+__exãnsi⁄__
+ 
+	töt64_t
+;
+
+174 
+	tu_öt8_t
+;
+
+175 
+	tu_öt16_t
+;
+
+176 
+	tu_öt32_t
+;
+
+177 #i‡
+__WORDSIZE
+ == 64
+
+178 
+	tu_öt64_t
+;
+
+179 #ñi‡
+__GLIBC_HAVE_LONG_LONG
+
+
+180 
+__exãnsi⁄__
+ 
+	tu_öt64_t
+;
+
+183 
+	tªgi°î_t
+;
+
+188 
+	#__ötN_t
+(
+N
+, 
+MODE
+) \
+
+189 ##
+	tN
+##
+	t_t
+ 
+	t__©åibuã__
+ ((
+	t__mode__
+ (
+	tMODE
+)))
+
+	)
+
+190 
+	t__u_ötN_t
+(
+	tN
+, 
+	tMODE
+) \
+
+191 
+	tu_öt
+##
+	tN
+##
+	t_t
+ 
+	t__©åibuã__
+ ((
+	t__mode__
+ (
+	tMODE
+)))
+
+	)
+
+193 #i‚de‡
+	t__öt8_t_deföed
+
+
+194 
+	t__öt8_t_deföed
+
+
+	)
+
+195 
+	t__ötN_t
+ (8, 
+	t__QI__
+);
+
+196 
+__ötN_t
+ (16, 
+__HI__
+);
+
+197 
+__ötN_t
+ (32, 
+__SI__
+);
+
+198 
+__ötN_t
+ (64, 
+__DI__
+);
+
+201 
+__u_ötN_t
+ (8, 
+__QI__
+);
+
+202 
+__u_ötN_t
+ (16, 
+__HI__
+);
+
+203 
+__u_ötN_t
+ (32, 
+__SI__
+);
+
+204 
+__u_ötN_t
+ (64, 
+__DI__
+);
+
+206 
+	tªgi°î_t
+ 
+	t__©åibuã__
+ ((
+	t__mode__
+ (
+	t__w‹d__
+)));
+
+212 
+	#__BIT_TYPES_DEFINED__
+ 1
+
+	)
+
+215 #ifdef 
+__USE_BSD
+
+
+217 
+	~<ídün.h
+>
+
+220 
+	~<sys/£À˘.h
+>
+
+223 
+	~<sys/sysma¸os.h
+>
+
+227 #i‡(
+deföed
+ 
+__USE_UNIX98
+ || deföed 
+__USE_XOPEN2K8
+) \
+
+228 && !
+deföed
+ 
+__blksize_t_deföed
+
+
+229 
+__blksize_t
+ 
+	tblksize_t
+;
+
+230 
+	#__blksize_t_deföed
+
+
+	)
+
+234 #i‚de‡
+__USE_FILE_OFFSET64
+
+
+235 #i‚de‡
+__blk˙t_t_deföed
+
+
+236 
+__blk˙t_t
+ 
+	tblk˙t_t
+;
+
+237 
+	#__blk˙t_t_deföed
+
+
+	)
+
+239 #i‚de‡
+__fsblk˙t_t_deföed
+
+
+240 
+__fsblk˙t_t
+ 
+	tfsblk˙t_t
+;
+
+241 
+	#__fsblk˙t_t_deföed
+
+
+	)
+
+243 #i‚de‡
+__fsfû˙t_t_deföed
+
+
+244 
+__fsfû˙t_t
+ 
+	tfsfû˙t_t
+;
+
+245 
+	#__fsfû˙t_t_deföed
+
+
+	)
+
+248 #i‚de‡
+__blk˙t_t_deföed
+
+
+249 
+__blk˙t64_t
+ 
+	tblk˙t_t
+;
+
+250 
+	#__blk˙t_t_deföed
+
+
+	)
+
+252 #i‚de‡
+__fsblk˙t_t_deföed
+
+
+253 
+__fsblk˙t64_t
+ 
+	tfsblk˙t_t
+;
+
+254 
+	#__fsblk˙t_t_deföed
+
+
+	)
+
+256 #i‚de‡
+__fsfû˙t_t_deföed
+
+
+257 
+__fsfû˙t64_t
+ 
+	tfsfû˙t_t
+;
+
+258 
+	#__fsfû˙t_t_deföed
+
+
+	)
+
+262 #ifde‡
+__USE_LARGEFILE64
+
+
+263 
+__blk˙t64_t
+ 
+	tblk˙t64_t
+;
+
+264 
+__fsblk˙t64_t
+ 
+	tfsblk˙t64_t
+;
+
+265 
+__fsfû˙t64_t
+ 
+	tfsfû˙t64_t
+;
+
+270 #i‡
+deföed
+ 
+__USE_POSIX199506
+ || deföed 
+__USE_UNIX98
+
+
+271 
+	~<bôs/±hªadty≥s.h
+>
+
+274 
+	g__END_DECLS
+
+
 	@/usr/include/xlocale.h
 
 21 #i‚de‡
@@ -43553,6 +48085,390 @@ wók
 ±hªad_£tˇn˚l°©e
 
 
+	@/usr/include/bits/pthreadtypes.h
+
+19 #i‚de‡
+_BITS_PTHREADTYPES_H
+
+
+20 
+	#_BITS_PTHREADTYPES_H
+ 1
+
+	)
+
+22 
+	#__SIZEOF_PTHREAD_ATTR_T
+ 36
+
+	)
+
+23 
+	#__SIZEOF_PTHREAD_MUTEX_T
+ 24
+
+	)
+
+24 
+	#__SIZEOF_PTHREAD_MUTEXATTR_T
+ 4
+
+	)
+
+25 
+	#__SIZEOF_PTHREAD_COND_T
+ 48
+
+	)
+
+26 
+	#__SIZEOF_PTHREAD_COND_COMPAT_T
+ 12
+
+	)
+
+27 
+	#__SIZEOF_PTHREAD_CONDATTR_T
+ 4
+
+	)
+
+28 
+	#__SIZEOF_PTHREAD_RWLOCK_T
+ 32
+
+	)
+
+29 
+	#__SIZEOF_PTHREAD_RWLOCKATTR_T
+ 8
+
+	)
+
+30 
+	#__SIZEOF_PTHREAD_BARRIER_T
+ 20
+
+	)
+
+31 
+	#__SIZEOF_PTHREAD_BARRIERATTR_T
+ 4
+
+	)
+
+36 
+	t±hªad_t
+;
+
+41 
+	m__size
+[
+__SIZEOF_PTHREAD_ATTR_T
+];
+
+42 
+	m__Æign
+;
+
+43 } 
+	t±hªad_©å_t
+;
+
+46 
+	s__±hªad_öã∫Æ_¶i°
+
+
+48 
+__±hªad_öã∫Æ_¶i°
+ *
+	m__√xt
+;
+
+49 } 
+	t__±hªad_¶i°_t
+;
+
+56 
+	s__±hªad_muãx_s
+
+
+58 
+	m__lock
+;
+
+59 
+	m__cou¡
+;
+
+60 
+	m__ow√r
+;
+
+63 
+	m__köd
+;
+
+64 
+	m__nu£rs
+;
+
+65 
+__exãnsi⁄__
+ union
+
+67 
+	m__•ös
+;
+
+68 
+__±hªad_¶i°_t
+ 
+	m__li°
+;
+
+70 } 
+	m__d©a
+;
+
+71 
+	m__size
+[
+__SIZEOF_PTHREAD_MUTEX_T
+];
+
+72 
+	m__Æign
+;
+
+73 } 
+	t±hªad_muãx_t
+;
+
+77 
+	m__size
+[
+__SIZEOF_PTHREAD_MUTEXATTR_T
+];
+
+78 
+	m__Æign
+;
+
+79 } 
+	t±hªad_muãx©å_t
+;
+
+88 
+	m__lock
+;
+
+89 
+	m__fuãx
+;
+
+90 
+__exãnsi⁄__
+ 
+	m__tŸÆ_£q
+;
+
+91 
+__exãnsi⁄__
+ 
+	m__wakeup_£q
+;
+
+92 
+__exãnsi⁄__
+ 
+	m__wokí_£q
+;
+
+93 *
+	m__muãx
+;
+
+94 
+	m__nwaôîs
+;
+
+95 
+	m__brﬂdˇ°_£q
+;
+
+96 } 
+	m__d©a
+;
+
+97 
+	m__size
+[
+__SIZEOF_PTHREAD_COND_T
+];
+
+98 
+__exãnsi⁄__
+ 
+	m__Æign
+;
+
+99 } 
+	t±hªad_c⁄d_t
+;
+
+103 
+	m__size
+[
+__SIZEOF_PTHREAD_CONDATTR_T
+];
+
+104 
+	m__Æign
+;
+
+105 } 
+	t±hªad_c⁄d©å_t
+;
+
+109 
+	t±hªad_key_t
+;
+
+113 
+	t±hªad_⁄˚_t
+;
+
+116 #i‡
+deföed
+ 
+__USE_UNIX98
+ || deföed 
+__USE_XOPEN2K
+
+
+123 
+	m__lock
+;
+
+124 
+	m__ƒ_ªadîs
+;
+
+125 
+	m__ªadîs_wakeup
+;
+
+126 
+	m__wrôî_wakeup
+;
+
+127 
+	m__ƒ_ªadîs_queued
+;
+
+128 
+	m__ƒ_wrôîs_queued
+;
+
+131 
+	m__Êags
+;
+
+132 
+	m__sh¨ed
+;
+
+133 
+	m__∑d1
+;
+
+134 
+	m__∑d2
+;
+
+135 
+	m__wrôî
+;
+
+136 } 
+	m__d©a
+;
+
+137 
+	m__size
+[
+__SIZEOF_PTHREAD_RWLOCK_T
+];
+
+138 
+	m__Æign
+;
+
+139 } 
+	t±hªad_rwlock_t
+;
+
+143 
+	m__size
+[
+__SIZEOF_PTHREAD_RWLOCKATTR_T
+];
+
+144 
+	m__Æign
+;
+
+145 } 
+	t±hªad_rwlock©å_t
+;
+
+149 #ifde‡
+__USE_XOPEN2K
+
+
+151 vﬁ©ûê
+	t±hªad_•ölock_t
+;
+
+158 
+	m__size
+[
+__SIZEOF_PTHREAD_BARRIER_T
+];
+
+159 
+	m__Æign
+;
+
+160 } 
+	t±hªad_b¨rõr_t
+;
+
+164 
+	m__size
+[
+__SIZEOF_PTHREAD_BARRIERATTR_T
+];
+
+165 
+	m__Æign
+;
+
+166 } 
+	t±hªad_b¨rõøâr_t
+;
+
+171 
+	#__˛ónup_f˘_©åibuã
+ 
+	`__©åibuã__
+ ((
+	`__ªg∑rm__
+ (1)))
+
+	)
+
 	@/usr/include/bits/wchar.h
 
 20 #i‚de‡
@@ -44088,6 +49004,534 @@ _LINUX_ERRNO_H
 4 
 	~<asm/î∫o.h
 >
+
+	@/usr/include/sys/select.h
+
+22 #i‚de‡
+_SYS_SELECT_H
+
+
+23 
+	#_SYS_SELECT_H
+ 1
+
+	)
+
+25 
+	~<„©uªs.h
+>
+
+28 
+	~<bôs/ty≥s.h
+>
+
+31 
+	~<bôs/£À˘.h
+>
+
+34 
+	~<bôs/sig£t.h
+>
+
+36 #i‚de‡
+__sig£t_t_deföed
+
+
+37 
+	#__sig£t_t_deföed
+
+
+	)
+
+38 
+__sig£t_t
+ 
+	tsig£t_t
+;
+
+42 
+	#__√ed_time_t
+
+
+	)
+
+43 
+	#__√ed_time•ec
+
+
+	)
+
+44 
+	~<time.h
+>
+
+45 
+	#__√ed_timevÆ
+
+
+	)
+
+46 
+	~<bôs/time.h
+>
+
+48 #i‚de‡
+__su£c⁄ds_t_deföed
+
+
+49 
+__su£c⁄ds_t
+ 
+	tsu£c⁄ds_t
+;
+
+50 
+	#__su£c⁄ds_t_deföed
+
+
+	)
+
+55 
+	t__fd_mask
+;
+
+58 #unde‡
+__NFDBITS
+
+
+59 #unde‡
+__FDELT
+
+
+60 #unde‡
+__FDMASK
+
+
+62 
+	#__NFDBITS
+ (8 * (Ë (
+__fd_mask
+))
+
+	)
+
+63 
+	#__FDELT
+(
+d
+Ë((dË/ 
+__NFDBITS
+)
+
+	)
+
+64 
+	#__FDMASK
+(
+d
+Ë((
+__fd_mask
+Ë1 << ((dË% 
+__NFDBITS
+))
+
+	)
+
+71 #ifde‡
+__USE_XOPEN
+
+
+72 
+__fd_mask
+ 
+	mfds_bôs
+[
+__FD_SETSIZE
+ / 
+__NFDBITS
+];
+
+73 
+	#__FDS_BITS
+(
+£t
+Ë((£t)->
+fds_bôs
+)
+
+	)
+
+75 
+__fd_mask
+ 
+	m__fds_bôs
+[
+__FD_SETSIZE
+ / 
+__NFDBITS
+];
+
+76 
+	#__FDS_BITS
+(
+£t
+Ë((£t)->
+__fds_bôs
+)
+
+	)
+
+78 } 
+	tfd_£t
+;
+
+81 
+	#FD_SETSIZE
+ 
+__FD_SETSIZE
+
+
+	)
+
+83 #ifde‡
+__USE_MISC
+
+
+85 
+__fd_mask
+ 
+	tfd_mask
+;
+
+88 
+	#NFDBITS
+ 
+__NFDBITS
+
+
+	)
+
+93 
+	#FD_SET
+(
+fd
+, 
+fd£ç
+Ë
+	`__FD_SET
+ (fd, fd£ç)
+
+	)
+
+94 
+	#FD_CLR
+(
+fd
+, 
+fd£ç
+Ë
+	`__FD_CLR
+ (fd, fd£ç)
+
+	)
+
+95 
+	#FD_ISSET
+(
+fd
+, 
+fd£ç
+Ë
+	`__FD_ISSET
+ (fd, fd£ç)
+
+	)
+
+96 
+	#FD_ZERO
+(
+fd£ç
+Ë
+	`__FD_ZERO
+ (fd£ç)
+
+	)
+
+99 
+__BEGIN_DECLS
+
+
+109 
+£À˘
+ (
+__nfds
+, 
+fd_£t
+ *
+__ª°ri˘
+ 
+__ªadfds
+,
+
+110 
+fd_£t
+ *
+__ª°ri˘
+ 
+__wrôefds
+,
+
+111 
+fd_£t
+ *
+__ª°ri˘
+ 
+__ex˚±fds
+,
+
+112 
+timevÆ
+ *
+__ª°ri˘
+ 
+__timeout
+);
+
+114 #ifde‡
+__USE_XOPEN2K
+
+
+121 
+p£À˘
+ (
+__nfds
+, 
+fd_£t
+ *
+__ª°ri˘
+ 
+__ªadfds
+,
+
+122 
+fd_£t
+ *
+__ª°ri˘
+ 
+__wrôefds
+,
+
+123 
+fd_£t
+ *
+__ª°ri˘
+ 
+__ex˚±fds
+,
+
+124 c⁄° 
+time•ec
+ *
+__ª°ri˘
+ 
+__timeout
+,
+
+125 c⁄° 
+__sig£t_t
+ *
+__ª°ri˘
+ 
+__sigmask
+);
+
+128 
+	g__END_DECLS
+
+
+	@/usr/include/sys/sysmacros.h
+
+21 #i‚de‡
+_SYS_SYSMACROS_H
+
+
+22 
+	#_SYS_SYSMACROS_H
+ 1
+
+	)
+
+24 
+	~<„©uªs.h
+>
+
+29 #ifde‡
+__GLIBC_HAVE_LONG_LONG
+
+
+30 
+__exãnsi⁄__
+
+
+31 
+	$gnu_dev_maj‹
+ (
+__dev
+)
+
+32 
+__THROW
+;
+
+33 
+__exãnsi⁄__
+
+
+34 
+	$gnu_dev_mö‹
+ (
+__dev
+)
+
+35 
+__THROW
+;
+
+36 
+__exãnsi⁄__
+
+
+37 
+	$gnu_dev_makedev
+ (
+__maj‹
+,
+
+38 
+__mö‹
+)
+
+39 
+__THROW
+;
+
+41 #i‡
+deföed
+ 
+__GNUC__
+ && __GNUC__ >2 && deföed 
+__USE_EXTERN_INLINES
+
+
+42 
+__exãnsi⁄__
+ 
+__exã∫_ölöe
+ 
+
+43 
+	`__NTH
+ (
+	$gnu_dev_maj‹
+ (
+__dev
+))
+
+45  ((
+__dev
+ >> 8) & 0xfff) | (() (__dev >> 32) & ~0xfff);
+
+46 
+	}
+}
+
+48 
+__exãnsi⁄__
+ 
+__exã∫_ölöe
+ 
+
+49 
+__NTH
+ (
+	$gnu_dev_mö‹
+ (
+__dev
+))
+
+51  (
+__dev
+ & 0xff) | (() (__dev >> 12) & ~0xff);
+
+52 
+	}
+}
+
+54 
+__exãnsi⁄__
+ 
+__exã∫_ölöe
+ 
+
+55 
+__NTH
+ (
+	$gnu_dev_makedev
+ (
+__maj‹
+, 
+__mö‹
+))
+
+57  ((
+__mö‹
+ & 0xffË| ((
+__maj‹
+ & 0xfff) << 8)
+
+58 | (((Ë(
+__mö‹
+ & ~0xff)) << 12)
+
+59 | (((Ë(
+__maj‹
+ & ~0xfff)) << 32));
+
+60 
+	}
+}
+
+65 
+	#maj‹
+(
+dev
+Ë
+	`gnu_dev_maj‹
+ (dev)
+
+	)
+
+66 
+	#mö‹
+(
+dev
+Ë
+	`gnu_dev_mö‹
+ (dev)
+
+	)
+
+67 
+	#makedev
+(
+maj
+, 
+mö
+Ë
+	`gnu_dev_makedev
+ (maj, mö)
+
+	)
 
 	@/usr/include/wchar.h
 
@@ -47646,6 +53090,730 @@ __√ed_wöt_t
 1 
 	~<asm-gíîic/î∫o.h
 >
+
+	@/usr/include/bits/select.h
+
+19 #i‚de‡
+_SYS_SELECT_H
+
+
+24 #i‡
+deföed
+ 
+__GNUC__
+ && __GNUC__ >= 2
+
+26 
+	#__FD_ZERO
+(
+fd•
+) \
+
+28 
+__d0
+, 
+__d1
+; \
+
+29 
+__asm__
+ 
+	`__vﬁ©ûe__
+ ("cld;Ñep; stosl" \
+
+30 : "=c" (
+__d0
+), "=D" (
+__d1
+) \
+
+31 : "a" (0), "0" ( (
+fd_£t
+) \
+
+32 /  (
+__fd_mask
+)), \
+
+33 "1" (&
+	`__FDS_BITS
+ (
+fd•
+)[0]) \
+
+35 } 0)
+
+	)
+
+37 
+	#__FD_SET
+(
+fd
+, 
+fd•
+) \
+
+38 
+__asm__
+ 
+	`__vﬁ©ûe__
+ ("btsl %1,%0" \
+
+39 : "=m" (
+	`__FDS_BITS
+ (
+fd•
+)[
+	`__FDELT
+ (
+fd
+)]) \
+
+40 : "r" (((Ë(
+fd
+)Ë% 
+__NFDBITS
+) \
+
+41 : "cc","mem‹y")
+
+	)
+
+42 
+	#__FD_CLR
+(
+fd
+, 
+fd•
+) \
+
+43 
+__asm__
+ 
+	`__vﬁ©ûe__
+ ("btrl %1,%0" \
+
+44 : "=m" (
+	`__FDS_BITS
+ (
+fd•
+)[
+	`__FDELT
+ (
+fd
+)]) \
+
+45 : "r" (((Ë(
+fd
+)Ë% 
+__NFDBITS
+) \
+
+46 : "cc","mem‹y")
+
+	)
+
+47 
+	#__FD_ISSET
+(
+fd
+, 
+fd•
+) \
+
+48 (
+__exãnsi⁄__
+ \
+
+49 ({
+__ªsu…
+; \
+
+50 
+__asm__
+ 
+	`__vﬁ©ûe__
+ ("btl %1,%2 ; setcb %b0" \
+
+51 : "=q" (
+__ªsu…
+) \
+
+52 : "r" (((Ë(
+fd
+)Ë% 
+__NFDBITS
+), \
+
+53 "m" (
+	`__FDS_BITS
+ (
+fd•
+)[
+	`__FDELT
+ (
+fd
+)]) \
+
+55 
+__ªsu…
+; }))
+
+	)
+
+61 
+	#__FD_ZERO
+(
+£t
+) \
+
+63 
+__i
+; \
+
+64 
+fd_£t
+ *
+__¨r
+ = (
+£t
+); \
+
+65 
+__i
+ = 0; __ò<  (
+fd_£t
+Ë/  (
+__fd_mask
+); ++__i) \
+
+66 
+	`__FDS_BITS
+ (
+__¨r
+)[
+__i
+] = 0; \
+
+67 } 0)
+
+	)
+
+68 
+	#__FD_SET
+(
+d
+, 
+£t
+Ë(
+	`__FDS_BITS
+ (£t)[
+	`__FDELT
+ (d)] |
+	`__FDMASK
+ (d))
+
+	)
+
+69 
+	#__FD_CLR
+(
+d
+, 
+£t
+Ë(
+	`__FDS_BITS
+ (£t)[
+	`__FDELT
+ (d)] &~
+	`__FDMASK
+ (d))
+
+	)
+
+70 
+	#__FD_ISSET
+(
+d
+, 
+£t
+Ë(
+	`__FDS_BITS
+ (£t)[
+	`__FDELT
+ (d)] & 
+	`__FDMASK
+ (d))
+
+	)
+
+	@/usr/include/bits/sigset.h
+
+21 #i‚def 
+_SIGSET_H_ty≥s
+
+
+22 
+	#_SIGSET_H_ty≥s
+ 1
+
+	)
+
+24 
+	t__sig_©omic_t
+;
+
+28 
+	#_SIGSET_NWORDS
+ (1024 / (8 *  ()))
+
+	)
+
+31 
+	m__vÆ
+[
+_SIGSET_NWORDS
+];
+
+32 } 
+	t__sig£t_t
+;
+
+43 #i‡!
+deföed
+ 
+_SIGSET_H_‚s
+ && deföed 
+_SIGNAL_H
+
+
+44 
+	#_SIGSET_H_‚s
+ 1
+
+	)
+
+46 #i‚de‡
+_EXTERN_INLINE
+
+
+47 
+	#_EXTERN_INLINE
+ 
+__exã∫_ölöe
+
+
+	)
+
+51 
+	#__sigmask
+(
+sig
+) \
+
+52 (((Ë1Ë<< (((
+sig
+Ë- 1Ë% (8 *  ())))
+
+	)
+
+55 
+	#__sigw‹d
+(
+sig
+Ë(((sigË- 1Ë/ (8 *  ()))
+
+	)
+
+57 #i‡
+deföed
+ 
+__GNUC__
+ && __GNUC__ >= 2
+
+58 
+	#__sigem±y£t
+(
+£t
+) \
+
+59 (
+	`__exãnsi⁄__
+ ({ 
+__˙t
+ = 
+_SIGSET_NWORDS
+; \
+
+60 
+sig£t_t
+ *
+__£t
+ = (
+£t
+); \
+
+61 --
+__˙t
+ >0Ë
+__£t
+->
+__vÆ
+[__cnt] = 0; \
+
+62 0; }))
+
+	)
+
+63 
+	#__sigfûl£t
+(
+£t
+) \
+
+64 (
+	`__exãnsi⁄__
+ ({ 
+__˙t
+ = 
+_SIGSET_NWORDS
+; \
+
+65 
+sig£t_t
+ *
+__£t
+ = (
+£t
+); \
+
+66 --
+__˙t
+ >0Ë
+__£t
+->
+__vÆ
+[__cnt] = ~0UL; \
+
+67 0; }))
+
+	)
+
+69 #ifde‡
+__USE_GNU
+
+
+73 
+	#__sigi£m±y£t
+(
+£t
+) \
+
+74 (
+	`__exãnsi⁄__
+ ({ 
+__˙t
+ = 
+_SIGSET_NWORDS
+; \
+
+75 c⁄° 
+sig£t_t
+ *
+__£t
+ = (
+£t
+); \
+
+76 
+__ªt
+ = 
+__£t
+->
+__vÆ
+[--
+__˙t
+]; \
+
+77 !
+__ªt
+ && --
+__˙t
+ >= 0) \
+
+78 
+__ªt
+ = 
+__£t
+->
+__vÆ
+[
+__˙t
+]; \
+
+79 
+__ªt
+ =0; }))
+
+	)
+
+80 
+	#__sig™d£t
+(
+de°
+, 
+À·
+, 
+right
+) \
+
+81 (
+	`__exãnsi⁄__
+ ({ 
+__˙t
+ = 
+_SIGSET_NWORDS
+; \
+
+82 
+sig£t_t
+ *
+__de°
+ = (
+de°
+); \
+
+83 c⁄° 
+sig£t_t
+ *
+__À·
+ = (
+À·
+); \
+
+84 c⁄° 
+sig£t_t
+ *
+__right
+ = (
+right
+); \
+
+85 --
+__˙t
+ >= 0) \
+
+86 
+__de°
+->
+__vÆ
+[
+__˙t
+] = (
+__À·
+->__val[__cnt] \
+
+87 & 
+__right
+->
+__vÆ
+[
+__˙t
+]); \
+
+88 0; }))
+
+	)
+
+89 
+	#__sig‹£t
+(
+de°
+, 
+À·
+, 
+right
+) \
+
+90 (
+	`__exãnsi⁄__
+ ({ 
+__˙t
+ = 
+_SIGSET_NWORDS
+; \
+
+91 
+sig£t_t
+ *
+__de°
+ = (
+de°
+); \
+
+92 c⁄° 
+sig£t_t
+ *
+__À·
+ = (
+À·
+); \
+
+93 c⁄° 
+sig£t_t
+ *
+__right
+ = (
+right
+); \
+
+94 --
+__˙t
+ >= 0) \
+
+95 
+__de°
+->
+__vÆ
+[
+__˙t
+] = (
+__À·
+->__val[__cnt] \
+
+96 | 
+__right
+->
+__vÆ
+[
+__˙t
+]); \
+
+97 0; }))
+
+	)
+
+104 
+__sigismembî
+ (
+__c⁄°
+ 
+__sig£t_t
+ *, );
+
+105 
+__sigadd£t
+ (
+__sig£t_t
+ *, );
+
+106 
+__sigdñ£t
+ (
+__sig£t_t
+ *, );
+
+108 #ifde‡
+__USE_EXTERN_INLINES
+
+
+109 
+	#__SIGSETFN
+(
+NAME
+, 
+BODY
+, 
+CONST
+) \
+
+110 
+_EXTERN_INLINE
+ \
+
+111 
+	`NAME
+ (
+CONST
+ 
+__sig£t_t
+ *
+__£t
+, 
+__sig
+) \
+
+113 
+__mask
+ = 
+	`__sigmask
+ (
+__sig
+); \
+
+114 
+__w‹d
+ = 
+	`__sigw‹d
+ (
+__sig
+); \
+
+115  
+BODY
+; \
+
+116 }
+
+	)
+
+118 
+__SIGSETFN
+ (
+__sigismembî
+, (
+__£t
+->
+__vÆ
+[
+__w‹d
+] & 
+__mask
+Ë? 1 : 0, 
+__c⁄°
+)
+
+119 
+__SIGSETFN
+ (
+__sigadd£t
+, ((
+__£t
+->
+__vÆ
+[
+__w‹d
+] |
+__mask
+), 0), )
+
+120 
+__SIGSETFN
+ (
+__sigdñ£t
+, ((
+__£t
+->
+__vÆ
+[
+__w‹d
+] &~
+__mask
+), 0), )
+
+122 #unde‡
+__SIGSETFN
+
 
 	@/usr/include/bits/wchar-ldbl.h
 
@@ -56672,390 +62840,6 @@ EDEADLK
 111 
 	#EHWPOISON
  133
-
-	)
-
-	@/usr/include/bits/pthreadtypes.h
-
-19 #i‚de‡
-_BITS_PTHREADTYPES_H
-
-
-20 
-	#_BITS_PTHREADTYPES_H
- 1
-
-	)
-
-22 
-	#__SIZEOF_PTHREAD_ATTR_T
- 36
-
-	)
-
-23 
-	#__SIZEOF_PTHREAD_MUTEX_T
- 24
-
-	)
-
-24 
-	#__SIZEOF_PTHREAD_MUTEXATTR_T
- 4
-
-	)
-
-25 
-	#__SIZEOF_PTHREAD_COND_T
- 48
-
-	)
-
-26 
-	#__SIZEOF_PTHREAD_COND_COMPAT_T
- 12
-
-	)
-
-27 
-	#__SIZEOF_PTHREAD_CONDATTR_T
- 4
-
-	)
-
-28 
-	#__SIZEOF_PTHREAD_RWLOCK_T
- 32
-
-	)
-
-29 
-	#__SIZEOF_PTHREAD_RWLOCKATTR_T
- 8
-
-	)
-
-30 
-	#__SIZEOF_PTHREAD_BARRIER_T
- 20
-
-	)
-
-31 
-	#__SIZEOF_PTHREAD_BARRIERATTR_T
- 4
-
-	)
-
-36 
-	t±hªad_t
-;
-
-41 
-	m__size
-[
-__SIZEOF_PTHREAD_ATTR_T
-];
-
-42 
-	m__Æign
-;
-
-43 } 
-	t±hªad_©å_t
-;
-
-46 
-	s__±hªad_öã∫Æ_¶i°
-
-
-48 
-__±hªad_öã∫Æ_¶i°
- *
-	m__√xt
-;
-
-49 } 
-	t__±hªad_¶i°_t
-;
-
-56 
-	s__±hªad_muãx_s
-
-
-58 
-	m__lock
-;
-
-59 
-	m__cou¡
-;
-
-60 
-	m__ow√r
-;
-
-63 
-	m__köd
-;
-
-64 
-	m__nu£rs
-;
-
-65 
-__exãnsi⁄__
- union
-
-67 
-	m__•ös
-;
-
-68 
-__±hªad_¶i°_t
- 
-	m__li°
-;
-
-70 } 
-	m__d©a
-;
-
-71 
-	m__size
-[
-__SIZEOF_PTHREAD_MUTEX_T
-];
-
-72 
-	m__Æign
-;
-
-73 } 
-	t±hªad_muãx_t
-;
-
-77 
-	m__size
-[
-__SIZEOF_PTHREAD_MUTEXATTR_T
-];
-
-78 
-	m__Æign
-;
-
-79 } 
-	t±hªad_muãx©å_t
-;
-
-88 
-	m__lock
-;
-
-89 
-	m__fuãx
-;
-
-90 
-__exãnsi⁄__
- 
-	m__tŸÆ_£q
-;
-
-91 
-__exãnsi⁄__
- 
-	m__wakeup_£q
-;
-
-92 
-__exãnsi⁄__
- 
-	m__wokí_£q
-;
-
-93 *
-	m__muãx
-;
-
-94 
-	m__nwaôîs
-;
-
-95 
-	m__brﬂdˇ°_£q
-;
-
-96 } 
-	m__d©a
-;
-
-97 
-	m__size
-[
-__SIZEOF_PTHREAD_COND_T
-];
-
-98 
-__exãnsi⁄__
- 
-	m__Æign
-;
-
-99 } 
-	t±hªad_c⁄d_t
-;
-
-103 
-	m__size
-[
-__SIZEOF_PTHREAD_CONDATTR_T
-];
-
-104 
-	m__Æign
-;
-
-105 } 
-	t±hªad_c⁄d©å_t
-;
-
-109 
-	t±hªad_key_t
-;
-
-113 
-	t±hªad_⁄˚_t
-;
-
-116 #i‡
-deföed
- 
-__USE_UNIX98
- || deföed 
-__USE_XOPEN2K
-
-
-123 
-	m__lock
-;
-
-124 
-	m__ƒ_ªadîs
-;
-
-125 
-	m__ªadîs_wakeup
-;
-
-126 
-	m__wrôî_wakeup
-;
-
-127 
-	m__ƒ_ªadîs_queued
-;
-
-128 
-	m__ƒ_wrôîs_queued
-;
-
-131 
-	m__Êags
-;
-
-132 
-	m__sh¨ed
-;
-
-133 
-	m__∑d1
-;
-
-134 
-	m__∑d2
-;
-
-135 
-	m__wrôî
-;
-
-136 } 
-	m__d©a
-;
-
-137 
-	m__size
-[
-__SIZEOF_PTHREAD_RWLOCK_T
-];
-
-138 
-	m__Æign
-;
-
-139 } 
-	t±hªad_rwlock_t
-;
-
-143 
-	m__size
-[
-__SIZEOF_PTHREAD_RWLOCKATTR_T
-];
-
-144 
-	m__Æign
-;
-
-145 } 
-	t±hªad_rwlock©å_t
-;
-
-149 #ifde‡
-__USE_XOPEN2K
-
-
-151 vﬁ©ûê
-	t±hªad_•ölock_t
-;
-
-158 
-	m__size
-[
-__SIZEOF_PTHREAD_BARRIER_T
-];
-
-159 
-	m__Æign
-;
-
-160 } 
-	t±hªad_b¨rõr_t
-;
-
-164 
-	m__size
-[
-__SIZEOF_PTHREAD_BARRIERATTR_T
-];
-
-165 
-	m__Æign
-;
-
-166 } 
-	t±hªad_b¨rõøâr_t
-;
-
-171 
-	#__˛ónup_f˘_©åibuã
- 
-	`__©åibuã__
- ((
-	`__ªg∑rm__
- (1)))
 
 	)
 
@@ -98668,8 +104452,8 @@ _LINUX_LIMITS_H
 .
 1
 /usr/include
-92
-2196
+104
+2467
 TVplayer.c
 audio.c
 audio.h
@@ -98687,11 +104471,16 @@ sync.h
 utility.h
 video.c
 video.h
+/usr/include/fcntl.h
 /usr/include/libavcodec/avcodec.h
 /usr/include/libavformat/avformat.h
 /usr/include/libswscale/swscale.h
 /usr/include/math.h
 /usr/include/stdio.h
+event.h
+log.h
+/usr/include/bits/fcntl.h
+/usr/include/bits/fcntl2.h
 /usr/include/bits/huge_val.h
 /usr/include/bits/huge_valf.h
 /usr/include/bits/huge_vall.h
@@ -98700,6 +104489,7 @@ video.h
 /usr/include/bits/mathdef.h
 /usr/include/bits/mathinline.h
 /usr/include/bits/nan.h
+/usr/include/bits/stat.h
 /usr/include/bits/stdio-ldbl.h
 /usr/include/bits/stdio.h
 /usr/include/bits/stdio2.h
@@ -98724,6 +104514,7 @@ video.h
 /usr/include/bits/stdio-lock.h
 /usr/include/bits/time.h
 /usr/include/bits/typesizes.h
+/usr/include/bits/uio.h
 /usr/include/bits/wordsize.h
 /usr/include/ctype.h
 /usr/include/endian.h
@@ -98731,24 +104522,29 @@ video.h
 /usr/include/gnu/stubs.h
 /usr/include/stdint.h
 /usr/include/sys/cdefs.h
+/usr/include/sys/types.h
 /usr/include/xlocale.h
 /usr/include/bits/byteswap.h
 /usr/include/bits/endian.h
 /usr/include/bits/error.h
 /usr/include/bits/libc-lock.h
+/usr/include/bits/pthreadtypes.h
 /usr/include/bits/wchar.h
 /usr/include/gconv.h
 /usr/include/gnu/stubs-32.h
 /usr/include/linux/errno.h
+/usr/include/sys/select.h
+/usr/include/sys/sysmacros.h
 /usr/include/wchar.h
 /usr/include/asm/errno.h
+/usr/include/bits/select.h
+/usr/include/bits/sigset.h
 /usr/include/bits/wchar-ldbl.h
 /usr/include/bits/wchar2.h
 /usr/include/pthread.h
 /usr/include/tls.h
 /usr/include/wctype.h
 /usr/include/asm-generic/errno.h
-/usr/include/bits/pthreadtypes.h
 /usr/include/bits/setjmp.h
 /usr/include/sched.h
 /usr/include/tcl.h

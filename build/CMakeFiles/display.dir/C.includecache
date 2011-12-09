@@ -6,6 +6,8 @@
 
 #IncludeRegexTransform: 
 
+/home/infinite/Project/TVplayer/src/config.h
+
 /home/infinite/Project/TVplayer/src/display.c
 display.h
 /home/infinite/Project/TVplayer/src/display.h
@@ -13,6 +15,8 @@ display.h
 /home/infinite/Project/TVplayer/src/display.h
 structures.h
 /home/infinite/Project/TVplayer/src/structures.h
+config.h
+/home/infinite/Project/TVplayer/src/config.h
 
 /home/infinite/Project/TVplayer/src/libffmpeg.h
 libavcodec/avcodec.h

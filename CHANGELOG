@@ -1,3 +1,22 @@
+2011-12-9
+add new sync method base on external timer
+add two different screen scale
+add new log printing method
+port sdl & ffmpeg lib to android, then run TVplayer on android platform
+fix some bugs in AV sync & queue
+Test result(PC):
+.avi good
+.rmvb normal
+.cavs 480p 720p good
+.ts normal
+.mov normal
+.mkv 1080p can not support
+Test result(android platform):
+.mp4 slow AV not sync
+.mov slow
+.ts slow 
+.cavs slow
+
 2011-12-7
 rename some data struct
 add method of getting media info

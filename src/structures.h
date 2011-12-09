@@ -58,6 +58,7 @@ typedef struct Media {
     VideoFrame frame_buf[VIDEO_FRAME_QUEUE_SIZE];
     int frame_buf_size;
     int frame_index;
+    int index;
     double clk;
     double frame_timer;
     double frame_last_pts;
@@ -71,6 +72,11 @@ typedef struct Media {
     uint8_t audio_buf[(AVCODEC_MAX_AUDIO_FRAME_SIZE * 3) / 2];
     uint8_t *audio_pkt_data;
     int audio_pkt_size;
+    double audio_diff_cum;
+    double audio_diff_avg_coef;
+    double audio_diff_threshold;
+    int audio_diff_avg_count;
+
     SDL_mutex *frame_buf_mutex;
     SDL_mutex *frame_buf_cond;
     SDL_cond *play_cond;

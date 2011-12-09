@@ -14,6 +14,7 @@ void audio_callback(void *userdata, Uint8 *stream, int len)
 		audio->audio_buf_size = 1024;
 		memset(audio->audio_buf, 0, audio->audio_buf_size);
 	    } else {
+		audio_size = sync_audio(audio, (int16_t *)audio->audio_buf, audio_size, pts);
 		audio->audio_buf_size = audio_size;
 	    }
 	    audio->audio_buf_index = 0;

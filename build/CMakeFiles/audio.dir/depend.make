@@ -8,6 +8,7 @@ CMakeFiles/audio.dir/src/audio.c.o: ../src/libsdl.h
 CMakeFiles/audio.dir/src/audio.c.o: ../src/log.h
 CMakeFiles/audio.dir/src/audio.c.o: ../src/parse.h
 CMakeFiles/audio.dir/src/audio.c.o: ../src/structures.h
+CMakeFiles/audio.dir/src/audio.c.o: ../src/sync.h
 CMakeFiles/audio.dir/src/audio.c.o: ../src/utility.h
 CMakeFiles/audio.dir/src/audio.c.o: /usr/local/include/SDL/SDL.h
 CMakeFiles/audio.dir/src/audio.c.o: /usr/local/include/SDL/SDL_assert.h

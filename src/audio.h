@@ -1,12 +1,11 @@
 #include "structures.h"
 #include "parse.h"
+#include "sync.h"
 
 #ifndef AUDIO_DECODE_H
 #define AUDIO_DECODE_H
 
-
 #define SDL_AUDIO_BUFFER_SIZE 1024
-
 
 void init_audio(Media *audio);
 int find_audio_decoder(Media *audio);

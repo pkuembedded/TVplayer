@@ -4,16 +4,11 @@
 #include "video.h"
 #include "audio.h"
 #include "sync.h"
-#define VIDEO_FRAME_QUEUE_SIZE 1
-#define FF_ALLOC_EVENT   (SDL_USEREVENT)
-#define FF_REFRESH_EVENT (SDL_USEREVENT + 1)
-#define FF_QUIT_EVENT (SDL_USEREVENT + 2)
+#include "event.h"
+#include "config.h"
 
-Media video, audio;
 int main(int argc, char **argv)
 {
-    uint64_t global_video_pkt_pts;
-    SDL_Surface *screen;
     SDL_Event event;
     Content *content = av_mallocz(sizeof(Content));
     Media *video = av_mallocz(sizeof(Media));
@@ -21,7 +16,6 @@ int main(int argc, char **argv)
     State *state = av_mallocz(sizeof(State));
     SDL_Thread *video_decode_tid;
     SDL_Thread *read_pkt_tid;
-    SDL_Thread *play_tid;
     state->content = content;
     state->video = video;
     state->audio = audio;
@@ -42,15 +36,15 @@ int main(int argc, char **argv)
     LOGI("finding decoder");
     find_decoder(video);
     video->get_info(video);
-    LOGI("initing screen");
-    init_screen(video);
+
     LOGI("creating reading thread...");
     read_pkt_tid = SDL_CreateThread(queue_av_pkt, "read", state);
-    init_frame(video);
     LOGI("creating decode thread...");
     video_decode_tid = SDL_CreateThread(decode_video, "decode", video);
+    LOGI("initing screen");
+    init_screen(video);
     LOGI("schedule refreshing");
-    schedule_refresh(state, 30);
+    schedule_refresh(state, 100);
     av_init_packet(&flush_pkt);
     flush_pkt.data = "FLUSH";
     while(true) {
@@ -58,6 +52,13 @@ int main(int argc, char **argv)
 	switch(event.type) {
 	case FF_REFRESH_EVENT:
 	    video_refresh_timer(event.user.data1);
+	    break;
+	case FF_QUIT_EVENT:
+//	    SDL_Quit();
+	    exit(1);
+	    break;
+	case FF_ALLOC_EVENT:
+	    init_frame(event.user.data1);
 	    break;
 	default:
 	    break;

@@ -4,6 +4,8 @@
 CMakeFiles/TVplayer.dir/src/TVplayer.c.o
  /home/infinite/Project/TVplayer/src/TVplayer.c
  /home/infinite/Project/TVplayer/src/audio.h
+ /home/infinite/Project/TVplayer/src/config.h
+ /home/infinite/Project/TVplayer/src/event.h
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h
  /home/infinite/Project/TVplayer/src/log.h
@@ -60,6 +62,7 @@ CMakeFiles/TVplayer.dir/src/audio.c.o
  /home/infinite/Project/TVplayer/src/log.h
  /home/infinite/Project/TVplayer/src/parse.h
  /home/infinite/Project/TVplayer/src/structures.h
+ /home/infinite/Project/TVplayer/src/sync.h
  /home/infinite/Project/TVplayer/src/utility.h
  /usr/local/include/SDL/SDL.h
  /usr/local/include/SDL/SDL_assert.h
@@ -101,6 +104,7 @@ CMakeFiles/TVplayer.dir/src/audio.c.o
  /usr/local/include/SDL/begin_code.h
  /usr/local/include/SDL/close_code.h
 CMakeFiles/TVplayer.dir/src/display.c.o
+ /home/infinite/Project/TVplayer/src/config.h
  /home/infinite/Project/TVplayer/src/display.c
  /home/infinite/Project/TVplayer/src/display.h
  /home/infinite/Project/TVplayer/src/libffmpeg.h
@@ -148,6 +152,8 @@ CMakeFiles/TVplayer.dir/src/display.c.o
  /usr/local/include/SDL/begin_code.h
  /usr/local/include/SDL/close_code.h
 CMakeFiles/TVplayer.dir/src/parse.c.o
+ /home/infinite/Project/TVplayer/src/config.h
+ /home/infinite/Project/TVplayer/src/event.h
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h
  /home/infinite/Project/TVplayer/src/log.h
@@ -197,6 +203,7 @@ CMakeFiles/TVplayer.dir/src/parse.c.o
  /usr/local/include/SDL/begin_code.h
  /usr/local/include/SDL/close_code.h
 CMakeFiles/TVplayer.dir/src/queue.c.o
+ /home/infinite/Project/TVplayer/src/event.h
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h
  /home/infinite/Project/TVplayer/src/log.h
@@ -291,7 +298,9 @@ CMakeFiles/TVplayer.dir/src/sync.c.o
  /usr/local/include/SDL/begin_code.h
  /usr/local/include/SDL/close_code.h
 CMakeFiles/TVplayer.dir/src/video.c.o
+ /home/infinite/Project/TVplayer/src/config.h
  /home/infinite/Project/TVplayer/src/display.h
+ /home/infinite/Project/TVplayer/src/event.h
  /home/infinite/Project/TVplayer/src/libffmpeg.h
  /home/infinite/Project/TVplayer/src/libsdl.h
  /home/infinite/Project/TVplayer/src/log.h

@@ -24,23 +24,23 @@ int decode_video(void *arg)
 	pts = 0;
 	global_video_pkt_pts = pkt->pts;
 	avcodec_decode_video2(video->codec_ctx, pFrame, &frameFinished, &packet);
-	if(pkt->dts != AV_NOPTS_VALUE && pFrame->opaque && *(uint64_t *)pFrame->opaque != AV_NOPTS_VALUE) {
+	if(pkt->dts == AV_NOPTS_VALUE
+	   && pFrame->opaque && *(uint64_t *)pFrame->opaque != AV_NOPTS_VALUE) {
 	    pts = *(uint64_t *)pFrame->opaque;
 	} else if(pkt->dts != AV_NOPTS_VALUE) {
 	    pts = pkt->dts;	    
-	}
-	else {
+	} else {
 	    pts = 0;
 	}
 	pts *= av_q2d(video->stream->time_base);
-	//did we get a video frame?
+
 	if(frameFinished) {
 	    pts = sync_video(video, pFrame, pts);
 	    if(video_frame_convert(video, pFrame, pts) < 0)
 		break;
 	}
+	av_free_packet(pkt);
     }
-    av_free_packet(pkt);
     av_free(pFrame);
     return 0;
 }
@@ -59,7 +59,26 @@ int video_frame_convert(Media *video, AVFrame *pFrame, double pts)
     }
     SDL_UnlockMutex(video->frame_buf_mutex);
 
-    vf = &video->frame_buf[video->frame_index];
+    vf = &video->frame_buf[video->index];
+    /* allocate or resize the buffer! */
+    if(!vf->bmp ||
+       vf->width != video->stream->codec->width ||
+       vf->height != video->stream->codec->height) {
+	SDL_Event event;
+	vf->allocated = 0;
+	/* we have to do it in the main thread */
+	event.type = FF_ALLOC_EVENT;
+	event.user.data1 = video;
+	SDL_PushEvent(&event);
+
+	/* wait until we have a picture allocated */
+	SDL_LockMutex(video->frame_buf_mutex);
+	while(!vf->allocated) {
+	    SDL_CondWait(video->frame_buf_cond, video->frame_buf_mutex);
+	}
+	SDL_UnlockMutex(video->frame_buf_mutex);
+    }
+
     if(vf->bmp) {
 	SDL_LockYUVOverlay(vf->bmp);
 	dstPixFmt = PIX_FMT_YUV420P;
@@ -74,7 +93,13 @@ int video_frame_convert(Media *video, AVFrame *pFrame, double pts)
 	if(imgConvertCtx == NULL) {
 	    int w = video->stream->codec->width;
 	    int h = video->stream->codec->height;
-	    imgConvertCtx = sws_getContext(w, h, video->stream->codec->pix_fmt, w, h, dstPixFmt, SWS_BICUBIC, NULL, NULL, NULL);
+#ifdef ORIGINAL_SIZE
+	    imgConvertCtx = sws_getContext(w, h, video->stream->codec->pix_fmt,
+					   video->stream->codec->width, video->stream->codec->height, dstPixFmt, SWS_FAST_BILINEAR, NULL, NULL, NULL);
+#else
+	    imgConvertCtx = sws_getContext(w, h, video->stream->codec->pix_fmt,					   
+					   w, h, dstPixFmt, SWS_FAST_BILINEAR, NULL, NULL, NULL);
+#endif //ORIGINAL_SIZE
 	    if(imgConvertCtx == NULL) {
 		LOGE("fail to init the conversion context : video_frame_queue");
 		exit(-1);
@@ -84,6 +109,9 @@ int video_frame_convert(Media *video, AVFrame *pFrame, double pts)
 	SDL_UnlockYUVOverlay(vf->bmp);
 	vf->pts = pts;
 
+	if(++video->index == VIDEO_FRAME_QUEUE_SIZE) {
+	    video->index = 0;
+	}
 	SDL_LockMutex(video->frame_buf_mutex);
 	video->frame_buf_size++;
 	SDL_UnlockMutex(video->frame_buf_mutex);

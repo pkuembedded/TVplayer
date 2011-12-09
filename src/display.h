@@ -1,4 +1,5 @@
 #include "structures.h"
+#include "config.h"
 
 #ifndef DISPLAY_H
 #define DISPLAY_H

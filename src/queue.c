@@ -1,6 +1,5 @@
 #include "queue.h"
 
-
 void init_queue(PacketQueue *queue)
 {
     memset(queue, 0, sizeof(PacketQueue));
@@ -26,10 +25,12 @@ int add_to_queue(PacketQueue *queue, AVPacket *pkt)
     pkt1->pkt = *pkt;
     pkt1->next = NULL;
     SDL_LockMutex(queue->mutex);
+
     if(!queue->end)
 	queue->header = pkt1;
     else
 	queue->end->next = pkt1;
+
     queue->end = pkt1;
     queue->pkt_num++;
     queue->size += pkt1->pkt.size;
@@ -47,7 +48,6 @@ int get_from_queue(PacketQueue *queue, AVPacket *pkt)
     while(true) {
 	pkt1 = queue->header;
 	if(pkt1) {
-//	    fprintf(stderr, "video queue size :%d, video queue pkt_num: %d\n", queue->size, queue->pkt_num);
 	    queue->header = queue->header->next;
 	    if(!queue->header)
 		queue->end = NULL;
@@ -58,7 +58,6 @@ int get_from_queue(PacketQueue *queue, AVPacket *pkt)
 	    ret = 1;
 	    break;
 	}else {
-//	    fprintf(stderr, "video queue size :%d, video queue pkt_num: %d\n", queue->size, queue->pkt_num);
 	    SDL_CondWait(queue->cond, queue->mutex);
 	}
     }

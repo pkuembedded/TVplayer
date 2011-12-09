@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/infinite/Project/TVplayer/src/config.h
+
+/home/infinite/Project/TVplayer/src/event.h
+
 /home/infinite/Project/TVplayer/src/libffmpeg.h
 libavcodec/avcodec.h
 -
@@ -35,6 +39,8 @@ structures.h
 /home/infinite/Project/TVplayer/src/queue.h
 structures.h
 /home/infinite/Project/TVplayer/src/structures.h
+event.h
+/home/infinite/Project/TVplayer/src/event.h
 
 /home/infinite/Project/TVplayer/src/structures.h
 libffmpeg.h
@@ -57,6 +63,8 @@ queue.h
 /home/infinite/Project/TVplayer/src/queue.h
 parse.h
 /home/infinite/Project/TVplayer/src/parse.h
+config.h
+/home/infinite/Project/TVplayer/src/config.h
 
 /usr/local/include/SDL/SDL.h
 SDL_main.h

@@ -54,11 +54,12 @@ double get_external_clock() {
     return av_gettime() / 1000000.0;
 }
 
-double get_master_clock(State *state) 
+double get_master_clock() 
 {
-    return get_video_clock(state->video);
+//    return get_video_clock(state->video);
+    return get_external_clock();
 }
-
+int try_num;
 int video_refresh_timer(void *arg)
 {
     State *state = (State *)arg;
@@ -67,6 +68,7 @@ int video_refresh_timer(void *arg)
     if(state->video->stream) {
 	if(state->video->frame_buf_size == 0) {
 	    schedule_refresh(state, 1);
+	    LOGI("delay : 1");
 	} else {
 	    vf = &state->video->frame_buf[state->video->frame_index];
 	    state->video->video_current_pts = vf->pts;
@@ -77,16 +79,14 @@ int video_refresh_timer(void *arg)
 	    }
 	    state->video->frame_last_delay = delay;
 	    state->video->frame_last_pts = vf->pts;
-	    if(state->audio->stream) {
-		ref_clk = get_audio_clock(state->audio);
-		diff = vf->pts - ref_clk;
-		sync_threshold = (delay > AV_SYNC_THRESHOLD) ? delay : AV_SYNC_THRESHOLD;
-		if(fabs(diff) < AV_NOSYNC_THRESHOLD) {
-		    if(diff <= -sync_threshold) {
-			delay = 0;
-		    } else if(diff > sync_threshold) {
-			delay = 2 * delay;
-		    }
+	    ref_clk = get_master_clock();
+	    diff = vf->pts - ref_clk;
+	    sync_threshold = (delay > AV_SYNC_THRESHOLD) ? delay : AV_SYNC_THRESHOLD;
+	    if(fabs(diff) < AV_NOSYNC_THRESHOLD) {
+		if(diff <= -sync_threshold) {
+		    delay = 0;
+		} else if(diff > sync_threshold) {
+		    delay = 2 * delay;
 		}
 	    }
 	    state->video->frame_timer += delay;
@@ -94,7 +94,8 @@ int video_refresh_timer(void *arg)
 	    if(actual_delay < 0.010) {
 		actual_delay = 0.010;
 	    }
-	    schedule_refresh(state, (int)(actual_delay * 50 + 0.5));
+	    LOGI("%s : %d", "delay", (int)(actual_delay * 1000 + 0.5));
+	    schedule_refresh(state, (int)(actual_delay * 1000 + 0.5));
 	    play_video(state->video);
 	    if(++state->video->frame_index == VIDEO_FRAME_QUEUE_SIZE) {
 		state->video->frame_index = 0;
@@ -108,4 +109,55 @@ int video_refresh_timer(void *arg)
 	schedule_refresh(state, 100);
     }
     return 0;
+}
+
+
+int sync_audio(Media *audio, short *samples, int samples_size, double pts) 
+{
+    int n;
+    double ref_clk;
+    n = 2 * audio->stream->codec->channels;
+    double diff, avg_diff;
+    int wanted_size, min_size, max_size, nb_samples;
+    ref_clk = get_master_clock();
+    diff = get_audio_clock(audio) - ref_clk;
+    if(diff < AV_NOSYNC_THRESHOLD) {
+	audio->audio_diff_cum = diff + audio->audio_diff_avg_coef * audio->audio_diff_cum;
+	if(audio->audio_diff_avg_count < AUDIO_DIFF_AVG_NB) {
+	    audio->audio_diff_avg_count++;
+	} else {
+	    avg_diff = audio->audio_diff_cum * (1.0 - audio->audio_diff_avg_coef);
+	    if(fabs(avg_diff) >= audio->audio_diff_threshold) {
+		wanted_size = samples_size + ((int)(diff * audio->stream->codec->sample_rate) * n);
+		min_size = samples_size * ((100 - SAMPLE_CORRECTION_PERCENT_MAX) / 100);
+		max_size = samples_size * ((100 + SAMPLE_CORRECTION_PERCENT_MAX) / 100);
+		if(wanted_size < min_size) {
+		    wanted_size = min_size;
+		} else if (wanted_size > max_size) {
+		    wanted_size = max_size;
+		}
+		if(wanted_size < samples_size) {
+
+		    samples_size = wanted_size;
+		} else if(wanted_size > samples_size) {
+		    uint8_t *samples_end, *q;
+		    int nb;
+		    nb = (samples_size - wanted_size);
+		    samples_end = (uint8_t *)samples + samples_size - n;
+		    q = samples_end + n;
+		    while(nb > 0) {
+			memcpy(q, samples_end, n);
+			q += n;
+			nb -= n;
+		    }
+		    samples_size = wanted_size;
+		}
+	    }
+
+	}
+    } else {
+	audio->audio_diff_avg_count = 0;
+	audio->audio_diff_cum = 0;
+    }
+    return samples_size;
 }

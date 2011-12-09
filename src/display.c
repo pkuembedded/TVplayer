@@ -2,7 +2,12 @@
 
 int init_screen(Media *video)
 {
-    screen = SDL_SetVideoMode(video->codec_ctx->width, video->codec_ctx->height, 0, 0);
+#ifdef ORIGINAL_SIZE
+    screen = SDL_SetVideoMode(video->stream->codec->width, video->stream->codec->height, 0, 0);
+#else
+    screen = SDL_SetVideoMode(800, 350, 0, 0);
+#endif //ORIGINAL_SIZE
+
     if(!screen) {
 	LOGV("SDL: cannot init video mode : init_screen");
 	exit(1);
@@ -12,7 +17,7 @@ int init_screen(Media *video)
 
 void init_frame(Media *video) {
     VideoFrame *vf;
-    vf = &video->frame_buf;
+    vf = &video->frame_buf[video->index];
     if(vf->bmp) {
 	SDL_FreeYUVOverlay(vf->bmp);
     }
@@ -22,6 +27,11 @@ void init_frame(Media *video) {
 				   screen);
     vf->width = video->stream->codec->width;
     vf->height = video->stream->codec->height;
+
+    SDL_LockMutex(video->frame_buf_mutex);
+    vf->allocated = 1;
+    SDL_CondSignal(video->frame_buf_cond);
+    SDL_UnlockMutex(video->frame_buf_mutex);
 }
 
 int play_video(void *arg)
@@ -51,12 +61,19 @@ int play_video(void *arg)
 	}
 	x = (screen->w - w) / 2;
 	y = (screen->h - h) / 2;
-
+#ifdef ORIGINAL_SIZE
 	rect.x = 0;
 	rect.y = 0;
-	rect.w = video->codec_ctx->width;
-	rect.h = video->codec_ctx->height;
+	rect.w = video->stream->codec->width;
+	rect.h = video->stream->codec->height;
 	SDL_DisplayYUVOverlay(vf->bmp, &rect);
+#else
+	rect.x = 0;
+	rect.y = 0;
+	rect.w = screen->w;
+	rect.h = screen->h;
+	SDL_DisplayYUVOverlay(vf->bmp, &rect);
+#endif //ORIGINAL_SIZE
     }
 
     return 0;

@@ -1,6 +1,7 @@
 #include "structures.h"
 #include "queue.h"
 #include "parse.h"
+#include "config.h"
 
 #ifndef VIDEO_H
 #define VIDEO_H

@@ -236,6 +236,7 @@ TVplayer: libparse.so
 TVplayer: libsync.so
 TVplayer: libqueue.so
 TVplayer: libdisplay.so
+TVplayer: /usr/local/lib/libSDL.so
 TVplayer: CMakeFiles/TVplayer.dir/build.make
 TVplayer: CMakeFiles/TVplayer.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking C executable TVplayer"

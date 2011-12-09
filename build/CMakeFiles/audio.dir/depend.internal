@@ -9,6 +9,7 @@ CMakeFiles/audio.dir/src/audio.c.o
  /home/infinite/Project/TVplayer/src/log.h
  /home/infinite/Project/TVplayer/src/parse.h
  /home/infinite/Project/TVplayer/src/structures.h
+ /home/infinite/Project/TVplayer/src/sync.h
  /home/infinite/Project/TVplayer/src/utility.h
  /usr/local/include/SDL/SDL.h
  /usr/local/include/SDL/SDL_assert.h

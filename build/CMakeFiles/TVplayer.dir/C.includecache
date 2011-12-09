@@ -6,9 +6,41 @@
 
 #IncludeRegexTransform: 
 
+/home/infinite/Project/TVplayer/src/TVplayer.c
+stdio.h
+-
+math.h
+-
+structures.h
+/home/infinite/Project/TVplayer/src/structures.h
+video.h
+/home/infinite/Project/TVplayer/src/video.h
+audio.h
+/home/infinite/Project/TVplayer/src/audio.h
+sync.h
+/home/infinite/Project/TVplayer/src/sync.h
+event.h
+/home/infinite/Project/TVplayer/src/event.h
+config.h
+/home/infinite/Project/TVplayer/src/config.h
+
+/home/infinite/Project/TVplayer/src/audio.h
+structures.h
+/home/infinite/Project/TVplayer/src/structures.h
+parse.h
+/home/infinite/Project/TVplayer/src/parse.h
+sync.h
+/home/infinite/Project/TVplayer/src/sync.h
+
+/home/infinite/Project/TVplayer/src/config.h
+
 /home/infinite/Project/TVplayer/src/display.h
 structures.h
 /home/infinite/Project/TVplayer/src/structures.h
+config.h
+/home/infinite/Project/TVplayer/src/config.h
+
+/home/infinite/Project/TVplayer/src/event.h
 
 /home/infinite/Project/TVplayer/src/libffmpeg.h
 libavcodec/avcodec.h
@@ -39,6 +71,8 @@ structures.h
 /home/infinite/Project/TVplayer/src/queue.h
 structures.h
 /home/infinite/Project/TVplayer/src/structures.h
+event.h
+/home/infinite/Project/TVplayer/src/event.h
 
 /home/infinite/Project/TVplayer/src/structures.h
 libffmpeg.h
@@ -73,6 +107,8 @@ queue.h
 /home/infinite/Project/TVplayer/src/queue.h
 parse.h
 /home/infinite/Project/TVplayer/src/parse.h
+config.h
+/home/infinite/Project/TVplayer/src/config.h
 
 /usr/local/include/SDL/SDL.h
 SDL_main.h

@@ -7,7 +7,8 @@
 #define FF_QUIT_EVENT (SDL_USEREVENT + 2)
 #define AV_SYNC_THRESHOLD 0.01
 #define AV_NOSYNC_THRESHOLD 10.0
-
+#define AUDIO_DIFF_AVG_NB 20
+#define SAMPLE_CORRECTION_PERCENT_MAX 10
 
 double sync_video(Media *video, AVFrame *srcFrame, double pts);
 static Uint32 sdl_refresh_timer_cb(Uint32 interval, void *opaque);
@@ -16,5 +17,6 @@ double get_audio_clock(Media *audio);
 double get_video_clock(Media *video);
 double get_external_clock();
 int video_refresh_timer(void *arg);
+int sync_audio(Media *audio, short *samples, int samples_size, double pts);
 
 #endif //SYNC_H
