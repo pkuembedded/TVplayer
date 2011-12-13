@@ -1,3 +1,8 @@
+2011-12-12
+add auto-quit when come to end of the media file
+add jni api for reading video info
+add jni api that recv file url from android
+
 2011-12-9
 add new sync method base on external timer
 add two different screen scale

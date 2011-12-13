@@ -58,13 +58,14 @@ CMAKE_BINARY_DIR = /home/infinite/Project/TVplayer/build
 # All Build rule for target.
 CMakeFiles/TVplayer.dir/all: CMakeFiles/audio.dir/all
 CMakeFiles/TVplayer.dir/all: CMakeFiles/video.dir/all
-CMakeFiles/TVplayer.dir/all: CMakeFiles/sync.dir/all
 CMakeFiles/TVplayer.dir/all: CMakeFiles/parse.dir/all
-CMakeFiles/TVplayer.dir/all: CMakeFiles/queue.dir/all
+CMakeFiles/TVplayer.dir/all: CMakeFiles/sync.dir/all
 CMakeFiles/TVplayer.dir/all: CMakeFiles/display.dir/all
+CMakeFiles/TVplayer.dir/all: CMakeFiles/event.dir/all
+CMakeFiles/TVplayer.dir/all: CMakeFiles/queue.dir/all
 	$(MAKE) -f CMakeFiles/TVplayer.dir/build.make CMakeFiles/TVplayer.dir/depend
 	$(MAKE) -f CMakeFiles/TVplayer.dir/build.make CMakeFiles/TVplayer.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles  1 2 3 4 5 6 7
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles  1 2 3 4 5 6 7 8
 	@echo "Built target TVplayer"
 .PHONY : CMakeFiles/TVplayer.dir/all
 
@@ -74,7 +75,7 @@ all: CMakeFiles/TVplayer.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/TVplayer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/infinite/Project/TVplayer/build/CMakeFiles 13
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/infinite/Project/TVplayer/build/CMakeFiles 15
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/TVplayer.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/infinite/Project/TVplayer/build/CMakeFiles 0
 .PHONY : CMakeFiles/TVplayer.dir/rule
@@ -99,7 +100,7 @@ clean: CMakeFiles/TVplayer.dir/clean
 CMakeFiles/audio.dir/all:
 	$(MAKE) -f CMakeFiles/audio.dir/build.make CMakeFiles/audio.dir/depend
 	$(MAKE) -f CMakeFiles/audio.dir/build.make CMakeFiles/audio.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles  8
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles  9
 	@echo "Built target audio"
 .PHONY : CMakeFiles/audio.dir/all
 
@@ -134,7 +135,7 @@ clean: CMakeFiles/audio.dir/clean
 CMakeFiles/display.dir/all:
 	$(MAKE) -f CMakeFiles/display.dir/build.make CMakeFiles/display.dir/depend
 	$(MAKE) -f CMakeFiles/display.dir/build.make CMakeFiles/display.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles  9
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles  10
 	@echo "Built target display"
 .PHONY : CMakeFiles/display.dir/all
 
@@ -163,13 +164,48 @@ clean: CMakeFiles/display.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/event.dir
+
+# All Build rule for target.
+CMakeFiles/event.dir/all:
+	$(MAKE) -f CMakeFiles/event.dir/build.make CMakeFiles/event.dir/depend
+	$(MAKE) -f CMakeFiles/event.dir/build.make CMakeFiles/event.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles  11
+	@echo "Built target event"
+.PHONY : CMakeFiles/event.dir/all
+
+# Include target in all.
+all: CMakeFiles/event.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/event.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/infinite/Project/TVplayer/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/event.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/infinite/Project/TVplayer/build/CMakeFiles 0
+.PHONY : CMakeFiles/event.dir/rule
+
+# Convenience name for target.
+event: CMakeFiles/event.dir/rule
+.PHONY : event
+
+# clean rule for target.
+CMakeFiles/event.dir/clean:
+	$(MAKE) -f CMakeFiles/event.dir/build.make CMakeFiles/event.dir/clean
+.PHONY : CMakeFiles/event.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/event.dir/clean
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/parse.dir
 
 # All Build rule for target.
 CMakeFiles/parse.dir/all:
 	$(MAKE) -f CMakeFiles/parse.dir/build.make CMakeFiles/parse.dir/depend
 	$(MAKE) -f CMakeFiles/parse.dir/build.make CMakeFiles/parse.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles  10
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles  12
 	@echo "Built target parse"
 .PHONY : CMakeFiles/parse.dir/all
 
@@ -204,7 +240,7 @@ clean: CMakeFiles/parse.dir/clean
 CMakeFiles/queue.dir/all:
 	$(MAKE) -f CMakeFiles/queue.dir/build.make CMakeFiles/queue.dir/depend
 	$(MAKE) -f CMakeFiles/queue.dir/build.make CMakeFiles/queue.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles  11
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles  13
 	@echo "Built target queue"
 .PHONY : CMakeFiles/queue.dir/all
 
@@ -239,7 +275,7 @@ clean: CMakeFiles/queue.dir/clean
 CMakeFiles/sync.dir/all:
 	$(MAKE) -f CMakeFiles/sync.dir/build.make CMakeFiles/sync.dir/depend
 	$(MAKE) -f CMakeFiles/sync.dir/build.make CMakeFiles/sync.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles  12
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles  14
 	@echo "Built target sync"
 .PHONY : CMakeFiles/sync.dir/all
 
@@ -274,7 +310,7 @@ clean: CMakeFiles/sync.dir/clean
 CMakeFiles/video.dir/all:
 	$(MAKE) -f CMakeFiles/video.dir/build.make CMakeFiles/video.dir/depend
 	$(MAKE) -f CMakeFiles/video.dir/build.make CMakeFiles/video.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles  13
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/infinite/Project/TVplayer/build/CMakeFiles  15
 	@echo "Built target video"
 .PHONY : CMakeFiles/video.dir/all
 

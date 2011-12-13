@@ -7,7 +7,7 @@
 #define VIDEO_H
 
 #define VIDEO_FRAME_QUEUE_SIZE 1
-uint64_t global_video_pkt_pts;
+unsigned long int global_video_pkt_pts;
 
 int video_frame_convert(Media *video, AVFrame *pFrame, double pts);
 int decode_video(void *arg);

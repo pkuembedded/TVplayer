@@ -1,4 +1,5 @@
 #include "sync.h"
+#include "event.h"
 
 double sync_video(Media *video, AVFrame *srcFrame, double pts) 
 {
@@ -67,9 +68,15 @@ int video_refresh_timer(void *arg)
     double actual_delay, delay, sync_threshold, ref_clk, diff;
     if(state->video->stream) {
 	if(state->video->frame_buf_size == 0) {
+	    try_num++;
+	    if(try_num > 10){
+		   LOGW("This is the end of the file");
+		   quit();
+	    }
 	    schedule_refresh(state, 1);
 	    LOGI("delay : 1");
 	} else {
+	    try_num  = 0;
 	    vf = &state->video->frame_buf[state->video->frame_index];
 	    state->video->video_current_pts = vf->pts;
 	    state->video->video_current_pts_time = av_gettime();

@@ -1,6 +1,7 @@
 /home/infinite/Project/TVplayer/build/CMakeFiles/TVplayer.dir
 /home/infinite/Project/TVplayer/build/CMakeFiles/audio.dir
 /home/infinite/Project/TVplayer/build/CMakeFiles/display.dir
+/home/infinite/Project/TVplayer/build/CMakeFiles/event.dir
 /home/infinite/Project/TVplayer/build/CMakeFiles/parse.dir
 /home/infinite/Project/TVplayer/build/CMakeFiles/queue.dir
 /home/infinite/Project/TVplayer/build/CMakeFiles/sync.dir

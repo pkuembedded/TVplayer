@@ -167,6 +167,9 @@ audio_LIB_DEPENDS:STATIC=
 display_LIB_DEPENDS:STATIC=
 
 //Dependencies for target
+event_LIB_DEPENDS:STATIC=
+
+//Dependencies for target
 file_LIB_DEPENDS:STATIC=
 
 //Dependencies for target

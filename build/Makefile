@@ -138,6 +138,19 @@ display/fast:
 .PHONY : display/fast
 
 #=============================================================================
+# Target rules for targets named event
+
+# Build rule for target.
+event: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 event
+.PHONY : event
+
+# fast build rule for target.
+event/fast:
+	$(MAKE) -f CMakeFiles/event.dir/build.make CMakeFiles/event.dir/build
+.PHONY : event/fast
+
+#=============================================================================
 # Target rules for targets named parse
 
 # Build rule for target.
@@ -267,6 +280,33 @@ src/display.c.s:
 	$(MAKE) -f CMakeFiles/display.dir/build.make CMakeFiles/display.dir/src/display.c.s
 .PHONY : src/display.c.s
 
+src/event.o: src/event.c.o
+.PHONY : src/event.o
+
+# target to build an object file
+src/event.c.o:
+	$(MAKE) -f CMakeFiles/TVplayer.dir/build.make CMakeFiles/TVplayer.dir/src/event.c.o
+	$(MAKE) -f CMakeFiles/event.dir/build.make CMakeFiles/event.dir/src/event.c.o
+.PHONY : src/event.c.o
+
+src/event.i: src/event.c.i
+.PHONY : src/event.i
+
+# target to preprocess a source file
+src/event.c.i:
+	$(MAKE) -f CMakeFiles/TVplayer.dir/build.make CMakeFiles/TVplayer.dir/src/event.c.i
+	$(MAKE) -f CMakeFiles/event.dir/build.make CMakeFiles/event.dir/src/event.c.i
+.PHONY : src/event.c.i
+
+src/event.s: src/event.c.s
+.PHONY : src/event.s
+
+# target to generate assembly for a file
+src/event.c.s:
+	$(MAKE) -f CMakeFiles/TVplayer.dir/build.make CMakeFiles/TVplayer.dir/src/event.c.s
+	$(MAKE) -f CMakeFiles/event.dir/build.make CMakeFiles/event.dir/src/event.c.s
+.PHONY : src/event.c.s
+
 src/parse.o: src/parse.c.o
 .PHONY : src/parse.o
 
@@ -385,6 +425,7 @@ help:
 	@echo "... audio"
 	@echo "... display"
 	@echo "... edit_cache"
+	@echo "... event"
 	@echo "... parse"
 	@echo "... queue"
 	@echo "... rebuild_cache"
@@ -399,6 +440,9 @@ help:
 	@echo "... src/display.o"
 	@echo "... src/display.i"
 	@echo "... src/display.s"
+	@echo "... src/event.o"
+	@echo "... src/event.i"
+	@echo "... src/event.s"
 	@echo "... src/parse.o"
 	@echo "... src/parse.i"
 	@echo "... src/parse.s"

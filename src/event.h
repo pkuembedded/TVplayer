@@ -5,4 +5,8 @@
 #define FF_REFRESH_EVENT (SDL_USEREVENT + 1)
 #define FF_QUIT_EVENT (SDL_USEREVENT + 2)
 
-#endif EVENT_H
+void quit();
+void refresh_event(void *opaque);
+void event_handle();
+
+#endif //EVENT_H

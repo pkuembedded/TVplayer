@@ -7,6 +7,7 @@ SET(CMAKE_DEPENDS_CHECK_C
   "/home/infinite/Project/TVplayer/src/TVplayer.c" "/home/infinite/Project/TVplayer/build/CMakeFiles/TVplayer.dir/src/TVplayer.c.o"
   "/home/infinite/Project/TVplayer/src/audio.c" "/home/infinite/Project/TVplayer/build/CMakeFiles/TVplayer.dir/src/audio.c.o"
   "/home/infinite/Project/TVplayer/src/display.c" "/home/infinite/Project/TVplayer/build/CMakeFiles/TVplayer.dir/src/display.c.o"
+  "/home/infinite/Project/TVplayer/src/event.c" "/home/infinite/Project/TVplayer/build/CMakeFiles/TVplayer.dir/src/event.c.o"
   "/home/infinite/Project/TVplayer/src/parse.c" "/home/infinite/Project/TVplayer/build/CMakeFiles/TVplayer.dir/src/parse.c.o"
   "/home/infinite/Project/TVplayer/src/queue.c" "/home/infinite/Project/TVplayer/build/CMakeFiles/TVplayer.dir/src/queue.c.o"
   "/home/infinite/Project/TVplayer/src/sync.c" "/home/infinite/Project/TVplayer/build/CMakeFiles/TVplayer.dir/src/sync.c.o"
@@ -22,4 +23,5 @@ SET(CMAKE_TARGET_LINKED_INFO_FILES
   "/home/infinite/Project/TVplayer/build/CMakeFiles/sync.dir/DependInfo.cmake"
   "/home/infinite/Project/TVplayer/build/CMakeFiles/queue.dir/DependInfo.cmake"
   "/home/infinite/Project/TVplayer/build/CMakeFiles/display.dir/DependInfo.cmake"
+  "/home/infinite/Project/TVplayer/build/CMakeFiles/event.dir/DependInfo.cmake"
   )

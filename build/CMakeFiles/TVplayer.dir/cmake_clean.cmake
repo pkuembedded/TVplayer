@@ -1,5 +1,6 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/TVplayer.dir/src/queue.c.o"
+  "CMakeFiles/TVplayer.dir/src/event.c.o"
   "CMakeFiles/TVplayer.dir/src/video.c.o"
   "CMakeFiles/TVplayer.dir/src/display.c.o"
   "CMakeFiles/TVplayer.dir/src/TVplayer.c.o"

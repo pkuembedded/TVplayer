@@ -6,6 +6,12 @@
 
 #IncludeRegexTransform: 
 
+/home/infinite/Project/TVplayer/src/event.c
+structures.h
+/home/infinite/Project/TVplayer/src/structures.h
+event.h
+/home/infinite/Project/TVplayer/src/event.h
+
 /home/infinite/Project/TVplayer/src/event.h
 
 /home/infinite/Project/TVplayer/src/libffmpeg.h
@@ -35,16 +41,6 @@ log.h
 /home/infinite/Project/TVplayer/src/log.h
 fcntl.h
 -
-
-/home/infinite/Project/TVplayer/src/sync.c
-sync.h
-/home/infinite/Project/TVplayer/src/sync.h
-event.h
-/home/infinite/Project/TVplayer/src/event.h
-
-/home/infinite/Project/TVplayer/src/sync.h
-structures.h
-/home/infinite/Project/TVplayer/src/structures.h
 
 /home/infinite/Project/TVplayer/src/utility.h
 
