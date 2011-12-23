@@ -1,1 +1,0 @@
-/usr/bin/gcc  -fPIC  -O0 -Wall -g -ggdb  -shared -Wl,-soname,libevent.so -o libevent.so CMakeFiles/event.dir/src/event.c.o 

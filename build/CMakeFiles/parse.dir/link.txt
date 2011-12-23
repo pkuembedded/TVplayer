@@ -1,1 +1,0 @@
-/usr/bin/gcc  -fPIC  -O0 -Wall -g -ggdb  -shared -Wl,-soname,libparse.so -o libparse.so CMakeFiles/parse.dir/src/parse.c.o 

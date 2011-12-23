@@ -5,9 +5,8 @@ int init_screen(Media *video)
 #ifdef ORIGINAL_SIZE
     screen = SDL_SetVideoMode(video->stream->codec->width, video->stream->codec->height, 0, 0);
 #else
-    screen = SDL_SetVideoMode(800, 350, 0, 0);
+    screen = SDL_SetVideoMode(800, 480, 0, 0);
 #endif //ORIGINAL_SIZE
-
     if(!screen) {
 	LOGV("SDL: cannot init video mode : init_screen");
 	exit(1);
@@ -15,24 +14,6 @@ int init_screen(Media *video)
     return 0;
 }
 
-void init_frame(Media *video) {
-    VideoFrame *vf;
-    vf = &video->frame_buf[video->index];
-    if(vf->bmp) {
-	SDL_FreeYUVOverlay(vf->bmp);
-    }
-    vf->bmp = SDL_CreateYUVOverlay(video->stream->codec->width,
-				   video->stream->codec->height,
-				   SDL_YV12_OVERLAY,
-				   screen);
-    vf->width = video->stream->codec->width;
-    vf->height = video->stream->codec->height;
-
-    SDL_LockMutex(video->frame_buf_mutex);
-    vf->allocated = 1;
-    SDL_CondSignal(video->frame_buf_cond);
-    SDL_UnlockMutex(video->frame_buf_mutex);
-}
 
 int play_video(void *arg)
 {
@@ -41,7 +22,7 @@ int play_video(void *arg)
     int w, h, x, y;
     float aspect_ratio;
     Media *video = (Media *)arg;
-    vf = &video->frame_buf[video->frame_index];
+    vf = &video->frame_buf[video->frame_display_index];
     //put our pict on the queue
     if(vf->bmp)
     {

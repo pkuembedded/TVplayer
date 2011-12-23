@@ -1,4 +1,5 @@
 #include "audio.h"
+#include "event.h"
 
 void audio_callback(void *userdata, Uint8 *stream, int len) 
 {
@@ -71,6 +72,7 @@ int decode_audio(Media *audio, uint8_t *audio_buf, int buf_size, double *pts_ptr
     double pts;
 
     for(;;) {
+	while(stop_flag);//新添加部分
 	while(audio->audio_pkt_size > 0) {
 	    data_size = buf_size;
 	    len1 = avcodec_decode_audio3(audio->codec_ctx, 
@@ -114,8 +116,6 @@ void init_audio(Media *audio)
 {
     memset(audio, 0, sizeof(Media));
     audio->media_type = AUDIO;
-    audio->play_cond = SDL_CreateCond();    
-    audio->play_mutex = SDL_CreateMutex();    
     audio->find_codec = find_audio_decoder;
     audio->get_info = get_av_info;
 }

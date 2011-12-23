@@ -76,7 +76,6 @@ int find_decoder(Media *media)
 
 int queue_av_pkt(void *arg) {
     LOGI("created reading thread");
-
     AVPacket *pkt = av_mallocz(sizeof(AVPacket));
     State *state = (State *)arg;
     init_queue(&state->audio->raw_data_buf);

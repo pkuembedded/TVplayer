@@ -1,1 +1,0 @@
-/usr/bin/gcc  -fPIC  -O0 -Wall -g -ggdb  -shared -Wl,-soname,libvideo.so -o libvideo.so CMakeFiles/video.dir/src/video.c.o 

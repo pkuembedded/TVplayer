@@ -7,7 +7,6 @@ void init_queue(PacketQueue *queue)
     queue->cond = SDL_CreateCond();
 }
 
-
 int add_to_queue(PacketQueue *queue, AVPacket *pkt)
 {
     AVPacketList *pkt1;

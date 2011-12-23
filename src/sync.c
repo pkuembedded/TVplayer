@@ -1,5 +1,6 @@
 #include "sync.h"
 #include "event.h"
+#include <unistd.h>
 
 double sync_video(Media *video, AVFrame *srcFrame, double pts) 
 {
@@ -21,23 +22,28 @@ static Uint32 sdl_refresh_timer_cb(Uint32 interval, void *opaque)
     event.type = FF_REFRESH_EVENT;
     event.user.data1 = opaque;
     SDL_PushEvent(&event);
-    return 0; /* 0 means stop timer */
+    return 0; 
 }
 
-/* schedule a video refresh in 'delay' ms */
+// schedule a video refresh in 'delay' ms 
 void schedule_refresh(State *state, int delay) {
+    SDL_AddTimer(delay, sdl_refresh_timer_cb, state);
+}
+
+void refresh(void *arg, int delay) {
+    State *state = (State *)arg;
     SDL_AddTimer(delay, sdl_refresh_timer_cb, state);
 }
 
 double get_audio_clock(Media *audio) {
     double pts;
     int hw_buf_size, bytes_per_sec, n;
-    pts = audio->clk; /* maintained in the audio thread */
+    pts = audio->clk; // maintained in the audio thread 
     hw_buf_size = audio->audio_buf_size - audio->audio_buf_index;
     bytes_per_sec = 0;
-    n = audio->stream->codec->channels * 2;
+    n = audio->stream->codec->channels*2;
     if(audio->stream) {
-	bytes_per_sec = audio->stream->codec->sample_rate * n;
+	bytes_per_sec = audio->stream->codec->sample_rate*n;
     }
     if(bytes_per_sec) {
 	pts -= (double)hw_buf_size / bytes_per_sec;
@@ -55,29 +61,21 @@ double get_external_clock() {
     return av_gettime() / 1000000.0;
 }
 
-double get_master_clock() 
-{
-//    return get_video_clock(state->video);
+double get_master_clock() {
     return get_external_clock();
 }
-int try_num;
-int video_refresh_timer(void *arg)
+
+void video_refresh(void *arg)
 {
     State *state = (State *)arg;
     VideoFrame *vf;
     double actual_delay, delay, sync_threshold, ref_clk, diff;
     if(state->video->stream) {
 	if(state->video->frame_buf_size == 0) {
-	    try_num++;
-	    if(try_num > 10){
-		   LOGW("This is the end of the file");
-		   quit();
-	    }
-	    schedule_refresh(state, 1);
-	    LOGI("delay : 1");
+	    LOGE("refresh 1");
+	    refresh(state, 1);
 	} else {
-	    try_num  = 0;
-	    vf = &state->video->frame_buf[state->video->frame_index];
+	    vf = &state->video->frame_buf[state->video->frame_display_index];
 	    state->video->video_current_pts = vf->pts;
 	    state->video->video_current_pts_time = av_gettime();
 	    delay = vf->pts - state->video->frame_last_pts;
@@ -86,7 +84,7 @@ int video_refresh_timer(void *arg)
 	    }
 	    state->video->frame_last_delay = delay;
 	    state->video->frame_last_pts = vf->pts;
-	    ref_clk = get_master_clock();
+	    ref_clk = get_external_clock();
 	    diff = vf->pts - ref_clk;
 	    sync_threshold = (delay > AV_SYNC_THRESHOLD) ? delay : AV_SYNC_THRESHOLD;
 	    if(fabs(diff) < AV_NOSYNC_THRESHOLD) {
@@ -101,21 +99,21 @@ int video_refresh_timer(void *arg)
 	    if(actual_delay < 0.010) {
 		actual_delay = 0.010;
 	    }
+	    refresh(state, (int)(actual_delay * 1000) + 0.5);
 	    LOGI("%s : %d", "delay", (int)(actual_delay * 1000 + 0.5));
-	    schedule_refresh(state, (int)(actual_delay * 1000 + 0.5));
+ 	    LOGW("frame buffer size : %d", state->video->frame_buf_size);
+//	    LOGW("convert : %d", state->video->frame_convert_index);
+//	    LOGW("display : %d", state->video->frame_display_index);
 	    play_video(state->video);
-	    if(++state->video->frame_index == VIDEO_FRAME_QUEUE_SIZE) {
-		state->video->frame_index = 0;
+	    if(++state->video->frame_display_index == MAX_VIDEO_FRAME_BUF_SIZE) {
+		state->video->frame_display_index = 0;
 	    }
 	    SDL_LockMutex(state->video->frame_buf_mutex);
 	    state->video->frame_buf_size--;
 	    SDL_CondSignal(state->video->frame_buf_cond);
 	    SDL_UnlockMutex(state->video->frame_buf_mutex);
 	}
-    } else {
-	schedule_refresh(state, 100);
     }
-    return 0;
 }
 
 
@@ -123,7 +121,7 @@ int sync_audio(Media *audio, short *samples, int samples_size, double pts)
 {
     int n;
     double ref_clk;
-    n = 2 * audio->stream->codec->channels;
+    n = 2*audio->stream->codec->channels;
     double diff, avg_diff;
     int wanted_size, min_size, max_size, nb_samples;
     ref_clk = get_master_clock();
@@ -160,7 +158,6 @@ int sync_audio(Media *audio, short *samples, int samples_size, double pts)
 		    samples_size = wanted_size;
 		}
 	    }
-
 	}
     } else {
 	audio->audio_diff_avg_count = 0;
